@@ -15,12 +15,14 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 500;
 `;
 
 const StyledLogo = styled.p`
   color: #bca4a4;
   margin: 0;
   font-size: ${({ theme }) => theme.fontSize.m};
+  letter-spacing: 3px;
 `;
 
 const StyledCartIcon = styled(ReactSVG)`

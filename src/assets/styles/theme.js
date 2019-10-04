@@ -15,6 +15,7 @@ export const theme = {
     impact: '#B19A9A',
     headerFont: '#BCA4A4',
     font: '#8B8383',
+    secondFont: '#725A5A',
     footerFont: '#171616'
   },
   mq: {
