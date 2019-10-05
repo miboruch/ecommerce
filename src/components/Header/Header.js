@@ -7,7 +7,7 @@ import Hamburger from '../Hamburger/Hamburger';
 const StyledHeader = styled.header`
   width: 100%;
   height: 64px;
-  background: #f7f4f1;
+  background: ${({ theme }) => theme.color.background};
   border-bottom: 1px solid #f1e2e2;
   position: fixed;
   top: 0;
