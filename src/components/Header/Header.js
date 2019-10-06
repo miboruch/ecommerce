@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
+import svgIcon from '../../assets/images/cart.svg';
 
 import Hamburger from '../Hamburger/Hamburger';
 
@@ -38,7 +39,7 @@ const Header = () => {
     <StyledHeader>
       <Hamburger />
       <StyledLogo>INDEED INC.</StyledLogo>
-      <StyledCartIcon src='/images/cart.svg' />
+      <StyledCartIcon src={svgIcon}/>
     </StyledHeader>
   );
 };

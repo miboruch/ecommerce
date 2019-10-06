@@ -23,8 +23,8 @@ const MainTemplate = ({ children }) => {
         <MenuContextProvider>
           <Header />
           <Menu />
+          {children}
         </MenuContextProvider>
-        {children}
       </ThemeProvider>
     </StyledWrapper>
   );

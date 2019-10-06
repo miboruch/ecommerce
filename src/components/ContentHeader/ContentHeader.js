@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+
+import image from '../../assets/images/hero.jpeg';
 
 const StyledWrapper = styled.section`
   width: 100%;
@@ -32,7 +33,7 @@ const ContentHeader = () => {
         If we plant the right seeds, tomorrow will be better. <br /> If you put
         out good things, then you'll get good things back.
       </StyledParagraph>
-      <StyledImage src={'./images/hero.jpeg'} />
+      <StyledImage src={image} />
     </StyledWrapper>
   );
 };

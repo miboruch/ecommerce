@@ -43,11 +43,10 @@ const StyledMore = styled(StyledPriceText)`
   background-clip: content-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: all 1s ease;
+  transition: all 1.5s ease;
 
   ${StyledWrapper}:hover & {
     background-size: 100% 100%;
-    transition: all 1s ease;
   }
 `;
 
