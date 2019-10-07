@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { MenuContext } from '../../contexts/MenuContext';
 
@@ -48,13 +49,15 @@ const SecondStripe = styled(StyledStripe)`
 `;
 
 const Menu = () => {
-  const { isOpen, menuItems } = useContext(MenuContext);
+  const { isOpen, toggleMenu, menuItems } = useContext(MenuContext);
 
   return (
     <StyledWrapper isOpen={isOpen}>
       <StyledList>
         {menuItems.map(item => (
-          <StyledListItem key={item.id}>{item.title}</StyledListItem>
+          <Link key={item.id} to={item.url} onClick={toggleMenu}>
+            <StyledListItem>{item.title}</StyledListItem>
+          </Link>
         ))}
       </StyledList>
       <StyledStripe isOpen={isOpen} />

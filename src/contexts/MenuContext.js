@@ -16,7 +16,12 @@ const MenuContextProvider = ({ children }) => {
 
   return (
     <MenuContext.Provider
-      value={{ isOpen: isOpen, toggleMenu: toggleMenu, menuItems: menuItems }}
+      value={{
+        isOpen: isOpen,
+        toggleMenu: toggleMenu,
+        menuItems: menuItems,
+        setMenuState: setOpen
+      }}
     >
       {children}
     </MenuContext.Provider>

@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
   }
   
+  a{
+    text-decoration: none;
+  }
+  
   @font-face {
     font-family: 'Poppins';
     src: local('Poppins'), url('../../assets/fonts/Poppins-Regular.ttf') format('truetype');

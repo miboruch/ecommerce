@@ -15,7 +15,7 @@ const StyledParagraph = styled.p`
   color: ${({ theme }) => theme.color.font};
   font-size: ${({ theme }) => theme.fontSize.s};
   margin: auto;
-  padding: 2rem 0;
+  padding-top: 2rem;
   letter-spacing: 2px;
 `;
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import svgIcon from '../../assets/images/cart.svg';
+import { Link } from 'react-router-dom';
 
 import Hamburger from '../Hamburger/Hamburger';
 
@@ -38,8 +39,12 @@ const Header = () => {
   return (
     <StyledHeader>
       <Hamburger />
-      <StyledLogo>INDEED INC.</StyledLogo>
-      <StyledCartIcon src={svgIcon}/>
+      <Link to='/'>
+        <StyledLogo>INDEED INC.</StyledLogo>
+      </Link>
+      <Link to='/cart'>
+        <StyledCartIcon src={svgIcon} />
+      </Link>
     </StyledHeader>
   );
 };

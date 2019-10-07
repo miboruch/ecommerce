@@ -6,7 +6,6 @@ import ContentHeader from '../../components/ContentHeader/ContentHeader';
 import DesignQuote from '../../components/DesignQuote/DesignQuote';
 import About from '../../components/About/About';
 import ContactFooter from '../../components/ContactFooter/ContactFooter';
-import Footer from '../../components/Footer/Footer';
 
 const LandingPage = () => {
   const { products } = useContext(ProductsContext);
@@ -26,7 +25,6 @@ const LandingPage = () => {
       <DesignQuote />
       <About />
       <ContactFooter />
-      <Footer />
     </>
   );
 };
