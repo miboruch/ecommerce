@@ -8,7 +8,7 @@ import ProductsContextProvider from './contexts/ProductsContext';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Story from './pages/Story/Story';
 import Products from './pages/Products/Products';
-import SpecificProduct from './components/SpecificProduct/SpecificProduct';
+import SpecificProduct from './pages/SpecificProduct/SpecificProduct';
 
 function App() {
   return (

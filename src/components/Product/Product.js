@@ -77,4 +77,5 @@ const Product = ({ name, addition, price, photoURL }) => (
   </StyledWrapper>
 );
 
+
 export default Product;

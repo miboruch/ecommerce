@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { ProductsContext } from '../../contexts/ProductsContext';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 import TitleSection from '../../components/TitleSection/TitleSection';
 import Product from '../../components/Product/Product';
@@ -9,13 +8,7 @@ import ContactFooter from '../../components/ContactFooter/ContactFooter';
 
 const Products = () => {
   const { products } = useContext(ProductsContext);
-
-  // products.forEach(item=>{
-  //   if(item.id === 3){
-  //     console.log(item);
-  //   }
-  // })
-
+  console.log(products);
   return (
     <>
       <TitleSection title='PRODUCTS' />
