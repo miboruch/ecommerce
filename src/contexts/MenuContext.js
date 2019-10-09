@@ -3,7 +3,6 @@ import { menuItems } from '../components/Menu/menuItems';
 
 export const MenuContext = React.createContext({
   isOpen: false,
-  toggleMenu: () => {},
   menuItems: []
 });
 

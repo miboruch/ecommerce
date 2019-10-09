@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
 import { theme } from '../assets/styles/theme';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import SEO from '../components/SEO/SEO';

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { ProductsContext } from '../../contexts/ProductsContext';
 import ProductContent from '../../components/ProductContent/ProductContent';
+import ContactFooter from "../../components/ContactFooter/ContactFooter";
 
 const StyledLoader = styled.div`
   width: 100%;
@@ -32,6 +33,7 @@ const SpecificProduct = ({ match }) => {
     <>
       <StyledLoader isLoading={isLoading} />
       <ProductContent productData={currentProduct} />
+      <ContactFooter />
     </>
   );
 };

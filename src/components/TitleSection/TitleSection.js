@@ -27,6 +27,7 @@ const StyledTitle = styled.h1`
   color: ${({ theme }) => theme.color.secondFont};
   letter-spacing: 4px;
   margin: 0;
+  text-transform: uppercase;
 `;
 
 const TitleSection = ({ title }) => {

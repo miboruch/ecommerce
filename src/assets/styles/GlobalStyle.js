@@ -1,32 +1,28 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  html{
-    box-sizing: border-box;
-    margin-top: 64px;
-  }
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap');
   
-  body {    
-    margin: 0;
+  *, *::before, *::after {
+    box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Poppins', sans-serif;
+  }
+  
+  html {
+    margin-top: 64px;
+    font-size: 62.5%;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1.6rem;
   }
   
   a{
     text-decoration: none;
-  }
-  
-  @font-face {
-    font-family: 'Poppins';
-    src: local('Poppins'), url('../../assets/fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-  }
-
-  @font-face {
-    font-family: 'Poppins';   
-    src: local('Poppins'), url('../../assets/fonts/Poppins-Bold.ttf') format('truetype');
-    font-weight: bold;
   }
 `;
 

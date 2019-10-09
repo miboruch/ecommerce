@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { MenuContext } from '../../contexts/MenuContext';
 
@@ -25,8 +25,14 @@ const InnerHamburger = styled.div`
   width: 28px;
   height: 1px;
   position: relative;
-  background: ${({ isOpen }) => (isOpen ? 'transparent' : '#000')};
+  background: #000;
   transition: background 0.4s ease;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      background: transparent;
+    `}
 
   ::before,
   ::after {
@@ -40,13 +46,27 @@ const InnerHamburger = styled.div`
   }
 
   ::before {
-    top: ${({ isOpen }) => (isOpen ? '0' : '-6px')};
-    transform: rotate(${({ isOpen }) => (isOpen ? '43deg' : '0')});
+    top: -6px;
+    transform: rotate(0);
+
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        top: 0;
+        transform: rotate(43deg);
+      `}
   }
 
   ::after {
-    top: ${({ isOpen }) => (isOpen ? '0' : '6px')};
-    transform: rotate(${({ isOpen }) => (isOpen ? '-43deg' : '0')});
+    top: 6px;
+    transform: rotate(0);
+
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        top: 0;
+        transform: rotate(-43deg);
+      `}
   }
 `;
 

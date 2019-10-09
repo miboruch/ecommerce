@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => {
-  return <StyledFooter>CREATED BY MICHALBORUCH 2019</StyledFooter>;
+  return <StyledFooter>created by michalboruch 2019</StyledFooter>;
 };
 
 export default Footer;

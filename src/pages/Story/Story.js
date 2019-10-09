@@ -7,7 +7,7 @@ import ContactFooter from '../../components/ContactFooter/ContactFooter';
 const Story = () => {
   return (
     <>
-      <TitleSection title='OUR STORY' />
+      <TitleSection title='our story' />
       <StoryContent />
       <ContactFooter />
     </>

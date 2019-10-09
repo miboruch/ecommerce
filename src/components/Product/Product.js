@@ -12,7 +12,8 @@ const StyledHeading = styled.p`
   font-size: ${({ theme }) => theme.fontSize.s};
   color: ${({ theme }) => theme.color.footerFont};
   margin: 0;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  font-weight: 500;
 `;
 
 const StyledSubtitle = styled.p`

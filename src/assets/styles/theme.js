@@ -1,7 +1,7 @@
 export const theme = {
   font: {
     family: {
-      poppins: 'Poppins'
+      montserrat: 'Montserrat'
     }
   },
   fontSize: {

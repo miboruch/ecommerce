@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 
 const StyledWrapper = styled.div`
   width: 100%;
+  height: 100vh;
 `;
 
 const StyledImpact = styled.p`
@@ -21,11 +24,11 @@ const StyledInfoBox = styled.div`
 `;
 
 const StyledTitle = styled.h1`
-  font-weight: normal;
   font-size: ${({ theme }) => theme.fontSize.m};
-  letter-spacing: 3px;
+  font-weight: 700;
+  letter-spacing: 2px;
   text-align: right;
-  margin: 0;
+  margin: 1rem 0;
 `;
 
 const StyledSubtitle = styled.p`
@@ -43,6 +46,21 @@ const StyledParagraph = styled.p`
   text-align: right;
 `;
 
+const Flex = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 3rem 0;
+`;
+
+const Description = styled.p`
+  width: 90%;
+  letter-spacing: 2px;
+  font-weight: normal;
+`;
+
 const ProductContent = ({ productData }) => {
   console.log(productData);
   return (
@@ -53,10 +71,16 @@ const ProductContent = ({ productData }) => {
         <StyledTitle>{productData.name}</StyledTitle>
         <StyledSubtitle>{productData.addition}</StyledSubtitle>
         <StyledParagraph>{productData.price} USD</StyledParagraph>
-        <label htmlFor={'basic'}>
-          <input type={'radio'} name={'basic'} />
-          BASIC
-        </label>
+        <Input inputType='select' options={['Basic pack', 'Extended pack']} />
+        <Flex>
+          <Input width='64px' placeholder='Quantity' type='number' min='1' max='5' />
+          <Button>add to cart</Button>
+        </Flex>
+        <StyledParagraph>Total: {37.99} USD</StyledParagraph>
+        <Description>
+          People like consistency. Whether it’s a store or a restaurant, they want to come in and
+          see what you are famous for.
+        </Description>
       </StyledInfoBox>
     </StyledWrapper>
   );

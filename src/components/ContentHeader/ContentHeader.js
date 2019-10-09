@@ -19,10 +19,11 @@ const StyledParagraph = styled.p`
 `;
 
 const StyledImage = styled.img`
-  width: 70%;
+  width: 290px;
+  height: 392px;
   position: absolute;
   object-fit: cover;
-  bottom: 100px;
+  bottom: 60px;
   right: 0;
 `;
 
