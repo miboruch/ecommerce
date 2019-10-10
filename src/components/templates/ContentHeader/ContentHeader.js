@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import image from '../../assets/images/hero.jpeg';
+import image from '../../../assets/images/hero.jpeg';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.section`
   width: 100%;
@@ -10,12 +11,11 @@ const StyledWrapper = styled.section`
   position: relative;
 `;
 
-const StyledParagraph = styled.p`
-  width: 65%;
+const StyledParagraph = styled(Paragraph)`
+  width: 85%;
   font-size: ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.secondFont};
   margin: 0;
-  padding: 2rem;
 `;
 
 const StyledImage = styled.img`
@@ -31,8 +31,8 @@ const ContentHeader = () => {
   return (
     <StyledWrapper>
       <StyledParagraph>
-        If we plant the right seeds, tomorrow will be better. <br /> If you put
-        out good things, then you'll get good things back.
+        If we plant the right seeds, tomorrow will be better. <br /> If you put out good things,
+        then you'll get good things back.
       </StyledParagraph>
       <StyledImage src={image} />
     </StyledWrapper>

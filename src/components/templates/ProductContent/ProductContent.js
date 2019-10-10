@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from '../../atoms/Input/Input';
+import Button from '../../atoms/Button/Button';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -19,7 +20,7 @@ const StyledImage = styled.img`
 `;
 
 const StyledInfoBox = styled.div`
-  width: 80%;
+  width: 85%;
   margin: auto;
 `;
 
@@ -40,10 +41,18 @@ const StyledSubtitle = styled.p`
   text-align: right;
 `;
 
-const StyledParagraph = styled.p`
-  letter-spacing: 2px;
-  font-size: ${({ theme }) => theme.fontSize.s};
+const StyledParagraph = styled(Paragraph)`
   text-align: right;
+  padding-right: 0;
+`;
+
+const StyledPriceParagraph = styled(StyledParagraph)`
+  color: ${({ theme }) => theme.color.secondFont};
+`;
+
+const Description = styled(StyledParagraph)`
+  width: 95%;
+  text-align: left;
 `;
 
 const Flex = styled.div`
@@ -53,12 +62,6 @@ const Flex = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 3rem 0;
-`;
-
-const Description = styled.p`
-  width: 90%;
-  letter-spacing: 2px;
-  font-weight: normal;
 `;
 
 const ProductContent = ({ productData }) => {
@@ -73,10 +76,10 @@ const ProductContent = ({ productData }) => {
         <StyledParagraph>{productData.price} USD</StyledParagraph>
         <Input inputType='select' options={['Basic pack', 'Extended pack']} />
         <Flex>
-          <Input width='64px' placeholder='Quantity' type='number' min='1' max='5' />
+          <Input quantity placeholder='Quantity' type='number' min='1' max='5' />
           <Button>add to cart</Button>
         </Flex>
-        <StyledParagraph>Total: {37.99} USD</StyledParagraph>
+        <StyledPriceParagraph>Total: {37.99} USD</StyledPriceParagraph>
         <Description>
           People like consistency. Whether it’s a store or a restaurant, they want to come in and
           see what you are famous for.

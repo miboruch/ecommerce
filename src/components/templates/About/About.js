@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import image from '../../assets/images/background.jpeg';
+import image from '../../../assets/images/background.jpeg';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledImage = styled.img`
   width: 100%;
@@ -10,13 +11,9 @@ const StyledImage = styled.img`
   margin-top: 2rem;
 `;
 
-const StyledParagraph = styled.p`
+const StyledParagraph = styled(Paragraph)`
   width: 90%;
-  color: ${({ theme }) => theme.color.font};
-  font-size: ${({ theme }) => theme.fontSize.s};
   margin: auto;
-  padding-top: 2rem;
-  letter-spacing: 2px;
 `;
 
 const StyledLine = styled.div`
@@ -31,10 +28,9 @@ const About = () => {
       <StyledLine />
       <StyledImage src={image} />
       <StyledParagraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
       </StyledParagraph>
     </>
   );

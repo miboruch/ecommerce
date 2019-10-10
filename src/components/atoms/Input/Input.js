@@ -1,17 +1,26 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledInput = styled.input`
-  width: ${({ width }) => width || '290px'};
+  width: 290px;
   height: 38px;
   background: transparent;
   border: 1px solid ${({ theme }) => theme.color.secondFont};
   font-family: ${({ theme }) => theme.font.family.montserrat};
 
   &::placeholder {
-    font-size: ${({ theme }) => theme.fontSize.xxs};
+    font-size: ${({ theme }) => theme.fontSize.xs};
     text-align: center;
   }
+
+  ${({ quantity }) =>
+    quantity &&
+    css`
+      width: 64px;
+      &::placeholder {
+        font-size: ${({ theme }) => theme.fontSize.xxs};
+      }
+    `}
 `;
 
 const StyledSelect = styled.select`

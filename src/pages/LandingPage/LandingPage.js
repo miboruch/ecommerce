@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { ProductsContext } from '../../contexts/ProductsContext';
 
-import Product from '../../components/Product/Product';
-import ContentHeader from '../../components/ContentHeader/ContentHeader';
-import DesignQuote from '../../components/DesignQuote/DesignQuote';
-import About from '../../components/About/About';
-import ContactFooter from '../../components/ContactFooter/ContactFooter';
+import Product from '../../components/templates/Product/Product';
+import ContentHeader from '../../components/templates/ContentHeader/ContentHeader';
+import DesignQuote from '../../components/molecules/DesignQuote/DesignQuote';
+import About from '../../components/templates/About/About';
+import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
 const LandingPage = () => {
   const { products } = useContext(ProductsContext);

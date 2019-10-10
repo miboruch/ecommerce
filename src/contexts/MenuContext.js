@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { menuItems } from '../components/Menu/menuItems';
+import { menuItems } from '../components/templates/Menu/menuItems';
 
 export const MenuContext = React.createContext({
   isOpen: false,

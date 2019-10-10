@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { MenuContext } from '../../contexts/MenuContext';
+import { MenuContext } from '../../../contexts/MenuContext';
 
 const StyledWrapper = styled.div`
   width: 100%;

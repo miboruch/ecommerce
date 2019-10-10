@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import image from '../../assets/images/back.jpeg';
+import image from '../../../assets/images/back.jpeg';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledBackgroundImage = styled.div`
   width: 100%;
@@ -11,11 +12,9 @@ const StyledBackgroundImage = styled.div`
   margin: 2rem 0;
 `;
 
-const StyledParagraph = styled.p`
+const StyledParagraph = styled(Paragraph)`
   width: 45%;
   font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.color.font};
-  padding: 2rem;
 `;
 
 const StyledQuoteAuthor = styled.span`

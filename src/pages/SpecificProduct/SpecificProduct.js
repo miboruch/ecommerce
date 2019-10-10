@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { ProductsContext } from '../../contexts/ProductsContext';
-import ProductContent from '../../components/ProductContent/ProductContent';
-import ContactFooter from "../../components/ContactFooter/ContactFooter";
+import ProductContent from '../../components/templates/ProductContent/ProductContent';
+import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
 const StyledLoader = styled.div`
   width: 100%;
@@ -15,10 +15,11 @@ const StyledLoader = styled.div`
   transition: transform 0.5s 0.3s ease;
 `;
 
-const SpecificProduct = ({ match }) => {
+const SpecificProduct = ({ match, ...props }) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [isLoading, setLoading] = useState(true);
   const { products } = useContext(ProductsContext);
+  console.log(props);
 
   useEffect(() => {
     products.map(product => {

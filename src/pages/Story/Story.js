@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TitleSection from '../../components/TitleSection/TitleSection';
-import StoryContent from '../../components/StoryContent/StoryContent';
-import ContactFooter from '../../components/ContactFooter/ContactFooter';
+import TitleSection from '../../components/molecules/TitleSection/TitleSection';
+import StoryContent from '../../components/templates/StoryContent/StoryContent';
+import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
 const Story = () => {
   return (
