@@ -7,20 +7,12 @@ const StyledInput = styled.input`
   background: transparent;
   border: 1px solid ${({ theme }) => theme.color.secondFont};
   font-family: ${({ theme }) => theme.font.family.montserrat};
+  text-align: center;
 
   &::placeholder {
     font-size: ${({ theme }) => theme.fontSize.xs};
     text-align: center;
   }
-
-  ${({ quantity }) =>
-    quantity &&
-    css`
-      width: 64px;
-      &::placeholder {
-        font-size: ${({ theme }) => theme.fontSize.xxs};
-      }
-    `}
 `;
 
 const StyledSelect = styled.select`
@@ -34,6 +26,12 @@ const StyledSelect = styled.select`
     letter-spacing: 2px;
     height: 20px;
   }
+
+  ${({ quantity }) =>
+    quantity &&
+    css`
+      width: 64px;
+    `}
 `;
 
 const StyledOption = styled.option`
@@ -41,16 +39,16 @@ const StyledOption = styled.option`
   padding: 2rem 0;
 `;
 
-const Input = ({ inputType = 'input', ...props }) => {
+const Input = React.forwardRef(({ inputType = 'input', onChange, ...props }, ref) => {
   let element = null;
 
   switch (inputType) {
     case 'input':
-      element = <StyledInput {...props} />;
+      element = <StyledInput {...props} ref={ref} />;
       break;
     case 'select':
       element = (
-        <StyledSelect>
+        <StyledSelect ref={ref} onChange={onChange}>
           {props.options.map((item, index) => (
             <StyledOption value={item} key={index}>
               {item}
@@ -64,6 +62,6 @@ const Input = ({ inputType = 'input', ...props }) => {
   }
 
   return <>{element}</>;
-};
+});
 
 export default Input;

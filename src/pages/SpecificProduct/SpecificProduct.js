@@ -15,11 +15,10 @@ const StyledLoader = styled.div`
   transition: transform 0.5s 0.3s ease;
 `;
 
-const SpecificProduct = ({ match, ...props }) => {
+const SpecificProduct = ({ match }) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [isLoading, setLoading] = useState(true);
   const { products } = useContext(ProductsContext);
-  console.log(props);
 
   useEffect(() => {
     products.map(product => {

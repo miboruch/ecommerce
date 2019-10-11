@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { OrderContext } from '../../../contexts/OrderContext';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -65,21 +66,57 @@ const Flex = styled.div`
 `;
 
 const ProductContent = ({ productData }) => {
-  console.log(productData);
+  const { state, addToCart } = useContext(OrderContext);
+
+  const [quantity, setQuantity] = useState(1);
+
+  const { addition, id, name, photoURL, price } = productData;
+  const [packTypeSelect, quantitySelect] = [useRef(null), useRef(null)];
+
+  const setQuantityHandler = event => {
+    const result = Number.parseInt(event.target.value);
+    setQuantity(result);
+  };
+
+  const setProductToCart = () => {
+    const index = packTypeSelect.current.selectedIndex;
+    const pack = packTypeSelect.current.options[index].text;
+
+    const product = {
+      name: name,
+      addition: addition,
+      id: id,
+      photoURL: photoURL,
+      pack: pack,
+      quantity: quantity,
+      productPrice: price,
+      totalPrice: quantity * price
+    };
+    addToCart(product);
+    console.log(state.cart);
+  };
+
   return (
     <StyledWrapper>
-      <StyledImpact>01/0{productData.id}</StyledImpact>
-      <StyledImage src={productData.photoURL} />
+      <StyledImpact>01/0{id}</StyledImpact>
+      <StyledImage src={photoURL} />
       <StyledInfoBox>
-        <StyledTitle>{productData.name}</StyledTitle>
-        <StyledSubtitle>{productData.addition}</StyledSubtitle>
-        <StyledParagraph>{productData.price} USD</StyledParagraph>
-        <Input inputType='select' options={['Basic pack', 'Extended pack']} />
+        <StyledTitle>{name}</StyledTitle>
+        <StyledSubtitle>{addition}</StyledSubtitle>
+        <StyledParagraph>{price} USD</StyledParagraph>
+        <Input inputType='select' ref={packTypeSelect} options={['Basic pack', 'Extended pack']} />
         <Flex>
-          <Input quantity placeholder='Quantity' type='number' min='1' max='5' />
-          <Button>add to cart</Button>
+          <Input
+            quantity
+            inputType='select'
+            value={quantity}
+            options={[1, 2, 3, 4, 5]}
+            ref={quantitySelect}
+            onChange={setQuantityHandler}
+          />
+          <Button onClick={setProductToCart}>add to cart</Button>
         </Flex>
-        <StyledPriceParagraph>Total: {37.99} USD</StyledPriceParagraph>
+        <StyledPriceParagraph>Total: {(quantity * price).toFixed(2)} USD</StyledPriceParagraph>
         <Description>
           People like consistency. Whether it’s a store or a restaurant, they want to come in and
           see what you are famous for.

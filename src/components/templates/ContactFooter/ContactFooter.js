@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { MenuContext } from '../../../contexts/MenuContext';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.footer`
   width: 100%;
@@ -15,12 +16,9 @@ const StyledWrapper = styled.footer`
   align-items: center;
 `;
 
-const StyledContactInfo = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.s};
+const StyledContactInfo = styled(Paragraph)`
   color: ${({ theme }) => theme.color.footerFont};
-  padding: 2rem 0;
   text-align: center;
-  line-height: 1.8;
 `;
 
 const StyledList = styled.ul`
