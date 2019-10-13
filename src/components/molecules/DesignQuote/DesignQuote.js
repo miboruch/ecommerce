@@ -14,7 +14,6 @@ const StyledBackgroundImage = styled.div`
 
 const StyledParagraph = styled(Paragraph)`
   width: 45%;
-  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 const StyledQuoteAuthor = styled.span`
@@ -24,7 +23,7 @@ const StyledQuoteAuthor = styled.span`
 const DesignQuote = () => {
   return (
     <StyledBackgroundImage>
-      <StyledParagraph>
+      <StyledParagraph small>
         Everything is designed. Few things are designed well. <br />
         <StyledQuoteAuthor>-Brian Reed</StyledQuoteAuthor>
       </StyledParagraph>

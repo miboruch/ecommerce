@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   width: 160px;
@@ -9,8 +9,13 @@ const Button = styled.button`
   text-transform: uppercase;
   border: none;
   font-family: ${({ theme }) => theme.font.family.montserrat};
-  font-size: 1rem;
-)}
+  font-size: ${({ theme }) => theme.fontSize.xxs};
+
+  ${({ cart }) =>
+    cart &&
+    css`
+      width: 38px;
+    `}
 `;
 
 export default Button;

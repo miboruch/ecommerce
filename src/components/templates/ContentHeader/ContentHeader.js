@@ -13,7 +13,6 @@ const StyledWrapper = styled.section`
 
 const StyledParagraph = styled(Paragraph)`
   width: 85%;
-  font-size: ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.color.secondFont};
   margin: 0;
 `;
@@ -30,7 +29,7 @@ const StyledImage = styled.img`
 const ContentHeader = () => {
   return (
     <StyledWrapper>
-      <StyledParagraph>
+      <StyledParagraph large>
         If we plant the right seeds, tomorrow will be better. <br /> If you put out good things,
         then you'll get good things back.
       </StyledParagraph>

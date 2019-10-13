@@ -1,18 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Paragraph from '../../atoms/Paragraph/Paragraph';
 
-const StyledParagraph = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.s};
+const StyledParagraph = styled(Paragraph)`
   color: ${({ theme }) => theme.color.headerFont};
-  letter-spacing: 2px;
   line-height: 1.8;
   margin: 2rem;
-`;
-
-const StyledSecondParagraph = styled(StyledParagraph)`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  letter-spacing: 3px;
 `;
 
 const StyledLink = styled(Link)`
@@ -43,20 +37,17 @@ const StyledLink = styled(Link)`
 const StoryContent = () => {
   return (
     <>
-      <StyledParagraph>
-        I have been working on this project since September 29th. First step was
-        to create a layout in Adobe XD, then I started to implement this layout
-        into a real website. The main goal was to create an elegant e-commerce
-        website, using Context API, React hooks and firebase. This is my first
-        project with authentication as well, so this is kind of the test project
-        for me.
+      <StyledParagraph medium>
+        I have been working on this project since September 29th. First step was to create a layout
+        in Adobe XD, then I started to implement this layout into a real website. The main goal was
+        to create an elegant e-commerce website, using Context API, React hooks and firebase. This
+        is my first project with authentication as well, so this is kind of the test project for me.
       </StyledParagraph>
-      <StyledSecondParagraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </StyledSecondParagraph>
+      <StyledParagraph small>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+      </StyledParagraph>
       <StyledLink to={'/products'}>see our products</StyledLink>
     </>
   );

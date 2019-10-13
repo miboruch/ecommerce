@@ -12,5 +12,7 @@ export const orderReducer = (state, action) => {
       return removeProduct(state, action.index);
     case TOTAL_PRICE:
       return calculateTotalPrice(state);
+    default:
+      throw new Error('Wrong reducer type used');
   }
 };

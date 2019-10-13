@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const StyledInput = styled.input`
@@ -22,11 +23,6 @@ const StyledSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.color.secondFont};
   font-family: ${({ theme }) => theme.font.family.montserrat};
 
-  &option {
-    letter-spacing: 2px;
-    height: 20px;
-  }
-
   ${({ quantity }) =>
     quantity &&
     css`
@@ -39,7 +35,7 @@ const StyledOption = styled.option`
   padding: 2rem 0;
 `;
 
-const Input = React.forwardRef(({ inputType = 'input', onChange, ...props }, ref) => {
+const Input = React.forwardRef(({ inputType, onChange, ...props }, ref) => {
   let element = null;
 
   switch (inputType) {
@@ -57,11 +53,17 @@ const Input = React.forwardRef(({ inputType = 'input', onChange, ...props }, ref
         </StyledSelect>
       );
       break;
-    default:
-      console.log('Wrong inputType');
   }
 
   return <>{element}</>;
 });
+
+Input.propTypes = {
+  inputType: PropTypes.oneOf(['input', 'select'])
+};
+
+Input.defaultProps = {
+  inputType: 'input'
+};
 
 export default Input;

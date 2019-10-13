@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ProductsContext } from '../../contexts/ProductsContext';
-
 import Product from '../../components/templates/Product/Product';
 import ContentHeader from '../../components/templates/ContentHeader/ContentHeader';
 import DesignQuote from '../../components/molecules/DesignQuote/DesignQuote';
@@ -14,13 +14,14 @@ const LandingPage = () => {
     <>
       <ContentHeader />
       {products.map(item => (
-        <Product
-          key={item.id}
-          name={item.name}
-          addition={item.addition}
-          price={item.price}
-          photoURL={item.photoURL}
-        />
+        <Link to={`/product/${item.id}`} key={item.id}>
+          <Product
+            name={item.name}
+            addition={item.addition}
+            price={item.price}
+            photoURL={item.photoURL}
+          />
+        </Link>
       ))}
       <DesignQuote />
       <About />
