@@ -28,13 +28,14 @@ const StyledTitle = styled.h1`
   letter-spacing: 4px;
   margin: 0;
   text-transform: uppercase;
+  font-family: ${({ theme }) => theme.font.family.montserrat};
 `;
 
-const TitleSection = ({ title }) => {
+const TitleSection = ({ children }) => {
   return (
     <StyledSection>
       <StyledSideSection />
-      <StyledTitle>{title}</StyledTitle>
+      <StyledTitle>{children}</StyledTitle>
     </StyledSection>
   );
 };

@@ -11,10 +11,11 @@ const Products = () => {
 
   return (
     <>
-      <TitleSection title='PRODUCTS' />
+      <TitleSection>Products</TitleSection>
       {products.map(item => (
         <Link to={`/product/${item.id}`} key={item.id}>
           <Product
+            key={item.id}
             name={item.name}
             addition={item.addition}
             price={item.price}

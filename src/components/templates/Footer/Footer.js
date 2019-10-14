@@ -4,11 +4,13 @@ import styled from 'styled-components';
 const StyledFooter = styled.footer`
   width: 100%;
   height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: ${({ theme }) => theme.fontSize.xxs};
   background: ${({ theme }) => theme.color.background};
   margin: 0;
   padding: 0;
-  text-align: center;
   letter-spacing: 3px;
 `;
 

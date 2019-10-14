@@ -23,6 +23,8 @@ const StyledList = styled.ul`
   margin-left: 2rem;
   list-style-type: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledListItem = styled.li`
@@ -49,15 +51,15 @@ const SecondStripe = styled(StyledStripe)`
 `;
 
 const Menu = () => {
-  const { isOpen, toggleMenu, menuItems } = useContext(MenuContext);
+  const { isOpen, menuItems } = useContext(MenuContext);
 
   return (
     <StyledWrapper isOpen={isOpen}>
       <StyledList>
         {menuItems.map(item => (
-          <Link key={item.id} to={item.url} onClick={toggleMenu}>
-            <StyledListItem>{item.title}</StyledListItem>
-          </Link>
+          <StyledListItem key={item.id} as={Link} to={item.url}>
+            {item.title}
+          </StyledListItem>
         ))}
       </StyledList>
       <StyledStripe isOpen={isOpen} />

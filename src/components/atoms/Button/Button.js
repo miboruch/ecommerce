@@ -10,10 +10,12 @@ const Button = styled.button`
   border: none;
   font-family: ${({ theme }) => theme.font.family.montserrat};
   font-size: ${({ theme }) => theme.fontSize.xxs};
+  text-align: center;
 
   ${({ cart }) =>
     cart &&
     css`
+      font-size: ${({ theme }) => theme.fontSize.m};
       width: 38px;
     `}
 `;

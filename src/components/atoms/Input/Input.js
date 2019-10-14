@@ -8,10 +8,11 @@ const StyledInput = styled.input`
   background: transparent;
   border: 1px solid ${({ theme }) => theme.color.secondFont};
   font-family: ${({ theme }) => theme.font.family.montserrat};
+  font-size: ${({ theme }) => theme.fontSize.s};
   text-align: center;
 
   &::placeholder {
-    font-size: ${({ theme }) => theme.fontSize.xs};
+    font-size: ${({ theme }) => theme.fontSize.s};
     text-align: center;
   }
 `;
@@ -59,7 +60,9 @@ const Input = React.forwardRef(({ inputType, onChange, ...props }, ref) => {
 });
 
 Input.propTypes = {
-  inputType: PropTypes.oneOf(['input', 'select'])
+  inputType: PropTypes.oneOf(['input', 'select']),
+  options: PropTypes.array,
+  onChange: PropTypes.func
 };
 
 Input.defaultProps = {

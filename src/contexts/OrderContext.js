@@ -1,13 +1,10 @@
 import React, { useContext, useReducer } from 'react';
 import { orderReducer } from '../reducers/orderReducer';
-import {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  TOTAL_PRICE
-} from '../reducers/orderReducer';
+import { ADD_TO_CART, REMOVE_FROM_CART, TOTAL_PRICE } from '../reducers/orderReducer';
 
 export const OrderContext = React.createContext({
-  cart: []
+  cart: [],
+  totalPrice: 0
 });
 
 const OrderContextProvider = ({ children }) => {
@@ -35,9 +32,7 @@ const OrderContextProvider = ({ children }) => {
   };
 
   return (
-    <OrderContext.Provider
-      value={{ state, addToCart, removeFromCart, calculateTotalPrice }}
-    >
+    <OrderContext.Provider value={{ state, addToCart, removeFromCart, calculateTotalPrice }}>
       {children}
     </OrderContext.Provider>
   );

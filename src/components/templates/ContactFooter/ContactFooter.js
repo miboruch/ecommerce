@@ -22,6 +22,8 @@ const StyledContactInfo = styled(Paragraph)`
 `;
 
 const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
   padding: 0;
 `;
@@ -46,9 +48,9 @@ const ContactFooter = () => {
       </StyledContactInfo>
       <StyledList>
         {menuItems.map(item => (
-          <Link key={item.id} to={item.url}>
-            <StyledListItem>{item.title}</StyledListItem>
-          </Link>
+          <StyledListItem as={Link} to={item.url} key={item.id}>
+            {item.title}
+          </StyledListItem>
         ))}
       </StyledList>
     </StyledWrapper>
