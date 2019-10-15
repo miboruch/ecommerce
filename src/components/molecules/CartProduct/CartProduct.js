@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
+import { OrderContext } from '../../../contexts/OrderContext';
 
 const StyledWrapper = styled.div`
   width: 95%;
@@ -47,21 +48,35 @@ const StyledButton = styled(Button)`
   margin: auto;
 `;
 
-const CartProduct = ({ imageURL, name, pack, addition, quantity, totalPrice }) => {
+const CartProduct = ({
+  imageURL,
+  name,
+  pack,
+  addition,
+  quantity,
+  totalPrice,
+  remove,
+  increase,
+  decrease
+}) => {
   return (
     <StyledWrapper>
       <StyledImage src={imageURL} />
       <QuantityBox>
-        <Button cart>+</Button>
+        <Button cart onClick={increase}>
+          +
+        </Button>
         <Paragraph>{quantity}</Paragraph>
-        <Button cart>-</Button>
+        <Button cart onClick={decrease}>
+          -
+        </Button>
       </QuantityBox>
       <NameBox>
         <StyledParagraph>{name}</StyledParagraph>
         <StyledParagraph small>{pack}</StyledParagraph>
         <StyledParagraph small>{addition}</StyledParagraph>
       </NameBox>
-      <StyledButton>Remove item</StyledButton>
+      <StyledButton onClick={remove}>Remove item</StyledButton>
       <Paragraph>{totalPrice}$</Paragraph>
     </StyledWrapper>
   );

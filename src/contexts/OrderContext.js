@@ -1,6 +1,12 @@
 import React, { useContext, useReducer } from 'react';
 import { orderReducer } from '../reducers/orderReducer';
-import { ADD_TO_CART, REMOVE_FROM_CART, TOTAL_PRICE } from '../reducers/orderReducer';
+import {
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  TOTAL_PRICE,
+  INCREASE_QUANTITY,
+  DECREASE_QUANTITY
+} from '../reducers/orderReducer';
 
 export const OrderContext = React.createContext({
   cart: [],
@@ -31,8 +37,24 @@ const OrderContextProvider = ({ children }) => {
     });
   };
 
+  const increaseQuantity = index => {
+    dispatch({
+      type: INCREASE_QUANTITY,
+      index: index
+    });
+  };
+
+  const decreaseQuantity = index => {
+    dispatch({
+      type: DECREASE_QUANTITY,
+      index: index
+    });
+  };
+
   return (
-    <OrderContext.Provider value={{ state, addToCart, removeFromCart, calculateTotalPrice }}>
+    <OrderContext.Provider
+      value={{ state, addToCart, removeFromCart, calculateTotalPrice, increaseQuantity, decreaseQuantity }}
+    >
       {children}
     </OrderContext.Provider>
   );

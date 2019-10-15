@@ -24,11 +24,20 @@ const StyledHeader = styled.h1`
 `;
 
 const Cart = () => {
-  const { state, calculateTotalPrice } = useContext(OrderContext);
+  const {
+    state,
+    calculateTotalPrice,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity
+  } = useContext(OrderContext);
 
   useEffect(() => {
     calculateTotalPrice();
-  }, []);
+  }, [state.cart, state.cart.length]);
+  /* It triggers calculate price function when quantity of object changes
+   * inside cart array, or length of array changes, then we know, that
+   * item was added or removed */
 
   return (
     <StyledWrapper>
@@ -44,9 +53,12 @@ const Cart = () => {
               imageURL={item.photoURL}
               quantity={item.quantity}
               totalPrice={item.totalPrice}
+              remove={() => removeFromCart(index)}
+              increase={() => increaseQuantity(index)}
+              decrease={() => decreaseQuantity(index)}
             />
           ))}
-          <Paragraph medium>Total price: {state.totalPrice}$</Paragraph>
+          <Paragraph medium>Total: {state.totalPrice}$</Paragraph>
         </>
       ) : (
         <StyledHeader>Your cart is empty</StyledHeader>

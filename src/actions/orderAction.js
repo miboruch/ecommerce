@@ -1,6 +1,22 @@
+export const calculateTotalPrice = state => {
+  let result = 0;
+  state.cart.map(item => {
+    result += item.totalPrice;
+  });
+
+  return {
+    ...state,
+    totalPrice: result.toFixed(2)
+  };
+};
+
 export const addProduct = (state, product) => {
+  console.log(product);
   const updatedCart = state.cart;
-  updatedCart.push(product);
+  updatedCart.push({
+    ...product,
+    totalPrice: Number.parseInt((product.quantity * product.productPrice).toFixed(2))
+  });
 
   return {
     ...state,
@@ -11,6 +27,7 @@ export const addProduct = (state, product) => {
 export const removeProduct = (state, index) => {
   const cart = state.cart;
   cart.splice(index, 1);
+  calculateTotalPrice(state);
 
   return {
     ...state,
@@ -18,14 +35,36 @@ export const removeProduct = (state, index) => {
   };
 };
 
-export const calculateTotalPrice = state => {
-  let result = 0;
-  state.cart.map(item => {
-    result += item.totalPrice;
-  });
+export const increaseQuantity = (state, index) => {
+  const cartItem = state.cart[index];
+  if (cartItem.quantity < 5) {
+    cartItem.quantity = cartItem.quantity + 1;
+    cartItem.totalPrice = Number.parseFloat(
+      (cartItem.totalPrice + cartItem.productPrice).toFixed(2)
+    );
+  }
 
+  calculateTotalPrice(state);
+  console.log(state);
   return {
     ...state,
-    totalPrice: result
+    cart: [...state.cart]
+  };
+};
+
+export const decreaseQuantity = (state, index) => {
+  const cartItem = state.cart[index];
+
+  if (cartItem.quantity > 1) {
+    cartItem.quantity = cartItem.quantity - 1;
+    cartItem.totalPrice = Number.parseFloat(
+      (cartItem.totalPrice - cartItem.productPrice).toFixed(2)
+    );
+  }
+
+  calculateTotalPrice(state);
+  return {
+    ...state,
+    cart: [...state.cart]
   };
 };

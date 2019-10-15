@@ -89,8 +89,7 @@ const ProductContent = ({ productData }) => {
       photoURL: photoURL,
       pack: pack,
       quantity: quantity,
-      productPrice: price,
-      totalPrice: quantity * price
+      productPrice: price
     };
     addToCart(product);
     console.log(state.cart);
