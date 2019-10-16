@@ -15,7 +15,8 @@ export const addProduct = (state, product) => {
   const updatedCart = state.cart;
   updatedCart.push({
     ...product,
-    totalPrice: Number.parseInt((product.quantity * product.productPrice).toFixed(2))
+    // totalPrice: Number.parseInt((product.quantity * product.productPrice).toFixed(2))
+    totalPrice: product.quantity * product.productPrice
   });
 
   return {

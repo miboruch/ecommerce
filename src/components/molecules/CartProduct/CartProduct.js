@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
@@ -80,6 +81,15 @@ const CartProduct = ({
       <Paragraph>{totalPrice}$</Paragraph>
     </StyledWrapper>
   );
+};
+
+CartProduct.propTypes = {
+  imageURL: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  pack: PropTypes.string.isRequired,
+  addition: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  totalPrice: PropTypes.number.isRequired
 };
 
 export default CartProduct;

@@ -27,7 +27,7 @@ const SpecificProduct = ({ match }) => {
       }
     });
     setLoading(false);
-  });
+  }, [match.params.id]);
 
   return (
     <>

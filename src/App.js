@@ -9,6 +9,7 @@ import Story from './pages/Story/Story';
 import Products from './pages/Products/Products';
 import SpecificProduct from './pages/SpecificProduct/SpecificProduct';
 import Cart from './pages/Cart/Cart';
+import AuthPage from './pages/AuthPage/AuthPage';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
                 <Route path={'/products'} component={Products} />
                 <Route path={'/cart'} component={Cart} />
                 <Route path={'/product/:id'} component={SpecificProduct} />
+                <Route path={'/login'} component={AuthPage} />
+                <Route path={'/register'} component={AuthPage} />
               </Switch>
             </ScrollTop>
           </OrderContextProvider>

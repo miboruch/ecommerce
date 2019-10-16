@@ -36,7 +36,7 @@ const StyledOption = styled.option`
   padding: 2rem 0;
 `;
 
-const Input = React.forwardRef(({ inputType, onChange, ...props }, ref) => {
+const Input = React.forwardRef(({ inputType, ...props }, ref) => {
   let element = null;
 
   switch (inputType) {
@@ -45,7 +45,7 @@ const Input = React.forwardRef(({ inputType, onChange, ...props }, ref) => {
       break;
     case 'select':
       element = (
-        <StyledSelect ref={ref} onChange={onChange}>
+        <StyledSelect ref={ref} onChange={props.onChange}>
           {props.options.map((item, index) => (
             <StyledOption value={item} key={index}>
               {item}
