@@ -13,6 +13,10 @@ const StyledWrapper = styled.div`
   align-items: center;
   text-align: center;
   border-bottom: 1px solid ${({ theme }) => theme.background};
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -21,6 +25,11 @@ const StyledImage = styled.img`
   margin: auto;
   grid-row-start: 1;
   grid-row-end: 2;
+
+  @media all and (min-width: 400px) {
+    width: 160px;
+    height: 86px;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -64,12 +73,12 @@ const CartProduct = ({
     <StyledWrapper>
       <StyledImage src={imageURL} />
       <QuantityBox>
-        <Button cart onClick={increase}>
-          +
-        </Button>
-        <Paragraph>{quantity}</Paragraph>
         <Button cart onClick={decrease}>
           -
+        </Button>
+        <Paragraph>{quantity}</Paragraph>
+        <Button cart onClick={increase}>
+          +
         </Button>
       </QuantityBox>
       <NameBox>

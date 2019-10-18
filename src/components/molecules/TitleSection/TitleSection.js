@@ -29,6 +29,15 @@ const StyledTitle = styled.h1`
   margin: 0;
   text-transform: uppercase;
   font-family: ${({ theme }) => theme.font.family.montserrat};
+  font-size: ${({ theme }) => theme.fontSize.s};
+
+  ${({ theme }) => theme.mq.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.m};
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    font-size: ${({ theme }) => theme.fontSize.l};
+  }
 `;
 
 const TitleSection = ({ children }) => {

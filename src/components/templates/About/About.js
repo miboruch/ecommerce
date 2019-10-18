@@ -1,19 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import image from '../../../assets/images/background.jpeg';
+import image from '../../../assets/images/background.jpg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
-const StyledImage = styled.img`
+const StyledWrapper = styled.div`
   width: 100%;
-  height: 70vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledImage = styled.img`
+  max-width: 100%;
+  height: auto;
   object-fit: cover;
   margin-top: 2rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    height: 100vh;
+    justify-content: center;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
   width: 90%;
   margin: auto;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+  }
 `;
 
 const StyledLine = styled.div`
@@ -24,7 +39,7 @@ const StyledLine = styled.div`
 
 const About = () => {
   return (
-    <>
+    <StyledWrapper>
       <StyledLine />
       <StyledImage src={image} />
       <StyledParagraph>
@@ -32,7 +47,7 @@ const About = () => {
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
         laboris nisi ut aliquip ex ea commodo consequat.
       </StyledParagraph>
-    </>
+    </StyledWrapper>
   );
 };
 

@@ -5,10 +5,11 @@ export const theme = {
     }
   },
   fontSize: {
-    xxs: '10px',
-    xs: '12px',
-    s: '14px',
-    m: '20px'
+    xxs: '1rem',
+    xs: '1.2rem',
+    s: '1.4rem',
+    m: '2rem',
+    l: '2.4rem'
   },
   color: {
     background: '#F7F4F1',
@@ -19,9 +20,9 @@ export const theme = {
     footerFont: '#171616'
   },
   mq: {
-    mobile: '@media all and (min-width: 350px)',
-    tablet: '@media all and (min-width: 812px)',
-    standard: '@media all and (min-width: 1024px)',
-    desktop: '@media all and (min-width: 1280px)'
+    mobile: '@media all and (min-width: 370px)',
+    tablet: '@media all and (min-width: 712px)',
+    standard: '@media all and (min-width: 1025px)',
+    desktop: '@media all and (min-width: 1480px)'
   }
 };

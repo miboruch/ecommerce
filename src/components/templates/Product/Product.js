@@ -6,6 +6,11 @@ const StyledWrapper = styled.section`
   text-align: center;
   padding: 2rem 0;
   position: relative;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 80%;
+    margin: auto;
+  }
 `;
 
 const StyledHeading = styled.p`
@@ -14,6 +19,10 @@ const StyledHeading = styled.p`
   margin: 0;
   letter-spacing: 2px;
   font-weight: 500;
+
+  ${({ theme }) => theme.mq.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.m};
+  }
 `;
 
 const StyledSubtitle = styled.p`
@@ -22,6 +31,10 @@ const StyledSubtitle = styled.p`
   margin-top: 2px;
   margin-bottom: 32px;
   letter-spacing: 1px;
+
+  ${({ theme }) => theme.mq.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
 const StyledImage = styled.img`
@@ -77,6 +90,5 @@ const Product = ({ name, addition, price, photoURL }) => (
     <StyledLine />
   </StyledWrapper>
 );
-
 
 export default Product;

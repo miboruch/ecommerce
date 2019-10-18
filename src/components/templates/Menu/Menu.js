@@ -29,9 +29,14 @@ const StyledList = styled.ul`
 
 const StyledListItem = styled.li`
   color: ${({ theme }) => theme.color.secondFont};
-  padding: 0.8rem 0;
-  letter-spacing: 2px;
+  font-size: ${({ theme }) => theme.fontSize.s};
+  padding: 1.2rem 0;
+  letter-spacing: 4px;
   z-index: 6;
+
+  ${({ theme }) => theme.mq.mobile} {
+    font-size: ${({ theme }) => theme.fontSize.m};
+  }
 `;
 
 const StyledStripe = styled.div`

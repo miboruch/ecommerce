@@ -9,6 +9,10 @@ const StyledContainer = styled.div`
   grid-template-columns: 50% 50%;
   text-align: center;
   border-bottom: 1px solid ${({ theme }) => theme.background};
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`

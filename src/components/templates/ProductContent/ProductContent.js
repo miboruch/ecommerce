@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
@@ -7,7 +7,8 @@ import { OrderContext } from '../../../contexts/OrderContext';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledImpact = styled.p`
@@ -18,11 +19,27 @@ const StyledImpact = styled.p`
 
 const StyledImage = styled.img`
   width: 100%;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 80%;
+    margin: auto;
+  }
+
+  ${({ theme }) => theme.mq.desktop} {
+    width: 60%;
+    margin: auto;
+    justify-content: center;
+  }
 `;
 
 const StyledInfoBox = styled.div`
   width: 85%;
   margin: auto;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+    margin: auto;
+  }
 `;
 
 const StyledTitle = styled.h1`
@@ -69,6 +86,7 @@ const ProductContent = ({ productData }) => {
   const { state, addToCart } = useContext(OrderContext);
 
   const [quantity, setQuantity] = useState(1);
+  const image = useRef(null);
 
   const { addition, id, name, photoURL, price } = productData;
   const [packTypeSelect, quantitySelect] = [useRef(null), useRef(null)];
@@ -92,13 +110,12 @@ const ProductContent = ({ productData }) => {
       productPrice: price
     };
     addToCart(product);
-    console.log(state.cart);
   };
 
   return (
     <StyledWrapper>
       <StyledImpact>01/0{id}</StyledImpact>
-      <StyledImage src={photoURL} />
+      <StyledImage src={photoURL} ref={image} />
       <StyledInfoBox>
         <StyledTitle>{name}</StyledTitle>
         <StyledSubtitle>{addition}</StyledSubtitle>

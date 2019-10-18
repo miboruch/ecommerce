@@ -5,11 +5,27 @@ import image from '../../../assets/images/back.jpeg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledBackgroundImage = styled.div`
-  width: 100%;
-  height: 70vh;
+  max-width: 100%;
+  height: 90vh;
   background-image: url(${image});
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   margin: 2rem 0;
+
+  @media all and (min-width: 600px) {
+    background-position: 50% 100%;
+  }
+
+  ${({ theme }) => theme.mq.tablet} {
+    width: 100%;
+    background-position: 80% 90%;
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+    margin: 2rem auto;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -18,6 +34,10 @@ const StyledParagraph = styled(Paragraph)`
 
 const StyledQuoteAuthor = styled.span`
   font-size: ${({ theme }) => theme.fontSize.xxs};
+
+  ${({ theme }) => theme.mq.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.s};
+  }
 `;
 
 const DesignQuote = () => {

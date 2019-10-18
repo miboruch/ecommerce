@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import CartHeader from '../../components/molecules/CartHeader/CartHeader';
 import CartProduct from '../../components/molecules/CartProduct/CartProduct';
+import Button from '../../components/atoms/Button/Button';
 import { OrderContext } from '../../contexts/OrderContext';
 import Paragraph from '../../components/atoms/Paragraph/Paragraph';
 
@@ -9,6 +10,16 @@ const StyledWrapper = styled.div`
   width: 100%;
   min-height: calc(100vh - 64px);
   position: relative;
+`;
+
+const InnerWrapper = styled.div`
+  width: 90%;
+  margin: auto;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 60%;
+    margin: auto;
+  }
 `;
 
 const StyledHeader = styled.h1`
@@ -20,6 +31,7 @@ const StyledHeader = styled.h1`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: ${({ theme }) => theme.fontSize.m};
+  font-weight: normal;
   text-align: center;
 `;
 
@@ -58,7 +70,10 @@ const Cart = () => {
               decrease={() => decreaseQuantity(index)}
             />
           ))}
-          <Paragraph medium>Total: {state.totalPrice}$</Paragraph>
+          <InnerWrapper>
+            <Paragraph medium>Total: {state.totalPrice}$</Paragraph>
+            <Button>Submit</Button>
+          </InnerWrapper>
         </>
       ) : (
         <StyledHeader>Your cart is empty</StyledHeader>
