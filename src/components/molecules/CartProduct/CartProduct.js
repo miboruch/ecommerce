@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
 import { OrderContext } from '../../../contexts/OrderContext';
@@ -59,6 +60,7 @@ const StyledButton = styled(Button)`
 `;
 
 const CartProduct = ({
+  id,
   imageURL,
   name,
   pack,
@@ -71,7 +73,9 @@ const CartProduct = ({
 }) => {
   return (
     <StyledWrapper>
-      <StyledImage src={imageURL} />
+      <Link to={`/product/${id}`}>
+        <StyledImage src={imageURL} />
+      </Link>
       <QuantityBox>
         <Button cart onClick={decrease}>
           -

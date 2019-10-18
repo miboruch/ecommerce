@@ -17,18 +17,27 @@ const StyledImpact = styled.p`
   padding-left: 1rem;
 `;
 
-const StyledImage = styled.img`
+const ImageWrapper = styled.div`
   width: 100%;
+  height: 80vh;
+  position: relative;
+  overflow: hidden;
+`;
 
-  ${({ theme }) => theme.mq.standard} {
-    width: 80%;
-    margin: auto;
-  }
+const StyledImageBackground = styled.div`
+  width: 100%;
+  height: 80vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(${({ photoUrl }) => photoUrl});
+  background-position: 30% center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.5s ease-out;
 
-  ${({ theme }) => theme.mq.desktop} {
-    width: 60%;
-    margin: auto;
-    justify-content: center;
+  :hover {
+    transform: scale(1.8);
   }
 `;
 
@@ -86,7 +95,6 @@ const ProductContent = ({ productData }) => {
   const { state, addToCart } = useContext(OrderContext);
 
   const [quantity, setQuantity] = useState(1);
-  const image = useRef(null);
 
   const { addition, id, name, photoURL, price } = productData;
   const [packTypeSelect, quantitySelect] = [useRef(null), useRef(null)];
@@ -94,6 +102,17 @@ const ProductContent = ({ productData }) => {
   const setQuantityHandler = event => {
     const result = Number.parseInt(event.target.value);
     setQuantity(result);
+  };
+
+  const mouseMoveEvent = event => {
+    const [pageX, pageY] = [event.pageX, event.pageY];
+    const [offsetTop, offsetLeft] = [event.target.offsetTop, event.target.offsetLeft];
+    const [width, height] = [event.target.offsetWidth, event.target.offsetHeight];
+
+    event.target.style = `transform-origin: ${((pageX - offsetLeft) / width) * 100}% ${((pageY -
+      offsetTop) /
+      height) *
+      100}%`;
   };
 
   const setProductToCart = () => {
@@ -115,7 +134,9 @@ const ProductContent = ({ productData }) => {
   return (
     <StyledWrapper>
       <StyledImpact>01/0{id}</StyledImpact>
-      <StyledImage src={photoURL} ref={image} />
+      <ImageWrapper>
+        <StyledImageBackground photoUrl={photoURL} onMouseMove={mouseMoveEvent} />
+      </ImageWrapper>
       <StyledInfoBox>
         <StyledTitle>{name}</StyledTitle>
         <StyledSubtitle>{addition}</StyledSubtitle>

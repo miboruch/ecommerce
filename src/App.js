@@ -23,7 +23,7 @@ function App() {
                 <Route path={'/story'} component={Story} />
                 <Route path={'/products'} component={Products} />
                 <Route path={'/cart'} component={Cart} />
-                <Route path={'/product/:id'} component={SpecificProduct} />
+                <Route path={'/product/:id'} exact component={SpecificProduct} />
                 <Route path={'/login'} component={AuthPage} />
                 <Route path={'/register'} component={AuthPage} />
               </Switch>

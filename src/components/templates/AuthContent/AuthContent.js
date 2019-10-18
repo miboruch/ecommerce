@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
+import { Link } from 'react-router-dom';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -32,9 +33,13 @@ const StyledInput = styled(Input)`
   margin-bottom: 2rem;
 `;
 
-const AuthContent = ({ type }) => {
-  const [isCurrentLogin] = useState(type === 'login');
+const AuthContent = ({ pathname }) => {
+  console.log(pathname);
+  const types = ['login', 'register'];
 
+  const [currentPage] = types.filter(page => pathname.includes(page));
+  const isCurrentLogin = currentPage === types[0];
+  console.log(isCurrentLogin);
   return (
     <StyledWrapper>
       <Formik
@@ -67,9 +72,19 @@ const AuthContent = ({ type }) => {
               value={values.password}
             />
             {isCurrentLogin ? (
-              <Button type='submit'>log in</Button>
+              <>
+                <Button type='submit'>log in</Button>
+                <Link to='/register'>
+                  <StyledParagraph small>or create an account</StyledParagraph>
+                </Link>
+              </>
             ) : (
-              <Button type='submit'>create</Button>
+              <>
+                <Button type='submit'>create</Button>
+                <Link to='/login'>
+                  <StyledParagraph small>or log in to your account</StyledParagraph>
+                </Link>
+              </>
             )}
           </StyledForm>
         )}

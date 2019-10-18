@@ -59,6 +59,7 @@ const Cart = () => {
           {state.cart.map((item, index) => (
             <CartProduct
               key={index}
+              id={item.id}
               name={item.name}
               pack={item.pack}
               addition={item.addition}
