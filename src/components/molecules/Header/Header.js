@@ -23,10 +23,15 @@ const StyledHeader = styled.header`
 const StyledParagraph = styled(Paragraph)`
   position: absolute;
   top: 50%;
-  right: 70px;
+  right: 50px;
   padding: 0;
   margin: 0;
   transform: translateY(-50%);
+  display: none;
+
+  ${({ theme }) => theme.mq.mobile} {
+    display: block;
+  }
 `;
 
 const StyledLogo = styled.p`

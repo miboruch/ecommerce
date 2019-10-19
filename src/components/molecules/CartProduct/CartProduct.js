@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
-import { OrderContext } from '../../../contexts/OrderContext';
+import { removeProduct, increaseQuantity, decreaseQuantity } from '../../../actions/action';
 
 const StyledWrapper = styled.div`
   width: 95%;
@@ -61,15 +62,16 @@ const StyledButton = styled(Button)`
 
 const CartProduct = ({
   id,
+  index,
   imageURL,
   name,
   pack,
   addition,
   quantity,
   totalPrice,
-  remove,
-  increase,
-  decrease
+  removeProduct,
+  increaseQuantity,
+  decreaseQuantity
 }) => {
   return (
     <StyledWrapper>
@@ -77,11 +79,11 @@ const CartProduct = ({
         <StyledImage src={imageURL} />
       </Link>
       <QuantityBox>
-        <Button cart onClick={decrease}>
+        <Button cart onClick={() => decreaseQuantity(index)}>
           -
         </Button>
         <Paragraph>{quantity}</Paragraph>
-        <Button cart onClick={increase}>
+        <Button cart onClick={() => increaseQuantity(index)}>
           +
         </Button>
       </QuantityBox>
@@ -90,7 +92,7 @@ const CartProduct = ({
         <StyledParagraph small>{pack}</StyledParagraph>
         <StyledParagraph small>{addition}</StyledParagraph>
       </NameBox>
-      <StyledButton onClick={remove}>Remove item</StyledButton>
+      <StyledButton onClick={() => removeProduct(id)}>Remove item</StyledButton>
       <Paragraph>{totalPrice}$</Paragraph>
     </StyledWrapper>
   );
@@ -105,4 +107,15 @@ CartProduct.propTypes = {
   totalPrice: PropTypes.number.isRequired
 };
 
-export default CartProduct;
+const mapDispatchToProps = dispatch => {
+  return {
+    removeProduct: id => dispatch(removeProduct(id)),
+    increaseQuantity: index => dispatch(increaseQuantity(index)),
+    decreaseQuantity: index => dispatch(decreaseQuantity(index))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CartProduct);

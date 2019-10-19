@@ -23,5 +23,10 @@ export const menuItems = [
     id: 5,
     title: 'CONTACT',
     url: '/contact'
+  },
+  {
+    id: 6,
+    title: 'LOG IN/REGISTER',
+    url: '/login'
   }
 ];

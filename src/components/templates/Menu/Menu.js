@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledList = styled.ul`
-  width: 50%;
+  width: auto;
   margin-left: 2rem;
   list-style-type: none;
   padding: 0;

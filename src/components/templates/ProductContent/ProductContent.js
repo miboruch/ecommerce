@@ -1,9 +1,10 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { OrderContext } from '../../../contexts/OrderContext';
+import { addProduct } from '../../../actions/action';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -91,9 +92,7 @@ const Flex = styled.div`
   margin: 3rem 0;
 `;
 
-const ProductContent = ({ productData }) => {
-  const { state, addToCart } = useContext(OrderContext);
-
+const ProductContent = ({ productData, addProduct }) => {
   const [quantity, setQuantity] = useState(1);
 
   const { addition, id, name, photoURL, price } = productData;
@@ -126,9 +125,10 @@ const ProductContent = ({ productData }) => {
       photoURL: photoURL,
       pack: pack,
       quantity: quantity,
-      productPrice: price
+      productPrice: price,
+      totalPrice: quantity * price
     };
-    addToCart(product);
+    addProduct(product);
   };
 
   return (
@@ -163,4 +163,13 @@ const ProductContent = ({ productData }) => {
   );
 };
 
-export default ProductContent;
+const mapDispatchToProps = dispatch => {
+  return {
+    addProduct: product => dispatch(addProduct(product))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ProductContent);

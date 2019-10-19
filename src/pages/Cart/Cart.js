@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import CartHeader from '../../components/molecules/CartHeader/CartHeader';
 import CartProduct from '../../components/molecules/CartProduct/CartProduct';
 import Button from '../../components/atoms/Button/Button';
-import { OrderContext } from '../../contexts/OrderContext';
 import Paragraph from '../../components/atoms/Paragraph/Paragraph';
+import { calculateTotalPrice } from '../../actions/action';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -35,44 +36,34 @@ const StyledHeader = styled.h1`
   text-align: center;
 `;
 
-const Cart = () => {
-  const {
-    state,
-    calculateTotalPrice,
-    removeFromCart,
-    increaseQuantity,
-    decreaseQuantity
-  } = useContext(OrderContext);
-
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [state.cart, state.cart.length]);
+const Cart = ({ cart, totalPrice, calculateTotalPrice }) => {
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
    * item was added or removed */
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [cart, cart.length]);
 
   return (
     <StyledWrapper>
       <CartHeader />
-      {state.cart.length !== 0 ? (
+      {cart.length !== 0 ? (
         <>
-          {state.cart.map((item, index) => (
+          {cart.map((item, index) => (
             <CartProduct
-              key={index}
+              key={item.id}
               id={item.id}
+              index={index}
               name={item.name}
               pack={item.pack}
               addition={item.addition}
               imageURL={item.photoURL}
               quantity={item.quantity}
               totalPrice={item.totalPrice}
-              remove={() => removeFromCart(index)}
-              increase={() => increaseQuantity(index)}
-              decrease={() => decreaseQuantity(index)}
             />
           ))}
           <InnerWrapper>
-            <Paragraph medium>Total: {state.totalPrice}$</Paragraph>
+            <Paragraph medium>Total: {totalPrice}$</Paragraph>
             <Button>Submit</Button>
           </InnerWrapper>
         </>
@@ -83,4 +74,17 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+const mapStateToProps = ({ cart, totalPrice }) => {
+  return { cart, totalPrice };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    calculateTotalPrice: () => dispatch(calculateTotalPrice())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart);
