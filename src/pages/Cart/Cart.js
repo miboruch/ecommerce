@@ -51,7 +51,7 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice }) => {
         <>
           {cart.map((item, index) => (
             <CartProduct
-              key={item.id}
+              key={index}
               id={item.id}
               index={index}
               name={item.name}

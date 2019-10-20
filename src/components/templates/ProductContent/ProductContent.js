@@ -71,7 +71,7 @@ const StyledSubtitle = styled.p`
 
 const StyledParagraph = styled(Paragraph)`
   text-align: right;
-  padding-right: 0;
+  padding: 2rem 0;
 `;
 
 const StyledPriceParagraph = styled(StyledParagraph)`
@@ -92,7 +92,7 @@ const Flex = styled.div`
   margin: 3rem 0;
 `;
 
-const ProductContent = ({ productData, addProduct }) => {
+const ProductContent = ({ productData, addProduct, cartError }) => {
   const [quantity, setQuantity] = useState(1);
 
   const { addition, id, name, photoURL, price } = productData;
@@ -153,6 +153,9 @@ const ProductContent = ({ productData, addProduct }) => {
           />
           <Button onClick={setProductToCart}>add to cart</Button>
         </Flex>
+        {cartError ? (
+          <StyledParagraph small>You already have this product in your cart</StyledParagraph>
+        ) : null}
         <StyledPriceParagraph>Total: {(quantity * price).toFixed(2)} USD</StyledPriceParagraph>
         <Description>
           People like consistency. Whether it’s a store or a restaurant, they want to come in and
@@ -163,6 +166,10 @@ const ProductContent = ({ productData, addProduct }) => {
   );
 };
 
+const mapStateToProps = ({ cartError }) => {
+  return { cartError };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     addProduct: product => dispatch(addProduct(product))
@@ -170,6 +177,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProductContent);

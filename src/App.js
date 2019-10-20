@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ScrollTop from './components/ScrollTop/ScrollTop';
 import ProductsContextProvider from './contexts/ProductsContext';
-import OrderContextProvider from './contexts/OrderContext';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Story from './pages/Story/Story';
 import Products from './pages/Products/Products';
@@ -19,19 +18,17 @@ function App() {
       <Router>
         <MainTemplate>
           <ProductsContextProvider>
-            <OrderContextProvider>
-              <ScrollTop>
-                <Switch>
-                  <Route path={'/'} exact component={LandingPage} />
-                  <Route path={'/story'} component={Story} />
-                  <Route path={'/products'} component={Products} />
-                  <Route path={'/cart'} component={Cart} />
-                  <Route path={'/product/:id'} exact component={SpecificProduct} />
-                  <Route path={'/login'} component={AuthPage} />
-                  <Route path={'/register'} component={AuthPage} />
-                </Switch>
-              </ScrollTop>
-            </OrderContextProvider>
+            <ScrollTop>
+              <Switch>
+                <Route path={'/'} exact component={LandingPage} />
+                <Route path={'/story'} component={Story} />
+                <Route path={'/products'} component={Products} />
+                <Route path={'/cart'} component={Cart} />
+                <Route path={'/product/:id'} exact component={SpecificProduct} />
+                <Route path={'/login'} component={AuthPage} />
+                <Route path={'/register'} component={AuthPage} />
+              </Switch>
+            </ScrollTop>
           </ProductsContextProvider>
         </MainTemplate>
       </Router>

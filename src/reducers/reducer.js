@@ -1,15 +1,13 @@
 const initialState = {
   cart: [],
-  totalPrice: 0
+  totalPrice: 0,
+  cartError: false
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PRODUCT':
-      return {
-        ...state,
-        cart: [...state.cart, action.payload]
-      };
+      return addProduct(state, action.payload);
     case 'REMOVE_PRODUCT':
       return {
         ...state,
@@ -24,6 +22,22 @@ export const reducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+const addProduct = (state, product) => {
+  console.log(state.cart);
+  const isProductInCart = state.cart.some(item => item.id === product.id);
+
+  return !isProductInCart
+    ? {
+        ...state,
+        cartError: false,
+        cart: [...state.cart, product]
+      }
+    : {
+        ...state,
+        cartError: true
+      };
 };
 
 const increaseQuantity = (state, index) => {
@@ -59,10 +73,7 @@ const decreaseQuantity = (state, index) => {
 };
 
 const calculateTotalPrice = state => {
-  let result = 0;
-  state.cart.map(item => {
-    result += item.totalPrice;
-  });
+  const result = state.cart.reduce((acc, item) => acc + item.totalPrice, 0);
 
   return {
     ...state,
