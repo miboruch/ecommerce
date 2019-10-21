@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { authenticateUser } from '../../../actions/authAction';
+import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -33,8 +35,7 @@ const StyledInput = styled(Input)`
   margin-bottom: 2rem;
 `;
 
-const AuthContent = ({ pathname }) => {
-  console.log(pathname);
+const AuthContent = ({ pathname, authenticate }) => {
   const types = ['login', 'register'];
 
   const [currentPage] = types.filter(page => pathname.includes(page));
@@ -46,6 +47,7 @@ const AuthContent = ({ pathname }) => {
         initialValues={{ email: '', password: '' }}
         onSubmit={({ email, password }) => {
           console.log(email, password);
+          authenticate(email, password, isCurrentLogin);
         }}
       >
         {({ handleChange, handleBlur, values }) => (
@@ -93,4 +95,14 @@ const AuthContent = ({ pathname }) => {
   );
 };
 
-export default AuthContent;
+const mapDispatchToProps = dispatch => {
+  return {
+    authenticate: (email, password, isLoginPage) =>
+      dispatch(authenticateUser(email, password, isLoginPage))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AuthContent);
