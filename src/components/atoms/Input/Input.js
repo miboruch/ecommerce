@@ -14,6 +14,7 @@ const StyledInput = styled.input`
   &::placeholder {
     font-size: ${({ theme }) => theme.fontSize.s};
     text-align: center;
+    letter-spacing: 2px;
   }
 `;
 

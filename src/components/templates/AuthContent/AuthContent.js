@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Formik, Form } from 'formik';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
@@ -43,9 +43,9 @@ const AuthContent = ({ pathname }) => {
   return (
     <StyledWrapper>
       <Formik
-        initialValues={{ username: '', password: '' }}
-        onSubmit={({ username, password }) => {
-          console.log(username, password);
+        initialValues={{ email: '', password: '' }}
+        onSubmit={({ email, password }) => {
+          console.log(email, password);
         }}
       >
         {({ handleChange, handleBlur, values }) => (
@@ -56,8 +56,8 @@ const AuthContent = ({ pathname }) => {
               <StyledParagraph medium>Sign in</StyledParagraph>
             )}
             <StyledInput
-              type='text'
-              name='username'
+              type='email'
+              name='email'
               placeholder='Username'
               onChange={handleChange}
               onBlur={handleBlur}

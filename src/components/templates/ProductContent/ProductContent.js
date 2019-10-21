@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { addProduct } from '../../../actions/action';
+import { addProduct } from '../../../actions/orderAction';
 
 const StyledWrapper = styled.div`
   width: 100%;

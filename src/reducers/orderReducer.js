@@ -1,28 +1,36 @@
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+export const INCREASE_QUANTITY = 'INCREASE_QUANTITY';
+export const DECREASE_QUANTITY = 'DECREASE_QUANTITY';
+export const CALCULATE_TOTAL = 'CALCULATE_TOTAL';
+
 const initialState = {
   cart: [],
   totalPrice: 0,
   cartError: false
 };
 
-export const reducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_PRODUCT':
+    case ADD_PRODUCT:
       return addProduct(state, action.payload);
-    case 'REMOVE_PRODUCT':
+    case REMOVE_PRODUCT:
       return {
         ...state,
         cart: [...state.cart.filter(item => item.id !== action.payload.id)]
       };
-    case 'INCREASE_QUANTITY':
+    case INCREASE_QUANTITY:
       return increaseQuantity(state, action.payload.index);
-    case 'DECREASE_QUANTITY':
+    case DECREASE_QUANTITY:
       return decreaseQuantity(state, action.payload.index);
-    case 'CALCULATE_TOTAL':
+    case CALCULATE_TOTAL:
       return calculateTotalPrice(state);
     default:
       return state;
   }
 };
+
+/* ACTION CREATORS */
 
 const addProduct = (state, product) => {
   console.log(state.cart);

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
-import { removeProduct, increaseQuantity, decreaseQuantity } from '../../../actions/action';
+import { removeProduct, increaseQuantity, decreaseQuantity } from '../../../actions/orderAction';
 
 const StyledWrapper = styled.div`
   width: 95%;

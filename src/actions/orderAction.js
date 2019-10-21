@@ -1,13 +1,21 @@
+import {
+  ADD_PRODUCT,
+  REMOVE_PRODUCT,
+  INCREASE_QUANTITY,
+  DECREASE_QUANTITY,
+  CALCULATE_TOTAL
+} from '../reducers/orderReducer';
+
 export const addProduct = product => {
   return {
-    type: 'ADD_PRODUCT',
+    type: ADD_PRODUCT,
     payload: product
   };
 };
 
 export const removeProduct = id => {
   return {
-    type: 'REMOVE_PRODUCT',
+    type: REMOVE_PRODUCT,
     payload: {
       id: id
     }
@@ -16,7 +24,7 @@ export const removeProduct = id => {
 
 export const increaseQuantity = index => {
   return {
-    type: 'INCREASE_QUANTITY',
+    type: INCREASE_QUANTITY,
     payload: {
       index: index
     }
@@ -25,7 +33,7 @@ export const increaseQuantity = index => {
 
 export const decreaseQuantity = index => {
   return {
-    type: 'DECREASE_QUANTITY',
+    type: DECREASE_QUANTITY,
     payload: {
       index: index
     }
@@ -34,6 +42,6 @@ export const decreaseQuantity = index => {
 
 export const calculateTotalPrice = () => {
   return {
-    type: 'CALCULATE_TOTAL'
+    type: CALCULATE_TOTAL
   };
 };

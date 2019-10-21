@@ -5,7 +5,7 @@ import CartHeader from '../../components/molecules/CartHeader/CartHeader';
 import CartProduct from '../../components/molecules/CartProduct/CartProduct';
 import Button from '../../components/atoms/Button/Button';
 import Paragraph from '../../components/atoms/Paragraph/Paragraph';
-import { calculateTotalPrice } from '../../actions/action';
+import { calculateTotalPrice } from '../../actions/orderAction';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -74,7 +74,7 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice }) => {
   );
 };
 
-const mapStateToProps = ({ cart, totalPrice }) => {
+const mapStateToProps = ({ orderReducer: { cart, totalPrice } }) => {
   return { cart, totalPrice };
 };
 
