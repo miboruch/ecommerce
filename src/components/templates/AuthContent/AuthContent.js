@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { authenticateUser } from '../../../actions/authAction';
-import { connect } from 'react-redux';
+import Spinner from '../../atoms/Spinner/Spinner';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -19,7 +21,12 @@ const StyledWrapper = styled.div`
 
 const StyledParagraph = styled(Paragraph)`
   margin: 0;
-  padding-bottom: 2rem;
+  padding: 1.5rem;
+`;
+
+const StyledErrorParagraph = styled(StyledParagraph)`
+  color: tomato;
+  text-align: center;
 `;
 
 const StyledForm = styled(Form)`
@@ -28,14 +35,23 @@ const StyledForm = styled(Form)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: left;
 `;
 
 const StyledInput = styled(Input)`
   margin-bottom: 2rem;
 `;
 
-const AuthContent = ({ pathname, authenticate }) => {
+const UserSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(8, 'Password is too short - 8 chars minimum')
+    .required('Password is required')
+});
+
+const AuthContent = ({ pathname, authenticate, loading }) => {
   const types = ['login', 'register'];
 
   const [currentPage] = types.filter(page => pathname.includes(page));
@@ -45,54 +61,72 @@ const AuthContent = ({ pathname, authenticate }) => {
     <StyledWrapper>
       <Formik
         initialValues={{ email: '', password: '' }}
+        validationSchema={UserSchema}
         onSubmit={({ email, password }) => {
           console.log(email, password);
           authenticate(email, password, isCurrentLogin);
         }}
       >
-        {({ handleChange, handleBlur, values }) => (
-          <StyledForm>
-            {isCurrentLogin ? (
-              <StyledParagraph medium>Log in</StyledParagraph>
-            ) : (
-              <StyledParagraph medium>Sign in</StyledParagraph>
-            )}
-            <StyledInput
-              type='email'
-              name='email'
-              placeholder='Username'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-            />
-            <StyledInput
-              type='password'
-              name='password'
-              placeholder='Password'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {isCurrentLogin ? (
-              <>
-                <Button type='submit'>log in</Button>
-                <Link to='/register'>
-                  <StyledParagraph small>or create an account</StyledParagraph>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Button type='submit'>create</Button>
-                <Link to='/login'>
-                  <StyledParagraph small>or log in to your account</StyledParagraph>
-                </Link>
-              </>
-            )}
-          </StyledForm>
+        {loading ? (
+          <Spinner />
+        ) : (
+          ({ handleChange, handleBlur, values, errors }) => (
+            <StyledForm>
+              {isCurrentLogin ? (
+                <StyledParagraph medium>Log in</StyledParagraph>
+              ) : (
+                <StyledParagraph medium>Sign up</StyledParagraph>
+              )}
+              {errors.email ? (
+                <StyledErrorParagraph small>{errors.email}</StyledErrorParagraph>
+              ) : (
+                <StyledParagraph small>email</StyledParagraph>
+              )}
+              <StyledInput
+                type='email'
+                name='email'
+                placeholder='Username'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+              />
+              {errors.password ? (
+                <StyledErrorParagraph small>{errors.password}</StyledErrorParagraph>
+              ) : (
+                <StyledParagraph small>password</StyledParagraph>
+              )}
+              <StyledInput
+                type='password'
+                name='password'
+                placeholder='Password'
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {isCurrentLogin ? (
+                <>
+                  <Button type='submit'>log in</Button>
+                  <Link to='/register'>
+                    <StyledParagraph small>or create an account</StyledParagraph>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Button type='submit'>create</Button>
+                  <Link to='/login'>
+                    <StyledParagraph small>or log in to your account</StyledParagraph>
+                  </Link>
+                </>
+              )}
+            </StyledForm>
+          )
         )}
       </Formik>
     </StyledWrapper>
   );
+};
+
+const mapStateToProps = ({ authReducer: { loading } }) => {
+  return { loading };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -103,6 +137,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AuthContent);

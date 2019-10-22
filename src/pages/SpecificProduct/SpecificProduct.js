@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ProductsContext } from '../../contexts/ProductsContext';
 import ProductContent from '../../components/templates/ProductContent/ProductContent';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
+import Spinner from '../../components/atoms/Spinner/Spinner';
 
 const StyledLoader = styled.div`
   width: 100%;
@@ -31,7 +32,9 @@ const SpecificProduct = ({ match }) => {
 
   return (
     <>
-      <StyledLoader isLoading={isLoading} />
+      <StyledLoader isLoading={isLoading}>
+        <Spinner />
+      </StyledLoader>
       <ProductContent productData={currentProduct} />
       <ContactFooter />
     </>

@@ -9,10 +9,13 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = data => {
+export const authSuccess = ({ data }) => {
   return {
     type: AUTH_SUCCESS,
-    payload: data
+    payload: {
+      token: data.idToken,
+      userID: data.localId
+    }
   };
 };
 

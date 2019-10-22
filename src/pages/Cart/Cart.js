@@ -36,7 +36,7 @@ const StyledHeader = styled.h1`
   text-align: center;
 `;
 
-const Cart = ({ cart, totalPrice, calculateTotalPrice }) => {
+const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
    * item was added or removed */
@@ -64,7 +64,7 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice }) => {
           ))}
           <InnerWrapper>
             <Paragraph medium>Total: {totalPrice}$</Paragraph>
-            <Button>Submit</Button>
+            {isLoggedIn ? <Button>Submit</Button> : <Button>Log in first</Button>}
           </InnerWrapper>
         </>
       ) : (
@@ -74,8 +74,8 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice }) => {
   );
 };
 
-const mapStateToProps = ({ orderReducer: { cart, totalPrice } }) => {
-  return { cart, totalPrice };
+const mapStateToProps = ({ orderReducer: { cart, totalPrice }, authReducer: { isLoggedIn } }) => {
+  return { cart, totalPrice, isLoggedIn };
 };
 
 const mapDispatchToProps = dispatch => {

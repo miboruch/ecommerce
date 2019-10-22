@@ -3,10 +3,11 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 
 const initialState = {
-  isLoggedIn: false,
   error: null,
-  pending: false,
-  result: false
+  token: null,
+  userID: null,
+  loading: false,
+  isLoggedIn: false
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -14,17 +15,23 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_START:
       return {
         ...state,
-        pending: true
+        loading: true
       };
     case AUTH_SUCCESS:
       return {
         ...state,
-        result: action.payload
+        error: null,
+        token: action.payload.token,
+        userID: action.payload.userID,
+        loading: false,
+        isLoggedIn: true
       };
     case AUTH_FAILURE:
       return {
         ...state,
-        error: action.payload.error
+        error: action.payload.error,
+        loading: false,
+        isLoggedIn: false
       };
     default:
       return state;

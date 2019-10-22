@@ -6,6 +6,7 @@ const Paragraph = styled.p`
   font-size: ${({ theme }) => theme.fontSize.s};
   letter-spacing: 2px;
   padding: 2rem;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 
   ${({ small }) =>
     small &&
