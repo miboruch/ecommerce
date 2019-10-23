@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 import { theme } from '../assets/styles/theme';
@@ -7,6 +7,8 @@ import SEO from '../components/SEO/SEO';
 import Header from '../components/molecules/Header/Header';
 import Menu from '../components/templates/Menu/Menu';
 import Footer from '../components/templates/Footer/Footer';
+import { connect } from 'react-redux';
+import { fetchProducts } from '../actions/firebaseAction';
 
 import MenuContextProvider from '../contexts/MenuContext';
 
@@ -14,7 +16,11 @@ const StyledWrapper = styled.div`
   width: 100%;
 `;
 
-const MainTemplate = ({ children }) => {
+const MainTemplate = ({ children, getProducts }) => {
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <StyledWrapper>
       <SEO />
@@ -35,4 +41,13 @@ MainTemplate.propTypes = {
   children: PropTypes.element.isRequired
 };
 
-export default MainTemplate;
+const mapDispatchToProps = dispatch => {
+  return {
+    getProducts: () => dispatch(fetchProducts())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MainTemplate);

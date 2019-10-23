@@ -1,6 +1,7 @@
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
 const initialState = {
   error: null,
@@ -31,6 +32,13 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         error: action.payload.error,
         loading: false,
+        isLoggedIn: false
+      };
+    case AUTH_LOGOUT:
+      return {
+        ...state,
+        token: null,
+        userID: null,
         isLoggedIn: false
       };
     default:

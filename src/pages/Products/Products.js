@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ProductsContext } from '../../contexts/ProductsContext';
+import { connect } from 'react-redux';
 
 import TitleSection from '../../components/molecules/TitleSection/TitleSection';
 import Product from '../../components/templates/Product/Product';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
-const Products = () => {
-  const { products } = useContext(ProductsContext);
-
+const Products = ({ products }) => {
   return (
     <>
       <TitleSection>Products</TitleSection>
@@ -28,4 +26,10 @@ const Products = () => {
   );
 };
 
-export default Products;
+const mapStateToProps = ({ firebaseReducer: { products } }) => {
+  return {
+    products
+  };
+};
+
+export default connect(mapStateToProps)(Products);

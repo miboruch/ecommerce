@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTH_START, AUTH_SUCCESS, AUTH_FAILURE } from '../reducers/authReducer';
+import { AUTH_START, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT } from '../reducers/authReducer';
 
 const API_KEY = 'AIzaSyDwmRW7kgffAwvOCUYz1yMK3qBahH2HURU';
 
@@ -28,6 +28,18 @@ export const authFailure = error => {
   };
 };
 
+export const authLogout = () => {
+  return {
+    type: AUTH_LOGOUT
+  };
+};
+
+const authTimeout = expireTime => dispatch => {
+  return setTimeout(() => {
+    dispatch(authLogout());
+  }, expireTime * 1000);
+};
+
 /* Action creators */
 
 export const authenticateUser = (email, password, isLoginPage) => dispatch => {
@@ -44,6 +56,7 @@ export const authenticateUser = (email, password, isLoginPage) => dispatch => {
     .then(response => {
       console.log(response);
       dispatch(authSuccess(response));
+      dispatch(authTimeout(response.data.expiresIn));
     })
     .catch(error => {
       console.log(error);

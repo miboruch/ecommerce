@@ -1,25 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
-import { ProductsContext } from '../../contexts/ProductsContext';
+import React, { useState, useEffect } from 'react';
 import ProductContent from '../../components/templates/ProductContent/ProductContent';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
-import Spinner from '../../components/atoms/Spinner/Spinner';
+import Loader from '../../components/atoms/Loader/Loader';
+import {connect} from 'react-redux';
 
-const StyledLoader = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: ${({ theme }) => theme.color.background};
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translateX(${({ isLoading }) => (isLoading ? '0%' : '-100%')});
-  transition: transform 0.5s 0.3s ease;
-`;
-
-const SpecificProduct = ({ match }) => {
+const SpecificProduct = ({ match, products }) => {
   const [currentProduct, setCurrentProduct] = useState({});
   const [isLoading, setLoading] = useState(true);
-  const { products } = useContext(ProductsContext);
 
   useEffect(() => {
     products.map(product => {
@@ -32,13 +19,15 @@ const SpecificProduct = ({ match }) => {
 
   return (
     <>
-      <StyledLoader isLoading={isLoading}>
-        <Spinner />
-      </StyledLoader>
+      <Loader isLoading={isLoading} />
       <ProductContent productData={currentProduct} />
       <ContactFooter />
     </>
   );
 };
 
-export default SpecificProduct;
+const mapStateToProps = ({ firebaseReducer: { products } }) => {
+  return { products };
+};
+
+export default connect(mapStateToProps)(SpecificProduct);

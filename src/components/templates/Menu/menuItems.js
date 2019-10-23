@@ -26,6 +26,11 @@ export const menuItems = [
   },
   {
     id: 6,
+    title: 'YOUR ORDERS',
+    url: '/orders'
+  },
+  {
+    id: 7,
     title: 'LOG IN/REGISTER',
     url: '/login'
   }

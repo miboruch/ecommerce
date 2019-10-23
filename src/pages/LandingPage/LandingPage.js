@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ProductsContext } from '../../contexts/ProductsContext';
+import { connect } from 'react-redux';
 import Product from '../../components/templates/Product/Product';
 import ContentHeader from '../../components/templates/ContentHeader/ContentHeader';
 import DesignQuote from '../../components/molecules/DesignQuote/DesignQuote';
 import About from '../../components/templates/About/About';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
-const LandingPage = () => {
-  const { products } = useContext(ProductsContext);
-
+const LandingPage = ({ products }) => {
   return (
     <>
       <ContentHeader />
@@ -30,4 +28,8 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+const mapStateToProps = ({ firebaseReducer: { products } }) => {
+  return { products };
+};
+
+export default connect(mapStateToProps)(LandingPage);
