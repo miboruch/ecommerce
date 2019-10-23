@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { addProduct } from '../../../actions/orderAction';
+import { addProduct } from '../../../actions/cartAction';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -166,7 +166,7 @@ const ProductContent = ({ productData, addProduct, cartError }) => {
   );
 };
 
-const mapStateToProps = ({ cartError }) => {
+const mapStateToProps = ({ cartReducer: { cartError } }) => {
   return { cartError };
 };
 

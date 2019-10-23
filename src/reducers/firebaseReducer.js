@@ -6,7 +6,7 @@ export const FETCH_FAILURE = 'FETCH_FAILURE';
 const initialState = {
   loading: false,
   products: [],
-  orders: [],
+  orders: {},
   error: null
 };
 

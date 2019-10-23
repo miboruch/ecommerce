@@ -5,7 +5,6 @@ import {
   FETCH_ORDERS_SUCCESS,
   FETCH_FAILURE
 } from '../reducers/firebaseReducer';
-import { useDispatch } from 'react-redux';
 
 const firebaseURL = 'https://ecommerce-page.firebaseio.com';
 
@@ -23,7 +22,6 @@ export const fetchOrdersSuccess = orders => {
 };
 
 export const fetchProductSuccess = products => {
-  console.log(typeof products);
   return {
     type: FETCH_PRODUCTS_SUCCESS,
     payload: products
@@ -46,10 +44,36 @@ export const fetchProducts = () => async dispatch => {
 
   dispatch(fetchStart());
   try {
+    let result = [];
     const response = await axios.get(`${firebaseURL}${productsURL}`);
-    let { aloe, fiveSucculent, leafed, succulent } = response.data.plants;
 
-    dispatch(fetchProductSuccess([aloe, fiveSucculent, leafed, succulent]));
+    for (let item in response.data.plants) {
+      result.push({
+        ...response.data.plants[item]
+      });
+    }
+
+    dispatch(fetchProductSuccess(result));
+  } catch (error) {
+    dispatch(fetchFailure(error));
+  }
+};
+
+export const fetchOrders = (token, id) => async dispatch => {
+  const ordersURL = `/history/orders.json?auth=${token}`;
+
+  dispatch(fetchStart());
+  try {
+    const response = await axios.get(`${firebaseURL}${ordersURL}`);
+
+    let fetchedOrders = [];
+    for (let item in response.data) {
+      if (response.data[item].userID === id) {
+        fetchedOrders.push({ ...response.data[item] });
+      }
+    }
+
+    dispatch(fetchOrdersSuccess(fetchedOrders));
   } catch (error) {
     dispatch(fetchFailure(error));
   }

@@ -1,47 +1,33 @@
-import {
-  ADD_PRODUCT,
-  REMOVE_PRODUCT,
-  INCREASE_QUANTITY,
-  DECREASE_QUANTITY,
-  CALCULATE_TOTAL
-} from '../reducers/orderReducer';
+import axios from 'axios';
+import { ORDER_START, ORDER_SUCCESS, ORDER_FAILURE } from '../reducers/orderReducer';
+const firebaseURL = 'https://ecommerce-page.firebaseio.com';
 
-export const addProduct = product => {
+export const orderStart = () => {
   return {
-    type: ADD_PRODUCT,
-    payload: product
+    type: ORDER_START
   };
 };
 
-export const removeProduct = id => {
+export const orderSuccess = response => {
   return {
-    type: REMOVE_PRODUCT,
-    payload: {
-      id: id
-    }
+    type: ORDER_SUCCESS,
+    payload: response
   };
 };
 
-export const increaseQuantity = index => {
+export const orderFailure = () => {
   return {
-    type: INCREASE_QUANTITY,
-    payload: {
-      index: index
-    }
+    type: ORDER_FAILURE
   };
 };
 
-export const decreaseQuantity = index => {
-  return {
-    type: DECREASE_QUANTITY,
-    payload: {
-      index: index
-    }
-  };
-};
-
-export const calculateTotalPrice = () => {
-  return {
-    type: CALCULATE_TOTAL
-  };
+export const createOrder = (token, orderObject) => async dispatch => {
+  const ordersURL = `/history/orders.json?auth=${token}`;
+  dispatch(orderStart());
+  try {
+    const response = await axios.post(`${firebaseURL}${ordersURL}`, orderObject);
+    dispatch(orderSuccess(response));
+  } catch (error) {
+    dispatch(orderFailure());
+  }
 };

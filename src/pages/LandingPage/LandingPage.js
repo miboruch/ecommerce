@@ -6,10 +6,12 @@ import ContentHeader from '../../components/templates/ContentHeader/ContentHeade
 import DesignQuote from '../../components/molecules/DesignQuote/DesignQuote';
 import About from '../../components/templates/About/About';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
+import Loader from '../../components/atoms/Loader/Loader';
 
-const LandingPage = ({ products }) => {
+const LandingPage = ({ products, loading }) => {
   return (
     <>
+      <Loader isLoading={loading} />
       <ContentHeader />
       {products.map(item => (
         <Link to={`/product/${item.id}`} key={item.id}>
@@ -28,8 +30,8 @@ const LandingPage = ({ products }) => {
   );
 };
 
-const mapStateToProps = ({ firebaseReducer: { products } }) => {
-  return { products };
+const mapStateToProps = ({ firebaseReducer: { products, loading } }) => {
+  return { products, loading };
 };
 
 export default connect(mapStateToProps)(LandingPage);

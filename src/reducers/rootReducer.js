@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import { orderReducer } from './orderReducer';
+import { cartReducer } from './cartReducer';
 import { authReducer } from './authReducer';
 import { firebaseReducer } from './firebaseReducer';
+import { orderReducer } from './orderReducer';
 
 export const rootReducer = combineReducers({
-  orderReducer,
+  cartReducer,
   authReducer,
-  firebaseReducer
+  firebaseReducer,
+  orderReducer
 });

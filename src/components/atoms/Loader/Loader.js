@@ -11,6 +11,7 @@ const StyledLoader = styled.div`
   left: 0;
   transform: translateX(${({ isLoading }) => (isLoading ? '0%' : '-100%')});
   transition: transform 0.5s 0.3s ease;
+  z-index: 9999;
 `;
 
 const Loader = ({ isLoading }) => {
