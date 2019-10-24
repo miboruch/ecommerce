@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import ReactSVG from 'react-svg';
 import svgIcon from '../../../assets/images/cart.svg';
 import { Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Hamburger from '../../atoms/Hamburger/Hamburger';
+import { authLogout } from '../../../actions/authAction';
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -34,6 +37,10 @@ const StyledParagraph = styled(Paragraph)`
   }
 `;
 
+const StyledLinkParagraph = styled(StyledParagraph)`
+  cursor: pointer;
+`;
+
 const StyledLogo = styled.p`
   color: #bca4a4;
   margin: 0;
@@ -49,16 +56,28 @@ const StyledCartIcon = styled(ReactSVG)`
   margin: 0 1.6rem;
 `;
 
-const Header = () => {
+const Header = ({ isLoggedIn, logoutUser, history }) => {
   return (
     <StyledHeader>
       <Hamburger />
       <Link to='/'>
         <StyledLogo>INDEED INC.</StyledLogo>
       </Link>
-      <Link to='/login'>
-        <StyledParagraph small>log in</StyledParagraph>
-      </Link>
+      {isLoggedIn ? (
+        <StyledLinkParagraph
+          small
+          onClick={() => {
+            history.push('/');
+            logoutUser();
+          }}
+        >
+          logout
+        </StyledLinkParagraph>
+      ) : (
+        <Link to='/login'>
+          <StyledParagraph small>login</StyledParagraph>
+        </Link>
+      )}
       <Link to='/cart'>
         <StyledCartIcon src={svgIcon} />
       </Link>
@@ -66,4 +85,19 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = ({ authReducer: { isLoggedIn } }) => {
+  return { isLoggedIn };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logoutUser: () => dispatch(authLogout())
+  };
+};
+
+const HeaderWithRouter = withRouter(Header);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderWithRouter);

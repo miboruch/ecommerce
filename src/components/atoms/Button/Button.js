@@ -11,6 +11,7 @@ const Button = styled.button`
   font-family: ${({ theme }) => theme.font.family.montserrat};
   font-size: ${({ theme }) => theme.fontSize.xxs};
   text-align: center;
+  cursor: pointer;
 
   ${({ cart }) =>
     cart &&

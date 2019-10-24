@@ -4,7 +4,7 @@ export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
 const initialState = {
-  loading: false,
+  loading: true,
   products: [],
   orders: {},
   error: null

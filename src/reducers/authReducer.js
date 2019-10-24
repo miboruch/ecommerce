@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   token: null,
   userID: null,
+  email: null,
   loading: false,
   isLoggedIn: false
 };
@@ -24,6 +25,7 @@ export const authReducer = (state = initialState, action) => {
         error: null,
         token: action.payload.token,
         userID: action.payload.userID,
+        email: action.payload.email,
         loading: false,
         isLoggedIn: true
       };
@@ -39,6 +41,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         token: null,
         userID: null,
+        email: null,
         isLoggedIn: false
       };
     default:

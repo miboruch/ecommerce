@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
@@ -51,12 +52,12 @@ const UserSchema = Yup.object().shape({
     .required('Password is required')
 });
 
-const AuthContent = ({ pathname, authenticate, loading }) => {
+const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn }) => {
   const types = ['login', 'register'];
 
   const [currentPage] = types.filter(page => pathname.includes(page));
   const isCurrentLogin = currentPage === types[0];
-  console.log(isCurrentLogin);
+
   return (
     <StyledWrapper>
       <Formik
@@ -64,7 +65,7 @@ const AuthContent = ({ pathname, authenticate, loading }) => {
         validationSchema={UserSchema}
         onSubmit={({ email, password }) => {
           console.log(email, password);
-          authenticate(email, password, isCurrentLogin);
+          authenticate(email, password, isCurrentLogin, history);
         }}
       >
         {loading ? (
@@ -125,18 +126,20 @@ const AuthContent = ({ pathname, authenticate, loading }) => {
   );
 };
 
-const mapStateToProps = ({ authReducer: { loading } }) => {
-  return { loading };
+const mapStateToProps = ({ authReducer: { loading, isLoggedIn } }) => {
+  return { loading, isLoggedIn };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    authenticate: (email, password, isLoginPage) =>
-      dispatch(authenticateUser(email, password, isLoginPage))
+    authenticate: (email, password, isLoginPage, history) =>
+      dispatch(authenticateUser(email, password, isLoginPage, history))
   };
 };
+
+const AuthContentWithRouter = withRouter(AuthContent);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthContent);
+)(AuthContentWithRouter);

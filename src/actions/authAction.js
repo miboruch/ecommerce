@@ -9,12 +9,13 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = ({ data }) => {
+export const authSuccess = (response, email) => {
   return {
     type: AUTH_SUCCESS,
     payload: {
-      token: data.idToken,
-      userID: data.localId
+      token: response.idToken,
+      userID: response.localId,
+      email: email
     }
   };
 };
@@ -42,7 +43,9 @@ const authTimeout = expireTime => dispatch => {
 
 /* Action creators */
 
-export const authenticateUser = (email, password, isLoginPage) => dispatch => {
+export const authenticateUser = (email, password, isLoginPage, history) => dispatch => {
+  /* isLoginPage -> allows me to select which URL should I choose */
+  /* history -> after success we have to redirect user to main page so we use history */
   const loginURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
   const registerURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
 
@@ -54,9 +57,9 @@ export const authenticateUser = (email, password, isLoginPage) => dispatch => {
       returnSecureToken: true
     })
     .then(response => {
-      console.log(response);
-      dispatch(authSuccess(response));
+      dispatch(authSuccess(response.data, email));
       dispatch(authTimeout(response.data.expiresIn));
+      history.push('/');
     })
     .catch(error => {
       console.log(error);
