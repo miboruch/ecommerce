@@ -6,7 +6,7 @@ export const FETCH_FAILURE = 'FETCH_FAILURE';
 const initialState = {
   loading: true,
   products: [],
-  orders: {},
+  orders: [],
   error: null
 };
 
@@ -21,13 +21,15 @@ export const firebaseReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
-        loading: false
+        loading: false,
+        error: null
       };
     case FETCH_ORDERS_SUCCESS:
       return {
         ...state,
         orders: action.payload,
-        loading: false
+        loading: false,
+        error: null
       };
     case FETCH_FAILURE:
       return {

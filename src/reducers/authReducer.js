@@ -8,6 +8,7 @@ const initialState = {
   token: null,
   userID: null,
   email: null,
+  createdDate: null,
   loading: false,
   isLoggedIn: false
 };
@@ -26,6 +27,7 @@ export const authReducer = (state = initialState, action) => {
         token: action.payload.token,
         userID: action.payload.userID,
         email: action.payload.email,
+        createdDate: action.payload.createdDate,
         loading: false,
         isLoggedIn: true
       };

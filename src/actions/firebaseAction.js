@@ -65,9 +65,10 @@ export const fetchOrders = (token, id) => async dispatch => {
   dispatch(fetchStart());
   try {
     const response = await axios.get(`${firebaseURL}${ordersURL}`);
-
+    console.log(response.data);
     let fetchedOrders = [];
     for (let item in response.data) {
+      console.log(item);
       if (response.data[item].userID === id) {
         fetchedOrders.push({ ...response.data[item] });
       }

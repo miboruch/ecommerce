@@ -9,13 +9,14 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (response, email) => {
+export const authSuccess = (idToken, localId, email, createdDate) => {
   return {
     type: AUTH_SUCCESS,
     payload: {
-      token: response.idToken,
-      userID: response.localId,
-      email: email
+      token: idToken,
+      userID: localId,
+      email,
+      createdDate
     }
   };
 };
@@ -30,6 +31,8 @@ export const authFailure = error => {
 };
 
 export const authLogout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('expire');
   return {
     type: AUTH_LOGOUT
   };
@@ -39,6 +42,16 @@ const authTimeout = expireTime => dispatch => {
   return setTimeout(() => {
     dispatch(authLogout());
   }, expireTime * 1000);
+};
+
+const getUserData = idToken => async () => {
+  const response = await axios.post(
+    `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`,
+    {
+      idToken
+    }
+  );
+  return response.data.users[0];
 };
 
 /* Action creators */
@@ -56,13 +69,46 @@ export const authenticateUser = (email, password, isLoginPage, history) => dispa
       password,
       returnSecureToken: true
     })
-    .then(response => {
-      dispatch(authSuccess(response.data, email));
+    .then(async response => {
+      const userData = await dispatch(getUserData(response.data.idToken));
+      const createdDate = new Date(Number.parseInt(userData.createdAt));
+
+      dispatch(authSuccess(response.data.idToken, userData.localId, userData.email, createdDate));
       dispatch(authTimeout(response.data.expiresIn));
       history.push('/');
+      const expireDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+      localStorage.setItem('token', response.data.idToken);
+      localStorage.setItem('expire', expireDate);
     })
     .catch(error => {
       console.log(error);
       dispatch(authFailure(error));
     });
+};
+
+export const authenticateCheck = () => async dispatch => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const expirationDate = new Date(localStorage.getItem('expire'));
+    if (expirationDate <= new Date()) {
+      dispatch(authLogout());
+    } else {
+      const userData = await dispatch(getUserData(token));
+      const createdDate = new Date(Number.parseInt(userData.createdAt));
+
+      dispatch(authSuccess(token, userData.localId, userData.email, createdDate));
+      dispatch(authTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
+
+      const response = await axios.post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`,
+        {
+          idToken: token
+        }
+      );
+
+      console.log(response.data.users[0]);
+    }
+  } else {
+    dispatch(authLogout());
+  }
 };

@@ -1,29 +1,12 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchOrders } from '../../actions/firebaseAction';
+import React from 'react';
+import OrderContent from '../../components/templates/OrderContent/OrderContent';
 
-const Orders = ({ token, userID, getOrders }) => {
-  useEffect(() => {
-    getOrders(token, userID);
-  }, []);
+const Orders = () => {
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
+    <>
+      <OrderContent />
+    </>
   );
 };
 
-const mapStateToProps = ({ authReducer: { token, userID } }) => {
-  return { token, userID };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getOrders: (token, id) => dispatch(fetchOrders(token, id))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Orders);
+export default Orders;

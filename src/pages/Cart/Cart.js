@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import CartHeader from '../../components/molecules/CartHeader/CartHeader';
 import CartProduct from '../../components/molecules/CartProduct/CartProduct';
 import Button from '../../components/atoms/Button/Button';
@@ -53,6 +54,14 @@ const Cart = ({
     calculateTotalPrice();
   }, [cart, cart.length]);
 
+  const arrayToObject = array =>
+    array.reduce((obj, item) => {
+      obj[item.id] = item;
+      return obj;
+    }, {});
+
+  const order = arrayToObject(cart);
+
   return (
     <StyledWrapper>
       <CartHeader />
@@ -74,11 +83,13 @@ const Cart = ({
           <InnerWrapper>
             <Paragraph medium>Total: {totalPrice}$</Paragraph>
             {isLoggedIn ? (
-              <Button onClick={() => createOrder(token, { ...cart, userID, totalPrice })}>
+              <Button onClick={() => createOrder(token, { order, userID, totalPrice })}>
                 Submit
               </Button>
             ) : (
-              <Button>Log in first</Button>
+              <Link to='/login'>
+                <Button>Log in first</Button>
+              </Link>
             )}
           </InnerWrapper>
         </>
