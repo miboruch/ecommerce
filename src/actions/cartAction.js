@@ -3,7 +3,8 @@ import {
   REMOVE_PRODUCT,
   INCREASE_QUANTITY,
   DECREASE_QUANTITY,
-  CALCULATE_TOTAL
+  CALCULATE_TOTAL,
+  RESET_CART
 } from '../reducers/cartReducer';
 
 export const addProduct = product => {
@@ -19,6 +20,12 @@ export const removeProduct = id => {
     payload: {
       id: id
     }
+  };
+};
+
+export const resetCart = () => {
+  return {
+    type: RESET_CART
   };
 };
 

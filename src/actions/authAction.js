@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { AUTH_START, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT } from '../reducers/authReducer';
+import {
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_FAILURE,
+  AUTH_LOGOUT,
+  AUTH_LOGOUT_START
+} from '../reducers/authReducer';
 
 const API_KEY = 'AIzaSyDwmRW7kgffAwvOCUYz1yMK3qBahH2HURU';
 
@@ -35,6 +41,12 @@ export const authLogout = () => {
   localStorage.removeItem('expire');
   return {
     type: AUTH_LOGOUT
+  };
+};
+
+const authLogoutStart = () => {
+  return {
+    type: AUTH_LOGOUT_START
   };
 };
 
@@ -111,4 +123,9 @@ export const authenticateCheck = () => async dispatch => {
   } else {
     dispatch(authLogout());
   }
+};
+
+export const logoutUser = () => dispatch => {
+  dispatch(authLogoutStart());
+  dispatch(authLogout());
 };

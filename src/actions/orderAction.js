@@ -25,7 +25,6 @@ export const createOrder = (token, orderObject) => async dispatch => {
   const ordersURL = `/history/orders.json?auth=${token}`;
   dispatch(orderStart());
   try {
-    console.log(orderObject);
     const response = await axios.post(`${firebaseURL}${ordersURL}`, orderObject);
     dispatch(orderSuccess(response));
   } catch (error) {

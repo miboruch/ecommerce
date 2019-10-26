@@ -2,6 +2,7 @@ export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_LOGOUT_START = 'AUTH_LOGOUT_START';
 
 const initialState = {
   error: null,
@@ -10,6 +11,7 @@ const initialState = {
   email: null,
   createdDate: null,
   loading: false,
+  logoutLoading: false,
   isLoggedIn: false
 };
 
@@ -19,6 +21,11 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      };
+    case AUTH_LOGOUT_START:
+      return {
+        ...state,
+        logoutLoading: true
       };
     case AUTH_SUCCESS:
       return {
@@ -44,7 +51,8 @@ export const authReducer = (state = initialState, action) => {
         token: null,
         userID: null,
         email: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        logoutLoading: false
       };
     default:
       return state;

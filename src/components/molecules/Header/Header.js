@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import ReactSVG from 'react-svg';
+import { connect } from 'react-redux';
 import svgIcon from '../../../assets/images/cart.svg';
 import { Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -25,20 +24,13 @@ const StyledHeader = styled.header`
 
 const StyledParagraph = styled(Paragraph)`
   position: absolute;
-  top: 50%;
-  right: 50px;
-  padding: 0;
+  background: ${({ theme }) => theme.color.background};
+  border: 1px solid #f1e2e2;
+  left: 50%;
+  bottom: -20px;
+  padding: 0 3rem;
   margin: 0;
-  transform: translateY(-50%);
-  display: none;
-
-  ${({ theme }) => theme.mq.mobile} {
-    display: block;
-  }
-`;
-
-const StyledLinkParagraph = styled(StyledParagraph)`
-  cursor: pointer;
+  transform: translate(-50%, -50%);
 `;
 
 const StyledLogo = styled.p`
@@ -56,48 +48,27 @@ const StyledCartIcon = styled(ReactSVG)`
   margin: 0 1.6rem;
 `;
 
-const Header = ({ isLoggedIn, logoutUser, history }) => {
+const Header = ({ isLoggedIn, email }) => {
   return (
     <StyledHeader>
       <Hamburger />
       <Link to='/'>
         <StyledLogo>INDEED INC.</StyledLogo>
       </Link>
-      {isLoggedIn ? (
-        <StyledLinkParagraph
-          small
-          onClick={() => {
-            history.push('/');
-            logoutUser();
-          }}
-        >
-          logout
-        </StyledLinkParagraph>
-      ) : (
-        <Link to='/login'>
-          <StyledParagraph small>login</StyledParagraph>
-        </Link>
-      )}
       <Link to='/cart'>
         <StyledCartIcon src={svgIcon} />
       </Link>
+      {isLoggedIn ? (
+        <StyledParagraph>{email}</StyledParagraph>
+      ) : (
+        <StyledParagraph>login</StyledParagraph>
+      )}
     </StyledHeader>
   );
 };
 
-const mapStateToProps = ({ authReducer: { isLoggedIn } }) => {
-  return { isLoggedIn };
+const mapStateToProps = ({ authReducer: { isLoggedIn, email } }) => {
+  return { isLoggedIn, email };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logoutUser: () => dispatch(authLogout())
-  };
-};
-
-const HeaderWithRouter = withRouter(Header);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderWithRouter);
+export default connect(mapStateToProps)(Header);

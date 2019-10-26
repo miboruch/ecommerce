@@ -26,7 +26,7 @@ export const menuItems = [
   },
   {
     id: 6,
-    title: 'YOUR ORDERS',
+    title: 'YOUR ACCOUNT',
     url: '/orders'
   },
   {

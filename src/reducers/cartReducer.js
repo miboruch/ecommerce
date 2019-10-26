@@ -3,6 +3,7 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const INCREASE_QUANTITY = 'INCREASE_QUANTITY';
 export const DECREASE_QUANTITY = 'DECREASE_QUANTITY';
 export const CALCULATE_TOTAL = 'CALCULATE_TOTAL';
+export const RESET_CART = 'RESET_CART';
 
 const initialState = {
   cart: [],
@@ -19,6 +20,12 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart.filter(item => item.id !== action.payload.id)]
       };
+    case RESET_CART:
+      return {
+        ...state,
+        cart: [],
+        totalPrice: 0
+      };
     case INCREASE_QUANTITY:
       return increaseQuantity(state, action.payload.index);
     case DECREASE_QUANTITY:
@@ -30,7 +37,7 @@ export const cartReducer = (state = initialState, action) => {
   }
 };
 
-/* ACTION CREATORS */
+/* --- */
 
 const addProduct = (state, product) => {
   console.log(state.cart);
