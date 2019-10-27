@@ -7,7 +7,6 @@ import svgUserIcon from '../../../assets/images/user.svg';
 import { Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Hamburger from '../../atoms/Hamburger/Hamburger';
-import { authLogout } from '../../../actions/authAction';
 
 const StyledHeader = styled.header`
   width: 100%;
@@ -41,20 +40,44 @@ const StyledLogo = styled.p`
   letter-spacing: 3px;
 `;
 
-const StyledCartIcon = styled(ReactSVG)`
+const StyledMailParagraph = styled(Paragraph)`
+  position: absolute;
+  top: 50%;
+  right: 90px;
+  transform: translateY(-50%);
+  display: none;
+  margin: 0;
+  padding: 0;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+  }
+`;
+
+const StyledIcon = styled(ReactSVG)`
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
   margin: 0 1.6rem;
+  fill: ${({ theme }) => theme.color.secondFont};
+  transition: all 0.5s ease;
+
+  :hover {
+    fill: ${({ theme }) => theme.color.impact};
+  }
 `;
 
-const StyledUserIcon = styled(ReactSVG)`
-  position: absolute;
-  top: 50%;
-  right: 50px;
-  transform: translateY(-50%);
-  margin: 0 1.6rem;
+const StyledUserIcon = styled(StyledIcon)`
+  right: 35px;
+`;
+
+const StyledMailBox = styled.div`
+  display: block;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: none;
+  }
 `;
 
 const Header = ({ isLoggedIn, email }) => {
@@ -64,17 +87,20 @@ const Header = ({ isLoggedIn, email }) => {
       <Link to='/'>
         <StyledLogo>INDEED INC.</StyledLogo>
       </Link>
-      <Link to='/account'>
+      <StyledMailParagraph small>{email}</StyledMailParagraph>
+      <Link to={isLoggedIn ? '/account' : '/login'}>
         <StyledUserIcon src={svgUserIcon} />
       </Link>
       <Link to='/cart'>
-        <StyledCartIcon src={svgCartIcon} />
+        <StyledIcon src={svgCartIcon} />
       </Link>
-      {isLoggedIn ? (
-        <StyledParagraph>{email}</StyledParagraph>
-      ) : (
-        <StyledParagraph>login</StyledParagraph>
-      )}
+      <StyledMailBox>
+        {isLoggedIn ? (
+          <StyledParagraph>{email}</StyledParagraph>
+        ) : (
+          <StyledParagraph>login</StyledParagraph>
+        )}
+      </StyledMailBox>
     </StyledHeader>
   );
 };

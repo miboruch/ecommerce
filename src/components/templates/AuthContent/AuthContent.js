@@ -52,7 +52,7 @@ const UserSchema = Yup.object().shape({
     .required('Password is required')
 });
 
-const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn }) => {
+const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn, error }) => {
   const types = ['login', 'register'];
 
   const [currentPage] = types.filter(page => pathname.includes(page));
@@ -64,7 +64,6 @@ const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn }) =
         initialValues={{ email: '', password: '' }}
         validationSchema={UserSchema}
         onSubmit={({ email, password }) => {
-          console.log(email, password);
           authenticate(email, password, isCurrentLogin, history);
         }}
       >
@@ -118,6 +117,9 @@ const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn }) =
                   </Link>
                 </>
               )}
+              {error !== null ? (
+                <StyledErrorParagraph small>incorrect login or password</StyledErrorParagraph>
+              ) : null}
             </StyledForm>
           )
         )}
@@ -126,8 +128,8 @@ const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn }) =
   );
 };
 
-const mapStateToProps = ({ authReducer: { loading, isLoggedIn } }) => {
-  return { loading, isLoggedIn };
+const mapStateToProps = ({ authReducer: { loading, isLoggedIn, error } }) => {
+  return { loading, isLoggedIn, error };
 };
 
 const mapDispatchToProps = dispatch => {

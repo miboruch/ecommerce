@@ -14,7 +14,8 @@ export const orderReducer = (state = initialState, action) => {
     case ORDER_START:
       return {
         ...state,
-        loading: true
+        loading: true,
+        success: false
       };
     case ORDER_SUCCESS:
       return {
