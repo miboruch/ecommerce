@@ -16,6 +16,10 @@ const StyledInput = styled.input`
     text-align: center;
     letter-spacing: 2px;
   }
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 400px;
+  }
 `;
 
 const StyledSelect = styled.select`

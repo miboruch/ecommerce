@@ -11,6 +11,7 @@ import SpecificProduct from './pages/SpecificProduct/SpecificProduct';
 import Cart from './pages/Cart/Cart';
 import AuthPage from './pages/AuthPage/AuthPage';
 import Account from './pages/Account/Account';
+import OrderComplete from './pages/OrderComplete/OrderComplete';
 
 function App({ isLoggedIn, authenticationCheck }) {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App({ isLoggedIn, authenticationCheck }) {
       <Route path={'/cart'} component={Cart} />
       <Route path={'/product/:id'} exact component={SpecificProduct} />
       <Route path={'/orders'} component={Account} />
+      <Route path={'/order-data'} component={OrderComplete} />
       <Redirect from={'/login'} to={'/orders'} />
       <Redirect from={'/register'} to={'/orders'} />
     </Switch>
@@ -38,6 +40,7 @@ function App({ isLoggedIn, authenticationCheck }) {
       <Route path={'/login'} component={AuthPage} />
       <Route path={'/register'} component={AuthPage} />
       <Route path={'/orders'} component={Account} />
+      <Redirect from={'/order-data'} to={'/login'} />
     </Switch>
   );
 

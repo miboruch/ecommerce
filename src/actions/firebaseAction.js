@@ -59,23 +59,23 @@ export const fetchProducts = () => async dispatch => {
   }
 };
 
-export const fetchOrders = (token, id) => async dispatch => {
-  const ordersURL = `/history/orders.json?auth=${token}`;
-
-  dispatch(fetchStart());
-  try {
-    const { data } = await axios.get(`${firebaseURL}${ordersURL}`);
-    console.log(data);
-    let fetchedOrders = [];
-    for (let item in data) {
-      console.log(data[item]);
-      if (data[item].userID === id) {
-        fetchedOrders.push(data[item]);
-      }
-    }
-
-    dispatch(fetchOrdersSuccess(fetchedOrders));
-  } catch (error) {
-    dispatch(fetchFailure(error));
-  }
-};
+// export const fetchOrders = (token, id) => async dispatch => {
+//   const ordersURL = `/history/orders.json?auth=${token}`;
+//
+//   dispatch(fetchStart());
+//   try {
+//     const { data } = await axios.get(`${firebaseURL}${ordersURL}`);
+//     console.log(data);
+//     let fetchedOrders = [];
+//     for (let item in data) {
+//       console.log(data[item]);
+//       if (data[item].userID === id) {
+//         fetchedOrders.push(data[item]);
+//       }
+//     }
+//
+//     dispatch(fetchOrdersSuccess(fetchedOrders));
+//   } catch (error) {
+//     dispatch(fetchFailure(error));
+//   }
+// };

@@ -38,6 +38,12 @@ const StyledHeader = styled.h1`
   text-align: center;
 `;
 
+const StyledButtonWrapper = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
 const Cart = ({
   cart,
   totalPrice,
@@ -75,13 +81,18 @@ const Cart = ({
           <InnerWrapper>
             <Paragraph medium>Total: {totalPrice}$</Paragraph>
             {isLoggedIn ? (
-              <Button onClick={() => createOrder(token, { ...cart, userID, totalPrice })}>
-                Submit
-              </Button>
-            ) : (
-              <Link to='/login'>
-                <Button>Log in first</Button>
+              <Link to='/order-data'>
+                <Button>Submit</Button>
               </Link>
+            ) : (
+              <StyledButtonWrapper>
+                <Link to='/order-data'>
+                  <Button>Submit</Button>
+                </Link>
+                <Link to='/login'>
+                  <Button>Log in first</Button>
+                </Link>
+              </StyledButtonWrapper>
             )}
           </InnerWrapper>
         </>

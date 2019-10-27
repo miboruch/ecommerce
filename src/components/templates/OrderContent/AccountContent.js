@@ -44,22 +44,15 @@ const StyledButton = styled(Button)`
 `;
 
 const AccountContent = ({
-  token,
   userID,
   isLoggedIn,
   loading,
-  orders,
   email,
   createdDate,
-  getOrders,
   logout,
   history,
   logoutLoading
 }) => {
-  useEffect(() => {
-    getOrders(token, userID);
-  }, [isLoggedIn]);
-
   const accountCreatedDate = new Date(createdDate).toDateString();
 
   return (
@@ -107,15 +100,14 @@ const AccountContent = ({
 };
 
 const mapStateToProps = ({
-  authReducer: { token, userID, isLoggedIn, email, createdDate, logoutLoading },
-  firebaseReducer: { loading, orders }
+  authReducer: { userID, isLoggedIn, email, createdDate, logoutLoading },
+  firebaseReducer: { loading }
 }) => {
-  return { token, userID, isLoggedIn, loading, orders, email, createdDate, logoutLoading };
+  return { userID, isLoggedIn, loading, email, createdDate, logoutLoading };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getOrders: (token, id) => dispatch(fetchOrders(token, id)),
     logout: () => dispatch(logoutUser())
   };
 };
