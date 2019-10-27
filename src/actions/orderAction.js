@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { ORDER_START, ORDER_SUCCESS, ORDER_FAILURE } from '../reducers/orderReducer';
+import {resetCart} from './cartAction';
+
 const firebaseURL = 'https://ecommerce-page.firebaseio.com';
 
 export const orderStart = () => {
@@ -27,6 +29,7 @@ export const createOrder = (token, orderObject) => async dispatch => {
   try {
     const response = await axios.post(`${firebaseURL}${ordersURL}`, orderObject);
     dispatch(orderSuccess(response));
+    dispatch(resetCart());
   } catch (error) {
     dispatch(orderFailure());
   }

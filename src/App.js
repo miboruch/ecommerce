@@ -25,10 +25,10 @@ function App({ isLoggedIn, authenticationCheck }) {
       <Route path={'/products'} component={Products} />
       <Route path={'/cart'} component={Cart} />
       <Route path={'/product/:id'} exact component={SpecificProduct} />
-      <Route path={'/orders'} component={Account} />
+      <Route path={'/account'} component={Account} />
       <Route path={'/order-data'} component={OrderComplete} />
-      <Redirect from={'/login'} to={'/orders'} />
-      <Redirect from={'/register'} to={'/orders'} />
+      <Redirect from={'/login'} to={'/account'} />
+      <Redirect from={'/register'} to={'/account'} />
     </Switch>
   ) : (
     <Switch>
@@ -39,7 +39,7 @@ function App({ isLoggedIn, authenticationCheck }) {
       <Route path={'/product/:id'} exact component={SpecificProduct} />
       <Route path={'/login'} component={AuthPage} />
       <Route path={'/register'} component={AuthPage} />
-      <Route path={'/orders'} component={Account} />
+      <Route path={'/account'} component={Account} />
       <Redirect from={'/order-data'} to={'/login'} />
     </Switch>
   );

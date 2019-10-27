@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import { connect } from 'react-redux';
-import svgIcon from '../../../assets/images/cart.svg';
+import svgCartIcon from '../../../assets/images/cart.svg';
+import svgUserIcon from '../../../assets/images/user.svg';
 import { Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Hamburger from '../../atoms/Hamburger/Hamburger';
@@ -48,6 +49,14 @@ const StyledCartIcon = styled(ReactSVG)`
   margin: 0 1.6rem;
 `;
 
+const StyledUserIcon = styled(ReactSVG)`
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  margin: 0 1.6rem;
+`;
+
 const Header = ({ isLoggedIn, email }) => {
   return (
     <StyledHeader>
@@ -55,8 +64,11 @@ const Header = ({ isLoggedIn, email }) => {
       <Link to='/'>
         <StyledLogo>INDEED INC.</StyledLogo>
       </Link>
+      <Link to='/account'>
+        <StyledUserIcon src={svgUserIcon} />
+      </Link>
       <Link to='/cart'>
-        <StyledCartIcon src={svgIcon} />
+        <StyledCartIcon src={svgCartIcon} />
       </Link>
       {isLoggedIn ? (
         <StyledParagraph>{email}</StyledParagraph>

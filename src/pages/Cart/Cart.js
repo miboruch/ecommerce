@@ -7,7 +7,6 @@ import CartProduct from '../../components/molecules/CartProduct/CartProduct';
 import Button from '../../components/atoms/Button/Button';
 import Paragraph from '../../components/atoms/Paragraph/Paragraph';
 import { calculateTotalPrice } from '../../actions/cartAction';
-import { createOrder } from '../../actions/orderAction';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -44,15 +43,7 @@ const StyledButtonWrapper = styled.section`
   justify-content: space-around;
 `;
 
-const Cart = ({
-  cart,
-  totalPrice,
-  calculateTotalPrice,
-  token,
-  userID,
-  isLoggedIn,
-  createOrder
-}) => {
+const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
    * item was added or removed */
@@ -103,17 +94,13 @@ const Cart = ({
   );
 };
 
-const mapStateToProps = ({
-  cartReducer: { cart, totalPrice },
-  authReducer: { userID, token, isLoggedIn }
-}) => {
-  return { cart, totalPrice, token, userID, isLoggedIn };
+const mapStateToProps = ({ cartReducer: { cart, totalPrice }, authReducer: { isLoggedIn } }) => {
+  return { cart, totalPrice, isLoggedIn };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    calculateTotalPrice: () => dispatch(calculateTotalPrice()),
-    createOrder: (token, cart) => dispatch(createOrder(token, cart))
+    calculateTotalPrice: () => dispatch(calculateTotalPrice())
   };
 };
 

@@ -18,7 +18,6 @@ const StyledWrapper = styled.div`
 
 const StyledInnerWrapper = styled.section`
   width: 100%;
-  align-items: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -88,12 +87,12 @@ const AccountContent = ({
           )}
         </>
       ) : (
-        <>
+        <StyledInnerWrapper>
           <Paragraph>You have to log in first to see this page</Paragraph>
           <Link to='/login'>
             <Button>LOG IN</Button>
           </Link>
-        </>
+        </StyledInnerWrapper>
       )}
     </StyledWrapper>
   );
