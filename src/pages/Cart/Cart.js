@@ -43,7 +43,7 @@ const StyledButtonWrapper = styled.section`
   justify-content: space-around;
 `;
 
-const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
+const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn, error, success }) => {
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
    * item was added or removed */
@@ -94,8 +94,12 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
   );
 };
 
-const mapStateToProps = ({ cartReducer: { cart, totalPrice }, authReducer: { isLoggedIn } }) => {
-  return { cart, totalPrice, isLoggedIn };
+const mapStateToProps = ({
+  cartReducer: { cart, totalPrice },
+  authReducer: { isLoggedIn },
+  orderReducer: { error, success }
+}) => {
+  return { cart, totalPrice, isLoggedIn, error, success };
 };
 
 const mapDispatchToProps = dispatch => {

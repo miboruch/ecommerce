@@ -57,7 +57,7 @@ const StyledMailParagraph = styled(Paragraph)`
 const StyledIcon = styled(ReactSVG)`
   position: absolute;
   top: 50%;
-  right: 0;
+  right: 35px;
   transform: translateY(-50%);
   margin: 0 1.6rem;
   fill: ${({ theme }) => theme.color.secondFont};
@@ -68,8 +68,22 @@ const StyledIcon = styled(ReactSVG)`
   }
 `;
 
-const StyledUserIcon = styled(StyledIcon)`
-  right: 35px;
+const StyledCartIcon = styled(StyledIcon)`
+  right: 0;
+
+  &::after {
+    content: '${({ productsLength }) => productsLength}';
+    color: ${({ theme }) => theme.color.secondFont};
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    transform: translateY(-50%);
+    
+    ${({ theme }) => theme.mq.standard}{
+      right: -11px;
+    }
+  }
 `;
 
 const StyledMailBox = styled.div`
@@ -80,7 +94,7 @@ const StyledMailBox = styled.div`
   }
 `;
 
-const Header = ({ isLoggedIn, email }) => {
+const Header = ({ isLoggedIn, email, cart }) => {
   return (
     <StyledHeader>
       <Hamburger />
@@ -89,10 +103,10 @@ const Header = ({ isLoggedIn, email }) => {
       </Link>
       <StyledMailParagraph small>{email}</StyledMailParagraph>
       <Link to={isLoggedIn ? '/account' : '/login'}>
-        <StyledUserIcon src={svgUserIcon} />
+        <StyledIcon src={svgUserIcon} />
       </Link>
       <Link to='/cart'>
-        <StyledIcon src={svgCartIcon} />
+        <StyledCartIcon src={svgCartIcon} productsLength={cart.length} />
       </Link>
       <StyledMailBox>
         {isLoggedIn ? (
@@ -105,8 +119,8 @@ const Header = ({ isLoggedIn, email }) => {
   );
 };
 
-const mapStateToProps = ({ authReducer: { isLoggedIn, email } }) => {
-  return { isLoggedIn, email };
+const mapStateToProps = ({ authReducer: { isLoggedIn, email }, cartReducer: { cart } }) => {
+  return { isLoggedIn, email, cart };
 };
 
 export default connect(mapStateToProps)(Header);
