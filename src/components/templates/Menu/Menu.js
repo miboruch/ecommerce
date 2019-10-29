@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useTrail, animated } from 'react-spring';
 
 import { MenuContext } from '../../../contexts/MenuContext';
 
@@ -20,14 +21,14 @@ const StyledWrapper = styled.div`
 
 const StyledList = styled.ul`
   width: auto;
-  margin-left: 2rem;
+  margin-left: 4rem;
   list-style-type: none;
   padding: 0;
   display: flex;
   flex-direction: column;
 `;
 
-const StyledListItem = styled.li`
+const StyledListItem = styled(animated.li)`
   color: ${({ theme }) => theme.color.secondFont};
   font-size: ${({ theme }) => theme.fontSize.s};
   padding: 1.2rem 0;
@@ -42,7 +43,7 @@ const StyledListItem = styled.li`
 const StyledStripe = styled.div`
   width: 1px;
   height: ${({ isOpen }) => (isOpen ? '100vh' : '1vh')}; /* or react spring */
-  background: ${({ theme }) => theme.color.background};
+  background: ${({ theme }) => theme.color.impact};
   position: absolute;
   top: 0;
   margin-left: 2rem;
@@ -58,13 +59,20 @@ const SecondStripe = styled(StyledStripe)`
 const Menu = () => {
   const { isOpen, menuItems } = useContext(MenuContext);
 
+  const menuTrail = useTrail(menuItems.length, {
+    opacity: isOpen ? 1 : 0,
+    transform: `translateX(${isOpen ? '0' : '-30px'})`,
+    from: { opacity: 0, transform: 'translateX(-30px)' },
+    delay: 900
+  });
+
   return (
     <StyledWrapper isOpen={isOpen}>
       <StyledList>
-        {menuItems.map(item => (
-          <StyledListItem key={item.id} as={Link} to={item.url}>
-            {item.title}
-          </StyledListItem>
+        {menuTrail.map((props, index) => (
+          <Link to={menuItems[index].url} key={menuItems[index].id}>
+            <StyledListItem style={props}>{menuItems[index].title}</StyledListItem>
+          </Link>
         ))}
       </StyledList>
       <StyledStripe isOpen={isOpen} />

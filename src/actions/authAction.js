@@ -110,15 +110,6 @@ export const authenticateCheck = () => async dispatch => {
 
       dispatch(authSuccess(token, userData.localId, userData.email, createdDate));
       dispatch(authTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
-
-      const response = await axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`,
-        {
-          idToken: token
-        }
-      );
-
-      console.log(response.data.users[0]);
     }
   } else {
     dispatch(authLogout());

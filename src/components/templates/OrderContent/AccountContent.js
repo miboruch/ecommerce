@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchOrders } from '../../../actions/firebaseAction';
 import { logoutUser } from '../../../actions/authAction';
 import { Link } from 'react-router-dom';
 import Spinner from '../../atoms/Spinner/Spinner';
@@ -53,6 +52,10 @@ const AccountContent = ({
   logoutLoading
 }) => {
   const accountCreatedDate = new Date(createdDate).toDateString();
+
+  useEffect(() => {
+    console.log(`logout state changed to: ${logoutLoading}`);
+  }, [logoutLoading]);
 
   return (
     <StyledWrapper>

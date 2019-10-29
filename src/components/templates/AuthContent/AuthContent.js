@@ -6,10 +6,10 @@ import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import Input from '../../atoms/Input/Input';
-import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { authenticateUser } from '../../../actions/authAction';
 import Spinner from '../../atoms/Spinner/Spinner';
+import Button from '../../atoms/Button/Button';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -52,7 +52,7 @@ const UserSchema = Yup.object().shape({
     .required('Password is required')
 });
 
-const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn, error }) => {
+const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
   const types = ['login', 'register'];
 
   const [currentPage] = types.filter(page => pathname.includes(page));
@@ -128,8 +128,8 @@ const AuthContent = ({ pathname, authenticate, loading, history, isLoggedIn, err
   );
 };
 
-const mapStateToProps = ({ authReducer: { loading, isLoggedIn, error } }) => {
-  return { loading, isLoggedIn, error };
+const mapStateToProps = ({ authReducer: { loading, error } }) => {
+  return { loading, error };
 };
 
 const mapDispatchToProps = dispatch => {

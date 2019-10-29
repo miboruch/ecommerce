@@ -37,13 +37,7 @@ const StyledHeader = styled.h1`
   text-align: center;
 `;
 
-const StyledButtonWrapper = styled.section`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn, error, success }) => {
+const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
    * item was added or removed */
@@ -71,20 +65,9 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn, error, succes
           ))}
           <InnerWrapper>
             <Paragraph medium>Total: {totalPrice}$</Paragraph>
-            {isLoggedIn ? (
-              <Link to='/order-data'>
-                <Button>Submit</Button>
-              </Link>
-            ) : (
-              <StyledButtonWrapper>
-                <Link to='/order-data'>
-                  <Button>Submit</Button>
-                </Link>
-                <Link to='/login'>
-                  <Button>Log in first</Button>
-                </Link>
-              </StyledButtonWrapper>
-            )}
+            <Link to={isLoggedIn ? '/order-data' : '/login'}>
+              <Button>{isLoggedIn ? 'Submit' : 'Log in first'}</Button>
+            </Link>
           </InnerWrapper>
         </>
       ) : (
@@ -94,12 +77,8 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn, error, succes
   );
 };
 
-const mapStateToProps = ({
-  cartReducer: { cart, totalPrice },
-  authReducer: { isLoggedIn },
-  orderReducer: { error, success }
-}) => {
-  return { cart, totalPrice, isLoggedIn, error, success };
+const mapStateToProps = ({ cartReducer: { cart, totalPrice }, authReducer: { isLoggedIn } }) => {
+  return { cart, totalPrice, isLoggedIn };
 };
 
 const mapDispatchToProps = dispatch => {

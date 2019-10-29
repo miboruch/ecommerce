@@ -12,10 +12,12 @@ import Cart from './pages/Cart/Cart';
 import AuthPage from './pages/AuthPage/AuthPage';
 import Account from './pages/Account/Account';
 import OrderComplete from './pages/OrderComplete/OrderComplete';
+import { fetchProducts } from './actions/firebaseAction';
 
-function App({ isLoggedIn, authenticationCheck }) {
+function App({ isLoggedIn, authenticationCheck, getProducts }) {
   useEffect(() => {
     authenticationCheck();
+    getProducts();
   }, []);
 
   const routes = isLoggedIn ? (
@@ -59,7 +61,8 @@ const mapStateToProps = ({ authReducer: { isLoggedIn } }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    authenticationCheck: () => dispatch(authenticateCheck())
+    authenticationCheck: () => dispatch(authenticateCheck()),
+    getProducts: () => dispatch(fetchProducts())
   };
 };
 

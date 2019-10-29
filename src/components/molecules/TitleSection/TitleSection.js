@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
+import { easeExpOut } from 'd3-ease';
 
 const StyledSection = styled.section`
   width: 100%;
@@ -7,10 +9,11 @@ const StyledSection = styled.section`
   background: white;
   position: relative;
   border-bottom: 2px solid ${({ theme }) => theme.color.background};
+  overflow: hidden;
 `;
 
-const StyledSideSection = styled.section`
-  width: 50%; /* Animation from 0% to 50% -> slide from right */
+const StyledSideSection = styled(animated.section)`
+  width: 50%;
   height: 100%;
   position: absolute;
   top: 0;
@@ -18,7 +21,7 @@ const StyledSideSection = styled.section`
   background: ${({ theme }) => theme.color.background};
 `;
 
-const StyledTitle = styled.h1`
+const StyledTitle = styled(animated.h1)`
   font-weight: normal;
   position: absolute;
   top: 50%;
@@ -41,10 +44,24 @@ const StyledTitle = styled.h1`
 `;
 
 const TitleSection = ({ children }) => {
+  const backgroundSlide = useSpring({
+    config: { duration: 2000, easing: easeExpOut },
+    from: { transform: 'translateX(100%)' },
+    to: { transform: 'translateX(0)' },
+    delay: 1000
+  });
+
+  const titleSlide = useSpring({
+    config: { duration: 1000, easing: easeExpOut },
+    from: { opacity: 0, left: '30%' },
+    to: { opacity: 1, left: '50%' },
+    delay: 2000
+  });
+
   return (
     <StyledSection>
-      <StyledSideSection />
-      <StyledTitle>{children}</StyledTitle>
+      <StyledSideSection style={backgroundSlide} />
+      <StyledTitle style={titleSlide}>{children}</StyledTitle>
     </StyledSection>
   );
 };

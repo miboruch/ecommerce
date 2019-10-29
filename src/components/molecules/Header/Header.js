@@ -69,20 +69,16 @@ const StyledIcon = styled(ReactSVG)`
 `;
 
 const StyledCartIcon = styled(StyledIcon)`
-  right: 0;
+  right: -10px;
 
-  &::after {
-    content: '${({ productsLength }) => productsLength}';
+  &::before {
+    content: '${({ size }) => size}';
     color: ${({ theme }) => theme.color.secondFont};
     display: block;
     position: absolute;
     top: 50%;
-    right: -13px;
+    right: 30px;
     transform: translateY(-50%);
-    
-    ${({ theme }) => theme.mq.standard}{
-      right: -11px;
-    }
   }
 `;
 
@@ -106,7 +102,7 @@ const Header = ({ isLoggedIn, email, cart }) => {
         <StyledIcon src={svgUserIcon} />
       </Link>
       <Link to='/cart'>
-        <StyledCartIcon src={svgCartIcon} productsLength={cart.length} />
+        <StyledCartIcon src={svgCartIcon} size={cart.length} />
       </Link>
       <StyledMailBox>
         {isLoggedIn ? (

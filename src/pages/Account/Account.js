@@ -1,10 +1,10 @@
 import React from 'react';
-import OrderContent from '../../components/templates/OrderContent/AccountContent';
+import AccountContent from '../../components/templates/OrderContent/AccountContent';
 
 const Account = () => {
   return (
     <>
-      <OrderContent />
+      <AccountContent />
     </>
   );
 };
