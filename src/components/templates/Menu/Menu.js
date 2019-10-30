@@ -17,6 +17,18 @@ const StyledWrapper = styled.div`
   transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   transition: transform 1s ease;
   z-index: 499;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 30%;
+  }
+
+  ::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100vh;
+    background: ${({ theme }) => theme.mq.impact};
+  }
 `;
 
 const StyledList = styled.ul`
@@ -42,18 +54,23 @@ const StyledListItem = styled(animated.li)`
 
 const StyledStripe = styled.div`
   width: 1px;
-  height: ${({ isOpen }) => (isOpen ? '100vh' : '1vh')}; /* or react spring */
+  height: ${({ isOpen }) => (isOpen ? '100vh' : '1vh')};
   background: ${({ theme }) => theme.color.impact};
   position: absolute;
   top: 0;
-  margin-left: 2rem;
+  left: 2rem;
   z-index: 5;
   transition: height 3s 1s ease;
 `;
 
 const SecondStripe = styled(StyledStripe)`
-  margin-left: 1rem;
+  left: 100%;
   transition: height 3s 2s ease;
+  display: none;
+
+  ${({ theme }) => theme.mq.standard} {
+    display: block;
+  }
 `;
 
 const Menu = () => {

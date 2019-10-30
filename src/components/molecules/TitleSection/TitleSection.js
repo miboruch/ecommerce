@@ -1,15 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring';
-import { easeExpOut } from 'd3-ease';
+import { animated, useSpring } from 'react-spring';
+import { createSlideOpacity } from '../../animations/animations';
+import { createBackgroundSlide } from '../../animations/animations';
 
 const StyledSection = styled.section`
   width: 100%;
   height: 220px;
   background: white;
   position: relative;
-  border-bottom: 2px solid ${({ theme }) => theme.color.background};
   overflow: hidden;
+
+  ::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background ${({ theme }) => theme.color.background};
+  }
 `;
 
 const StyledSideSection = styled(animated.section)`
@@ -44,19 +54,8 @@ const StyledTitle = styled(animated.h1)`
 `;
 
 const TitleSection = ({ children }) => {
-  const backgroundSlide = useSpring({
-    config: { duration: 2000, easing: easeExpOut },
-    from: { transform: 'translateX(100%)' },
-    to: { transform: 'translateX(0)' },
-    delay: 1000
-  });
-
-  const titleSlide = useSpring({
-    config: { duration: 1000, easing: easeExpOut },
-    from: { opacity: 0, left: '30%' },
-    to: { opacity: 1, left: '50%' },
-    delay: 2000
-  });
+  const backgroundSlide = createBackgroundSlide(2000, 1000)();
+  const titleSlide = createSlideOpacity(1000, 2000, { top: '30%' }, { top: '50%' })();
 
   return (
     <StyledSection>

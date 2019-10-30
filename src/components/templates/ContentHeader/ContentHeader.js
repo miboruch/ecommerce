@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { animated } from 'react-spring';
+import { createOpacity, createSlideOpacity } from '../../animations/animations';
 
 import image from '../../../assets/images/hero.jpg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -9,19 +11,21 @@ const StyledWrapper = styled.section`
   height: calc(100vh - 64px);
   background: ${({ theme }) => theme.color.background};
   position: relative;
+  overflow: hidden;
 `;
 
-const StyledParagraph = styled(Paragraph)`
+const StyledParagraph = styled(animated(Paragraph))`
   width: 85%;
   color: ${({ theme }) => theme.color.secondFont};
   margin: 0;
+  padding-top: 4rem;
 
   ${({ theme }) => theme.mq.mobile} {
     font-size: ${({ theme }) => theme.fontSize.m};
   }
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled(animated.img)`
   width: 100%;
   height: 50vh;
   position: absolute;
@@ -43,13 +47,15 @@ const StyledImage = styled.img`
 `;
 
 const ContentHeader = () => {
+  const fadeIn = createOpacity(1000, 1000)();
+  const imageEffect = createSlideOpacity(2500, 1700, { right: '-30px' }, { right: '0' })();
   return (
     <StyledWrapper>
-      <StyledParagraph medium>
+      <StyledParagraph style={fadeIn} medium>
         If we plant the right seeds, tomorrow will be better. <br /> If you put out good things,
         then you'll get good things back.
       </StyledParagraph>
-      <StyledImage src={image} />
+      <StyledImage src={image} style={imageEffect} />
     </StyledWrapper>
   );
 };

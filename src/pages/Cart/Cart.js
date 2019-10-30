@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { animated } from 'react-spring';
+import { createOpacity } from '../../components/animations/animations';
 import CartHeader from '../../components/molecules/CartHeader/CartHeader';
 import CartProduct from '../../components/molecules/CartProduct/CartProduct';
 import Button from '../../components/atoms/Button/Button';
@@ -14,7 +16,7 @@ const StyledWrapper = styled.div`
   position: relative;
 `;
 
-const InnerWrapper = styled.div`
+const InnerWrapper = styled(animated.div)`
   width: 90%;
   margin: auto;
 
@@ -24,7 +26,7 @@ const InnerWrapper = styled.div`
   }
 `;
 
-const StyledHeader = styled.h1`
+const StyledHeader = styled(animated.h1)`
   width: 90%;
   margin: auto;
   letter-spacing: 5px;
@@ -38,6 +40,9 @@ const StyledHeader = styled.h1`
 `;
 
 const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
+  const fadeIn = createOpacity(2000, 1500)();
+  const buttonFadeIn = createOpacity(2000, 2000)();
+
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
    * item was added or removed */
@@ -63,7 +68,7 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
               totalPrice={item.totalPrice}
             />
           ))}
-          <InnerWrapper>
+          <InnerWrapper style={buttonFadeIn}>
             <Paragraph medium>Total: {totalPrice}$</Paragraph>
             <Link to={isLoggedIn ? '/order-data' : '/login'}>
               <Button>{isLoggedIn ? 'Submit' : 'Log in first'}</Button>
@@ -71,7 +76,7 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
           </InnerWrapper>
         </>
       ) : (
-        <StyledHeader>Your cart is empty</StyledHeader>
+        <StyledHeader style={fadeIn}>Your cart is empty</StyledHeader>
       )}
     </StyledWrapper>
   );

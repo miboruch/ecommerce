@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { animated } from 'react-spring';
+import { createOpacity } from '../../animations/animations';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
 import { removeProduct, increaseQuantity, decreaseQuantity } from '../../../actions/cartAction';
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled(animated.div)`
   width: 95%;
   margin: 2rem auto;
   display: grid;
@@ -73,8 +75,9 @@ const CartProduct = ({
   increaseQuantity,
   decreaseQuantity
 }) => {
+  const fadeIn = createOpacity(2000, 1300)();
   return (
-    <StyledWrapper>
+    <StyledWrapper style={fadeIn}>
       <Link to={`/product/${id}`}>
         <StyledImage src={imageURL} />
       </Link>

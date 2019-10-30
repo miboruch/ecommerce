@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Fade from 'react-reveal/Fade';
 import image from '../../../assets/images/back.jpeg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
@@ -42,12 +42,14 @@ const StyledQuoteAuthor = styled.span`
 
 const DesignQuote = () => {
   return (
-    <StyledBackgroundImage>
-      <StyledParagraph small>
-        Everything is designed. Few things are designed well. <br />
-        <StyledQuoteAuthor>-Brian Reed</StyledQuoteAuthor>
-      </StyledParagraph>
-    </StyledBackgroundImage>
+    <Fade>
+      <StyledBackgroundImage>
+        <StyledParagraph small>
+          Everything is designed. Few things are designed well. <br />
+          <StyledQuoteAuthor>-Brian Reed</StyledQuoteAuthor>
+        </StyledParagraph>
+      </StyledBackgroundImage>
+    </Fade>
   );
 };
 

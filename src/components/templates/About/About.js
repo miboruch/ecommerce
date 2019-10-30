@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Fade from 'react-reveal/Fade';
 import image from '../../../assets/images/background.jpg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
@@ -39,15 +39,17 @@ const StyledLine = styled.div`
 
 const About = () => {
   return (
-    <StyledWrapper>
-      <StyledLine />
-      <StyledImage src={image} />
-      <StyledParagraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
-      </StyledParagraph>
-    </StyledWrapper>
+    <Fade>
+      <StyledWrapper>
+        <StyledLine />
+        <StyledImage src={image} />
+        <StyledParagraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </StyledParagraph>
+      </StyledWrapper>
+    </Fade>
   );
 };
 

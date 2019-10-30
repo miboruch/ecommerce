@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { animated } from 'react-spring';
+import { createOpacity } from '../../animations/animations';
 
-const StyledWrapper = styled.section`
+const StyledWrapper = styled(animated.section)`
   width: 100%;
   text-align: center;
   padding: 2rem 0;
@@ -79,16 +81,19 @@ const StyledLine = styled.div`
   transition: all 1s ease;
 `;
 
-const Product = ({ name, addition, price, photoURL }) => (
-  <StyledWrapper>
-    <StyledHeading>{name}</StyledHeading>
-    <StyledSubtitle>{addition}</StyledSubtitle>
-    <StyledImage src={photoURL} />
-    <StyledPriceText>USD {price}</StyledPriceText>
-    <StyledMore>see more</StyledMore>
-    <StyledBorder />
-    <StyledLine />
-  </StyledWrapper>
-);
+const Product = ({ name, addition, price, photoURL }) => {
+  const fadeIn = createOpacity(1500, 2500)();
+  return (
+    <StyledWrapper style={fadeIn}>
+      <StyledHeading>{name}</StyledHeading>
+      <StyledSubtitle>{addition}</StyledSubtitle>
+      <StyledImage src={photoURL} />
+      <StyledPriceText>USD {price}</StyledPriceText>
+      <StyledMore>see more</StyledMore>
+      <StyledBorder />
+      <StyledLine />
+    </StyledWrapper>
+  );
+};
 
 export default Product;

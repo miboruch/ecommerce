@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { animated } from 'react-spring';
 import { withRouter } from 'react-router-dom';
 import { logoutUser } from '../../../actions/authAction';
 import { Link } from 'react-router-dom';
 import Spinner from '../../atoms/Spinner/Spinner';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
+import { createOpacity } from '../../animations/animations';
 
 const StyledWrapper = styled.div`
   width: 90%;
@@ -22,6 +24,10 @@ const StyledInnerWrapper = styled.section`
   transform: translateY(-50%);
 `;
 
+const StyledBox = styled(animated.div)`
+  width: 100%;
+`;
+
 const StyledParagraph = styled(Paragraph)`
   padding: 0 0 1rem 0;
   margin: 0;
@@ -33,11 +39,11 @@ const StyledHeadingParagraph = styled(StyledParagraph)`
   padding: 0;
 `;
 
-const StyledHeading = styled.h1`
+const StyledHeading = styled(animated.h1)`
   font-weight: normal;
 `;
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(animated(Button))`
   margin-top: 5rem;
 `;
 
@@ -53,6 +59,10 @@ const AccountContent = ({
 }) => {
   const accountCreatedDate = new Date(createdDate).toDateString();
 
+  const headingSlide = createOpacity(1000, 1000)();
+  const contentSlide = createOpacity(1000, 1500)();
+  const buttonSlide = createOpacity(1000, 2000)();
+
   useEffect(() => {
     console.log(`logout state changed to: ${logoutLoading}`);
   }, [logoutLoading]);
@@ -65,20 +75,23 @@ const AccountContent = ({
             <Spinner />
           ) : (
             <StyledInnerWrapper>
-              <StyledHeading>Your account: </StyledHeading>
-              <StyledHeadingParagraph>
-                <strong>email:</strong>
-              </StyledHeadingParagraph>
-              <StyledParagraph>{email}</StyledParagraph>
-              <StyledHeadingParagraph>
-                <strong>your ID:</strong>
-              </StyledHeadingParagraph>
-              <StyledParagraph>{userID}</StyledParagraph>
-              <StyledHeadingParagraph>
-                <strong>created date:</strong>
-              </StyledHeadingParagraph>
-              <StyledParagraph>{accountCreatedDate}</StyledParagraph>
+              <StyledHeading style={headingSlide}>Your account: </StyledHeading>
+              <StyledBox style={contentSlide}>
+                <StyledHeadingParagraph>
+                  <strong>email:</strong>
+                </StyledHeadingParagraph>
+                <StyledParagraph>{email}</StyledParagraph>
+                <StyledHeadingParagraph>
+                  <strong>your ID:</strong>
+                </StyledHeadingParagraph>
+                <StyledParagraph>{userID}</StyledParagraph>
+                <StyledHeadingParagraph>
+                  <strong>created date:</strong>
+                </StyledHeadingParagraph>
+                <StyledParagraph>{accountCreatedDate}</StyledParagraph>
+              </StyledBox>
               <StyledButton
+                style={buttonSlide}
                 onClick={() => {
                   history.push('/');
                   logout();

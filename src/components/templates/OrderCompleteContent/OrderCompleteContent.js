@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { animated } from 'react-spring';
+import { createOpacity } from '../../animations/animations';
 import { connect } from 'react-redux';
 import Button from '../../atoms/Button/Button';
 import { Link } from 'react-router-dom';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Input from '../../atoms/Input/Input';
 import { createOrder } from '../../../actions/orderAction';
-import { authSuccess } from '../../../actions/authAction';
 import Spinner from '../../atoms/Spinner/Spinner';
 
 const StyledWrapper = styled.div`
@@ -20,7 +21,7 @@ const StyledWrapper = styled.div`
   align-items: center;
 `;
 
-const StyledForm = styled(Form)`
+const StyledForm = styled(animated(Form))`
   width: 90%;
   margin: auto;
   text-align: left;
@@ -49,7 +50,7 @@ const StyledInput = styled(Input)`
   margin-bottom: 1rem;
 `;
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(animated(Button))`
   margin-top: 3rem;
 `;
 
@@ -80,6 +81,8 @@ const OrderCompleteContent = ({
   success,
   loading
 }) => {
+  const fadeIn = createOpacity(2000, 900)();
+  const buttonFadeIn = createOpacity(1500, 1900)();
   return (
     <StyledWrapper>
       <Formik
@@ -102,7 +105,7 @@ const OrderCompleteContent = ({
           <Spinner />
         ) : (
           ({ handleChange, handleBlur, values, errors }) => (
-            <StyledForm>
+            <StyledForm style={fadeIn}>
               <StyledParagraph large>Fill up the data</StyledParagraph>
               {errors.name ? (
                 <StyledErrorParagraph small>{errors.name}</StyledErrorParagraph>
@@ -166,7 +169,9 @@ const OrderCompleteContent = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <StyledButton type='submit'>submit</StyledButton>
+              <StyledButton type='submit' style={buttonFadeIn}>
+                submit
+              </StyledButton>
               {success ? (
                 <Link to='/'>
                   <StyledParagraph>Order confirmed, go back to main page &#10003;</StyledParagraph>

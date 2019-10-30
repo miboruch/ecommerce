@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 
 import { MenuContext } from '../../../contexts/MenuContext';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -40,20 +41,22 @@ const ContactFooter = () => {
   const { menuItems } = useContext(MenuContext);
 
   return (
-    <StyledWrapper>
-      <StyledContactInfo>
-        (323) 638-2296 <br />
-        5723 Morgan Ave <br />
-        Los Angeles, California(CA), 90011
-      </StyledContactInfo>
-      <StyledList>
-        {menuItems.map(item => (
-          <StyledListItem as={Link} to={item.url} key={item.id}>
-            {item.title}
-          </StyledListItem>
-        ))}
-      </StyledList>
-    </StyledWrapper>
+    <Fade>
+      <StyledWrapper>
+        <StyledContactInfo>
+          (323) 638-2296 <br />
+          5723 Morgan Ave <br />
+          Los Angeles, California(CA), 90011
+        </StyledContactInfo>
+        <StyledList>
+          {menuItems.map(item => (
+            <StyledListItem as={Link} to={item.url} key={item.id}>
+              {item.title}
+            </StyledListItem>
+          ))}
+        </StyledList>
+      </StyledWrapper>
+    </Fade>
   );
 };
 

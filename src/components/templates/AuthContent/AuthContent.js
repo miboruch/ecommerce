@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
+import { animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -10,6 +11,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { authenticateUser } from '../../../actions/authAction';
 import Spinner from '../../atoms/Spinner/Spinner';
 import Button from '../../atoms/Button/Button';
+import { createOpacity } from '../../animations/animations';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -20,9 +22,10 @@ const StyledWrapper = styled.div`
   justify-content: center;
 `;
 
-const StyledParagraph = styled(Paragraph)`
+const StyledParagraph = styled(animated(Paragraph))`
   margin: 0;
   padding: 1.5rem;
+  transition: all 0.5s ease;
 `;
 
 const StyledErrorParagraph = styled(StyledParagraph)`
@@ -30,7 +33,7 @@ const StyledErrorParagraph = styled(StyledParagraph)`
   text-align: center;
 `;
 
-const StyledForm = styled(Form)`
+const StyledForm = styled(animated(Form))`
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -58,6 +61,8 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
   const [currentPage] = types.filter(page => pathname.includes(page));
   const isCurrentLogin = currentPage === types[0];
 
+  const fadeIn = createOpacity(1000, 1000)();
+
   return (
     <StyledWrapper>
       <Formik
@@ -71,12 +76,8 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
           <Spinner />
         ) : (
           ({ handleChange, handleBlur, values, errors }) => (
-            <StyledForm>
-              {isCurrentLogin ? (
-                <StyledParagraph medium>Log in</StyledParagraph>
-              ) : (
-                <StyledParagraph medium>Sign up</StyledParagraph>
-              )}
+            <StyledForm style={fadeIn}>
+              <StyledParagraph medium>{isCurrentLogin ? 'Log in' : 'Sign up'}</StyledParagraph>
               {errors.email ? (
                 <StyledErrorParagraph small>{errors.email}</StyledErrorParagraph>
               ) : (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Fade from 'react-reveal/Fade';
 import Product from '../../components/templates/Product/Product';
 import ContentHeader from '../../components/templates/ContentHeader/ContentHeader';
 import DesignQuote from '../../components/molecules/DesignQuote/DesignQuote';
@@ -14,14 +15,16 @@ const LandingPage = ({ products, loading }) => {
       <Loader isLoading={loading} />
       <ContentHeader />
       {products.map(item => (
-        <Link to={`/product/${item.id}`} key={item.id}>
-          <Product
-            name={item.name}
-            addition={item.addition}
-            price={item.price}
-            photoURL={item.photoURL}
-          />
-        </Link>
+        <Fade key={item.id}>
+          <Link to={`/product/${item.id}`}>
+            <Product
+              name={item.name}
+              addition={item.addition}
+              price={item.price}
+              photoURL={item.photoURL}
+            />
+          </Link>
+        </Fade>
       ))}
       <DesignQuote />
       <About />
