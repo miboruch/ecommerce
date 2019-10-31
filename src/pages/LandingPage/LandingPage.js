@@ -7,12 +7,10 @@ import ContentHeader from '../../components/templates/ContentHeader/ContentHeade
 import DesignQuote from '../../components/molecules/DesignQuote/DesignQuote';
 import About from '../../components/templates/About/About';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
-import Loader from '../../components/atoms/Loader/Loader';
 
-const LandingPage = ({ products, loading }) => {
+const LandingPage = ({ products }) => {
   return (
     <>
-      <Loader isLoading={loading} />
       <ContentHeader />
       {products.map(item => (
         <Fade key={item.id}>

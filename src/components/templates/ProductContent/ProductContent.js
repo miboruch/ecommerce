@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring';
@@ -94,12 +94,22 @@ const Flex = styled.div`
   margin: 3rem 0;
 `;
 
-const ProductContent = ({ productData, addProduct, cartError }) => {
+const ProductContent = ({ paramsId, addProduct, cartError, products }) => {
+  const [currentProduct, setCurrentProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const fadeIn = createFadeIn(1000, 800)();
 
-  const { addition, id, name, photoURL, price } = productData;
   const [packTypeSelect, quantitySelect] = [useRef(null), useRef(null)];
+
+  useEffect(() => {
+    products.map(product => {
+      if (product.id == paramsId) {
+        return setCurrentProduct(product);
+      }
+    });
+  }, [products, paramsId]);
+
+  const { addition, id, name, photoURL, price } = currentProduct;
 
   const setQuantityHandler = event => {
     const result = Number.parseInt(event.target.value);
@@ -135,42 +145,48 @@ const ProductContent = ({ productData, addProduct, cartError }) => {
   };
 
   return (
-    <StyledWrapper style={fadeIn}>
-      <StyledImpact>01/0{id}</StyledImpact>
-      <ImageWrapper>
-        <StyledImageBackground photoUrl={photoURL} onMouseMove={mouseMoveEvent} />
-      </ImageWrapper>
-      <StyledInfoBox>
-        <StyledTitle>{name}</StyledTitle>
-        <StyledSubtitle>{addition}</StyledSubtitle>
-        <StyledParagraph>{price} USD</StyledParagraph>
-        <Input inputType='select' ref={packTypeSelect} options={['Basic pack', 'Extended pack']} />
-        <Flex>
+    <>
+      <StyledWrapper style={fadeIn}>
+        <StyledImpact>01/0{id}</StyledImpact>
+        <ImageWrapper>
+          <StyledImageBackground photoUrl={photoURL} onMouseMove={mouseMoveEvent} />
+        </ImageWrapper>
+        <StyledInfoBox>
+          <StyledTitle>{name}</StyledTitle>
+          <StyledSubtitle>{addition}</StyledSubtitle>
+          <StyledParagraph>{price} USD</StyledParagraph>
           <Input
-            quantity
             inputType='select'
-            value={quantity}
-            options={[1, 2, 3, 4, 5]}
-            ref={quantitySelect}
-            onChange={setQuantityHandler}
+            ref={packTypeSelect}
+            options={['Basic pack', 'Extended pack']}
           />
-          <Button onClick={setProductToCart}>add to cart</Button>
-        </Flex>
-        {cartError ? (
-          <StyledParagraph small>You already have this product in your cart</StyledParagraph>
-        ) : null}
-        <StyledPriceParagraph>Total: {(quantity * price).toFixed(2)} USD</StyledPriceParagraph>
-        <Description>
-          People like consistency. Whether it’s a store or a restaurant, they want to come in and
-          see what you are famous for.
-        </Description>
-      </StyledInfoBox>
-    </StyledWrapper>
+          <Flex>
+            <Input
+              quantity
+              inputType='select'
+              value={quantity}
+              options={[1, 2, 3, 4, 5]}
+              ref={quantitySelect}
+              onChange={setQuantityHandler}
+            />
+            <Button onClick={setProductToCart}>add to cart</Button>
+          </Flex>
+          {cartError ? (
+            <StyledParagraph small>You already have this product in your cart</StyledParagraph>
+          ) : null}
+          <StyledPriceParagraph>Total: {(quantity * price).toFixed(2)} USD</StyledPriceParagraph>
+          <Description>
+            People like consistency. Whether it’s a store or a restaurant, they want to come in and
+            see what you are famous for.
+          </Description>
+        </StyledInfoBox>
+      </StyledWrapper>
+    </>
   );
 };
 
-const mapStateToProps = ({ cartReducer: { cartError } }) => {
-  return { cartError };
+const mapStateToProps = ({ cartReducer: { cartError }, firebaseReducer: { products } }) => {
+  return { cartError, products };
 };
 
 const mapDispatchToProps = dispatch => {

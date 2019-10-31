@@ -13,8 +13,9 @@ import AuthPage from './pages/AuthPage/AuthPage';
 import Account from './pages/Account/Account';
 import OrderComplete from './pages/OrderComplete/OrderComplete';
 import { fetchProducts } from './actions/firebaseAction';
+import Loader from './components/atoms/Loader/Loader';
 
-function App({ isLoggedIn, authenticationCheck, getProducts }) {
+function App({ isLoggedIn, authenticationCheck, getProducts, loading }) {
   useEffect(() => {
     authenticationCheck();
     getProducts();
@@ -49,14 +50,17 @@ function App({ isLoggedIn, authenticationCheck, getProducts }) {
   return (
     <Router>
       <MainTemplate>
-        <ScrollTop>{routes}</ScrollTop>
+        <>
+          <Loader isLoading={loading} />
+          <ScrollTop>{routes}</ScrollTop>
+        </>
       </MainTemplate>
     </Router>
   );
 }
 
-const mapStateToProps = ({ authReducer: { isLoggedIn } }) => {
-  return { isLoggedIn };
+const mapStateToProps = ({ authReducer: { isLoggedIn }, firebaseReducer: { loading } }) => {
+  return { isLoggedIn, loading };
 };
 
 const mapDispatchToProps = dispatch => {

@@ -4,30 +4,13 @@ import ContactFooter from '../../components/templates/ContactFooter/ContactFoote
 import Loader from '../../components/atoms/Loader/Loader';
 import { connect } from 'react-redux';
 
-const SpecificProduct = ({ match, products }) => {
-  const [currentProduct, setCurrentProduct] = useState({});
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    products.map(product => {
-      if (product.id == match.params.id) {
-        return setCurrentProduct(product);
-      }
-    });
-    setLoading(false);
-  }, [match.params.id]);
-
+const SpecificProduct = ({ match }) => {
   return (
     <>
-      <Loader isLoading={isLoading} />
-      <ProductContent productData={currentProduct} />
+      <ProductContent paramsId={match.params.id} />
       <ContactFooter />
     </>
   );
 };
 
-const mapStateToProps = ({ firebaseReducer: { products } }) => {
-  return { products };
-};
-
-export default connect(mapStateToProps)(SpecificProduct);
+export default SpecificProduct;
