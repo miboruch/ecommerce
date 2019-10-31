@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 
 const StyledWrapper = styled.section`
   width: 90%;
@@ -44,9 +44,9 @@ const StyledLink = styled(animated(Link))`
 `;
 
 const StoryContent = () => {
-  const fadeIn = createOpacity(1000, 2800)();
-  const fadeInDelayed = createOpacity(1000, 3600)();
-  const fadeInLink = createOpacity(1000, 4400)();
+  const fadeIn = createFadeIn(1000, 2800)();
+  const fadeInDelayed = createFadeIn(1000, 3600)();
+  const fadeInLink = createFadeIn(1000, 4400)();
 
   return (
     <StyledWrapper>

@@ -1,28 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createOpacity } from '../../components/animations/animations';
-
+import { createFadeIn } from '../../components/animations/animations';
+import Fade from 'react-reveal/Fade';
 import TitleSection from '../../components/molecules/TitleSection/TitleSection';
 import Product from '../../components/templates/Product/Product';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
 const Products = ({ products }) => {
-  const fadeIn = createOpacity(1000, 2500)();
+  const fadeIn = createFadeIn(1000, 500)();
   return (
     <>
       <TitleSection>Products</TitleSection>
       {products.map(item => (
-        <Link to={`/product/${item.id}`} key={item.id} style={fadeIn}>
-          <Product
-            style={fadeIn}
-            key={item.id}
-            name={item.name}
-            addition={item.addition}
-            price={item.price}
-            photoURL={item.photoURL}
-          />
-        </Link>
+        <Fade key={item.id} delay={300} duration={600}>
+          <Link to={`/product/${item.id}`}>
+            <Product
+              name={item.name}
+              addition={item.addition}
+              price={item.price}
+              photoURL={item.photoURL}
+            />
+          </Link>
+        </Fade>
       ))}
       <ContactFooter />
     </>

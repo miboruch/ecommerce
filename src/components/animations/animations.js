@@ -1,7 +1,7 @@
 import { useSpring } from 'react-spring';
 import { easeExpOut } from 'd3-ease';
 
-export const createSlideOpacity = (duration, delay, valuesFrom, valuesTo) => {
+export const createSlideFadeIn = (duration, delay, valuesFrom, valuesTo) => {
   return () =>
     useSpring({
       config: { duration: duration, easing: easeExpOut },
@@ -11,7 +11,7 @@ export const createSlideOpacity = (duration, delay, valuesFrom, valuesTo) => {
     });
 };
 
-export const createOpacity = (duration, delay) => {
+export const createFadeIn = (duration, delay) => {
   return () =>
     useSpring({
       config: { duration: duration, easing: easeExpOut },

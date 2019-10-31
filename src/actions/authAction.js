@@ -9,13 +9,13 @@ import {
 
 const API_KEY = 'AIzaSyDwmRW7kgffAwvOCUYz1yMK3qBahH2HURU';
 
-export const authStart = () => {
+const authStart = () => {
   return {
     type: AUTH_START
   };
 };
 
-export const authSuccess = (idToken, localId, email, createdDate) => {
+const authSuccess = (idToken, localId, email, createdDate) => {
   return {
     type: AUTH_SUCCESS,
     payload: {
@@ -27,7 +27,7 @@ export const authSuccess = (idToken, localId, email, createdDate) => {
   };
 };
 
-export const authFailure = error => {
+const authFailure = error => {
   return {
     type: AUTH_FAILURE,
     payload: {
@@ -36,17 +36,17 @@ export const authFailure = error => {
   };
 };
 
-export const authLogout = () => {
+const authLogoutStart = () => {
+  return {
+    type: AUTH_LOGOUT_START
+  };
+};
+
+const authLogout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('expire');
   return {
     type: AUTH_LOGOUT
-  };
-};
-
-const authLogoutStart = () => {
-  return {
-    type: AUTH_LOGOUT_START
   };
 };
 
@@ -68,6 +68,7 @@ const getUserData = idToken => async () => {
 
 /* Action creators */
 
+//login, register
 export const authenticateUser = (email, password, isLoginPage, history) => dispatch => {
   /* isLoginPage -> allows me to select which URL should I choose */
   /* history -> after success we have to redirect user to main page so we use history */
@@ -93,11 +94,11 @@ export const authenticateUser = (email, password, isLoginPage, history) => dispa
       localStorage.setItem('expire', expireDate);
     })
     .catch(error => {
-      console.log(error);
       dispatch(authFailure(error));
     });
 };
 
+//check if token is saved, and expire time is not expired yet
 export const authenticateCheck = () => async dispatch => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -116,7 +117,8 @@ export const authenticateCheck = () => async dispatch => {
   }
 };
 
-export const logoutUser = () => dispatch => {
+export const logoutUser = history => dispatch => {
   dispatch(authLogoutStart());
   dispatch(authLogout());
+  history.push('/');
 };

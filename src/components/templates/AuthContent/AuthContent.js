@@ -11,7 +11,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { authenticateUser } from '../../../actions/authAction';
 import Spinner from '../../atoms/Spinner/Spinner';
 import Button from '../../atoms/Button/Button';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -30,7 +30,6 @@ const StyledParagraph = styled(animated(Paragraph))`
 
 const StyledErrorParagraph = styled(StyledParagraph)`
   color: tomato;
-  text-align: center;
 `;
 
 const StyledForm = styled(animated(Form))`
@@ -61,7 +60,7 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
   const [currentPage] = types.filter(page => pathname.includes(page));
   const isCurrentLogin = currentPage === types[0];
 
-  const fadeIn = createOpacity(1000, 1000)();
+  const fadeIn = createFadeIn(1000, 1000)();
 
   return (
     <StyledWrapper>

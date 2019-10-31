@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { animated } from 'react-spring';
-import { createOpacity } from '../../components/animations/animations';
+import { createFadeIn } from '../../components/animations/animations';
 import CartHeader from '../../components/molecules/CartHeader/CartHeader';
 import CartProduct from '../../components/molecules/CartProduct/CartProduct';
 import Button from '../../components/atoms/Button/Button';
@@ -39,9 +39,13 @@ const StyledHeader = styled(animated.h1)`
   text-align: center;
 `;
 
+const StyledButton = styled(Button)`
+  margin-bottom: 2rem;
+`;
+
 const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
-  const fadeIn = createOpacity(2000, 1500)();
-  const buttonFadeIn = createOpacity(2000, 2000)();
+  const fadeIn = createFadeIn(2000, 1000)();
+  const buttonFadeIn = createFadeIn(2000, 1700)();
 
   /* It triggers calculate price function when quantity of object changes
    * inside cart array, or length of array changes, then we know, that
@@ -71,7 +75,7 @@ const Cart = ({ cart, totalPrice, calculateTotalPrice, isLoggedIn }) => {
           <InnerWrapper style={buttonFadeIn}>
             <Paragraph medium>Total: {totalPrice}$</Paragraph>
             <Link to={isLoggedIn ? '/order-data' : '/login'}>
-              <Button>{isLoggedIn ? 'Submit' : 'Log in first'}</Button>
+              <StyledButton>{isLoggedIn ? 'Submit' : 'Log in first'}</StyledButton>
             </Link>
           </InnerWrapper>
         </>

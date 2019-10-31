@@ -24,6 +24,12 @@ const Paragraph = styled.p`
     css`
       font-size: ${({ theme }) => theme.fontSize.m};
     `}
+
+  ${({ error }) =>
+    error &&
+    css`
+      color: tomato;
+    `}
 `;
 
 export default Paragraph;

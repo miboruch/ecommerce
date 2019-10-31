@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -96,7 +96,7 @@ const Flex = styled.div`
 
 const ProductContent = ({ productData, addProduct, cartError }) => {
   const [quantity, setQuantity] = useState(1);
-  const fadeIn = createOpacity(1000, 1000)();
+  const fadeIn = createFadeIn(1000, 800)();
 
   const { addition, id, name, photoURL, price } = productData;
   const [packTypeSelect, quantitySelect] = [useRef(null), useRef(null)];

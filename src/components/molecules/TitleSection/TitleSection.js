@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { animated, useSpring } from 'react-spring';
-import { createSlideOpacity } from '../../animations/animations';
+import { animated } from 'react-spring';
+import { createSlideFadeIn } from '../../animations/animations';
 import { createBackgroundSlide } from '../../animations/animations';
 
 const StyledSection = styled.section`
@@ -54,8 +54,8 @@ const StyledTitle = styled(animated.h1)`
 `;
 
 const TitleSection = ({ children }) => {
-  const backgroundSlide = createBackgroundSlide(2000, 1000)();
-  const titleSlide = createSlideOpacity(1000, 2000, { top: '30%' }, { top: '50%' })();
+  const backgroundSlide = createBackgroundSlide(1300, 700)();
+  const titleSlide = createSlideFadeIn(1000, 1600, { top: '40%' }, { top: '50%' })();
 
   return (
     <StyledSection>

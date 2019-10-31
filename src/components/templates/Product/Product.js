@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 
 const StyledWrapper = styled(animated.section)`
   width: 100%;
@@ -82,7 +82,7 @@ const StyledLine = styled.div`
 `;
 
 const Product = ({ name, addition, price, photoURL }) => {
-  const fadeIn = createOpacity(1500, 2500)();
+  const fadeIn = createFadeIn(1500, 2500)();
   return (
     <StyledWrapper style={fadeIn}>
       <StyledHeading>{name}</StyledHeading>

@@ -80,7 +80,7 @@ const Menu = () => {
     opacity: isOpen ? 1 : 0,
     transform: `translateX(${isOpen ? '0' : '-30px'})`,
     from: { opacity: 0, transform: 'translateX(-30px)' },
-    delay: 900
+    delay: 700
   });
 
   return (

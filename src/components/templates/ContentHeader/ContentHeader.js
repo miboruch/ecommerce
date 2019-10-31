@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { createOpacity, createSlideOpacity } from '../../animations/animations';
+import { createFadeIn, createSlideFadeIn } from '../../animations/animations';
 
 import image from '../../../assets/images/hero.jpg';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
@@ -47,8 +47,8 @@ const StyledImage = styled(animated.img)`
 `;
 
 const ContentHeader = () => {
-  const fadeIn = createOpacity(1000, 1000)();
-  const imageEffect = createSlideOpacity(2500, 1700, { right: '-30px' }, { right: '0' })();
+  const fadeIn = createFadeIn(1000, 1000)();
+  const imageEffect = createSlideFadeIn(2500, 1700, { right: '-30px' }, { right: '0' })();
   return (
     <StyledWrapper>
       <StyledParagraph style={fadeIn} medium>

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Spinner from '../../atoms/Spinner/Spinner';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 
 const StyledWrapper = styled.div`
   width: 90%;
@@ -59,9 +59,9 @@ const AccountContent = ({
 }) => {
   const accountCreatedDate = new Date(createdDate).toDateString();
 
-  const headingSlide = createOpacity(1000, 1000)();
-  const contentSlide = createOpacity(1000, 1500)();
-  const buttonSlide = createOpacity(1000, 2000)();
+  const headingSlide = createFadeIn(1000, 700)();
+  const contentSlide = createFadeIn(1000, 1200)();
+  const buttonSlide = createFadeIn(1000, 1700)();
 
   useEffect(() => {
     console.log(`logout state changed to: ${logoutLoading}`);
@@ -93,8 +93,7 @@ const AccountContent = ({
               <StyledButton
                 style={buttonSlide}
                 onClick={() => {
-                  history.push('/');
-                  logout();
+                  logout(history);
                 }}
               >
                 log out
@@ -123,7 +122,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(logoutUser())
+    logout: history => dispatch(logoutUser(history))
   };
 };
 

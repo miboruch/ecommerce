@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { animated } from 'react-spring';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 import { connect } from 'react-redux';
 import Button from '../../atoms/Button/Button';
 import { Link } from 'react-router-dom';
@@ -41,9 +41,8 @@ const StyledParagraph = styled(Paragraph)`
   text-align: left;
 `;
 
-const StyledErrorParagraph = styled(StyledParagraph)`
-  color: tomato;
-  text-align: left;
+const StyledSuccessParagraph = styled(StyledParagraph)`
+  text-align: center;
 `;
 
 const StyledInput = styled(Input)`
@@ -81,14 +80,25 @@ const OrderCompleteContent = ({
   success,
   loading
 }) => {
-  const fadeIn = createOpacity(2000, 900)();
-  const buttonFadeIn = createOpacity(1500, 1900)();
+  const fadeIn = createFadeIn(2000, 900)();
+  const buttonFadeIn = createFadeIn(1500, 1900)();
+
+  const errorCheck = (errorType, fieldText) =>
+    errorType ? (
+      <StyledParagraph error small>
+        {errorType}
+      </StyledParagraph>
+    ) : (
+      <StyledParagraph small>{fieldText}</StyledParagraph>
+    );
+
   return (
     <StyledWrapper>
       <Formik
         initialValues={{ name: '', lastName: '', city: '', address: '', houseNumber: undefined }}
         validationSchema={UserDataSchema}
         onSubmit={({ name, lastName, city, address, houseNumber }) => {
+          const orderDate = new Date();
           createOrder(token, {
             ...cart,
             totalPrice,
@@ -97,7 +107,8 @@ const OrderCompleteContent = ({
             lastName,
             city,
             address,
-            houseNumber
+            houseNumber,
+            orderDate
           });
         }}
       >
@@ -107,11 +118,7 @@ const OrderCompleteContent = ({
           ({ handleChange, handleBlur, values, errors }) => (
             <StyledForm style={fadeIn}>
               <StyledParagraph large>Fill up the data</StyledParagraph>
-              {errors.name ? (
-                <StyledErrorParagraph small>{errors.name}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>name</StyledParagraph>
-              )}
+              {errorCheck(errors.name, 'name')}
               <StyledInput
                 type='text'
                 name='name'
@@ -120,11 +127,7 @@ const OrderCompleteContent = ({
                 onBlur={handleBlur}
                 value={values.name}
               />
-              {errors.lastName ? (
-                <StyledErrorParagraph small>{errors.lastName}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>last name</StyledParagraph>
-              )}
+              {errorCheck(errors.lastName, 'last name')}
               <StyledInput
                 type='text'
                 name='lastName'
@@ -132,11 +135,7 @@ const OrderCompleteContent = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.address ? (
-                <StyledErrorParagraph small>{errors.address}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>address</StyledParagraph>
-              )}
+              {errorCheck(errors.address, 'address')}
               <StyledInput
                 type='text'
                 name='address'
@@ -144,12 +143,7 @@ const OrderCompleteContent = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-
-              {errors.houseNumber ? (
-                <StyledErrorParagraph small>{errors.houseNumber}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>number</StyledParagraph>
-              )}
+              {errorCheck(errors.houseNumber, 'house number')}
               <StyledInput
                 type='text'
                 name='houseNumber'
@@ -157,11 +151,7 @@ const OrderCompleteContent = ({
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {errors.city ? (
-                <StyledErrorParagraph small>{errors.city}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>city</StyledParagraph>
-              )}
+              {errorCheck(errors.city, 'city')}
               <StyledInput
                 type='text'
                 name='city'
@@ -174,7 +164,9 @@ const OrderCompleteContent = ({
               </StyledButton>
               {success ? (
                 <Link to='/'>
-                  <StyledParagraph>Order confirmed, go back to main page &#10003;</StyledParagraph>
+                  <StyledSuccessParagraph>
+                    Order confirmed, go back to main page &#10003;
+                  </StyledSuccessParagraph>
                 </Link>
               ) : null}
             </StyledForm>

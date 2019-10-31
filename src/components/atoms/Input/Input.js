@@ -23,7 +23,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledSelect = styled.select`
-  width: 100%; //290px
+  width: 100%;
   height: 36px;
   background: transparent;
   border: 1px solid ${({ theme }) => theme.color.secondFont};

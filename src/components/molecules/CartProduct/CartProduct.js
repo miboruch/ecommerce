@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
 import { removeProduct, increaseQuantity, decreaseQuantity } from '../../../actions/cartAction';
@@ -75,7 +75,7 @@ const CartProduct = ({
   increaseQuantity,
   decreaseQuantity
 }) => {
-  const fadeIn = createOpacity(2000, 1300)();
+  const fadeIn = createFadeIn(1800, 1000)();
   return (
     <StyledWrapper style={fadeIn}>
       <Link to={`/product/${id}`}>

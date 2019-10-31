@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { createOpacity } from '../../animations/animations';
+import { createFadeIn } from '../../animations/animations';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledContainer = styled(animated.div)`
@@ -22,7 +22,7 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const CartHeader = () => {
-  const fadeIn = createOpacity(2000, 700)();
+  const fadeIn = createFadeIn(2000, 300)();
   return (
     <StyledContainer style={fadeIn}>
       <StyledParagraph>Product</StyledParagraph>
