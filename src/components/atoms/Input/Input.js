@@ -29,10 +29,10 @@ const StyledSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.color.secondFont};
   font-family: ${({ theme }) => theme.font.family.montserrat};
 
-  ${({ quantity }) =>
-    quantity &&
+  ${({ small }) =>
+    small &&
     css`
-      width: 64px;
+      width: 50%;
     `}
 `;
 
@@ -50,7 +50,7 @@ const Input = React.forwardRef(({ inputType, ...props }, ref) => {
       break;
     case 'select':
       element = (
-        <StyledSelect ref={ref} onChange={props.onChange}>
+        <StyledSelect ref={ref} onChange={props.onChange} {...props}>
           {props.options.map((item, index) => (
             <StyledOption value={item} key={index}>
               {item}

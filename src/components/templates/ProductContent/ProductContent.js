@@ -162,7 +162,7 @@ const ProductContent = ({ paramsId, addProduct, cartError, products }) => {
           />
           <Flex>
             <Input
-              quantity
+              small
               inputType='select'
               value={quantity}
               options={[1, 2, 3, 4, 5]}

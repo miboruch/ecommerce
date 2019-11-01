@@ -2,8 +2,22 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useTrail, animated } from 'react-spring';
+import background from '../../../assets/images/background.jpg';
 
 import { MenuContext } from '../../../contexts/MenuContext';
+
+const MainWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
+  transition: transform 1s ease;
+  z-index: 499;
+`;
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -14,30 +28,31 @@ const StyledWrapper = styled.div`
   top: 0;
   left: 0;
   background: #fff;
-  transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
-  transition: transform 1s ease;
   z-index: 499;
 
   ${({ theme }) => theme.mq.standard} {
     width: 30%;
   }
-
-  ::after {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 100vh;
-    background: ${({ theme }) => theme.mq.impact};
-  }
 `;
 
 const StyledList = styled.ul`
   width: auto;
+  position: relative;
   margin-left: 4rem;
   list-style-type: none;
-  padding: 0;
+  padding: 0 0 4rem 0;
   display: flex;
   flex-direction: column;
+`;
+
+const ListBorder = styled.div`
+  width: 50%;
+  height: 1px;
+  background: ${({ theme }) => theme.color.background};
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const StyledListItem = styled(animated.li)`
@@ -55,7 +70,7 @@ const StyledListItem = styled(animated.li)`
 const StyledStripe = styled.div`
   width: 1px;
   height: ${({ isOpen }) => (isOpen ? '100vh' : '1vh')};
-  background: ${({ theme }) => theme.color.impact};
+  background: ${({ theme }) => theme.color.secondFont};
   position: absolute;
   top: 0;
   left: 2rem;
@@ -63,13 +78,22 @@ const StyledStripe = styled.div`
   transition: height 3s 1s ease;
 `;
 
-const SecondStripe = styled(StyledStripe)`
-  left: 100%;
-  transition: height 3s 2s ease;
+const SideWrapper = styled.div`
   display: none;
 
   ${({ theme }) => theme.mq.standard} {
     display: block;
+    position: fixed;
+    top: 0;
+    left: 30%;
+    width: 70%;
+    transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
+    transition: transform 1.2s 1.4s ease-in-out;
+    height: 100vh;
+    background-image: url(${background});
+    background-size: cover;
+    background-position: center;
+    z-index: 488;
   }
 `;
 
@@ -84,17 +108,20 @@ const Menu = () => {
   });
 
   return (
-    <StyledWrapper isOpen={isOpen}>
-      <StyledList>
-        {menuTrail.map((props, index) => (
-          <Link to={menuItems[index].url} key={menuItems[index].id}>
-            <StyledListItem style={props}>{menuItems[index].title}</StyledListItem>
-          </Link>
-        ))}
-      </StyledList>
-      <StyledStripe isOpen={isOpen} />
-      <SecondStripe isOpen={isOpen} />
-    </StyledWrapper>
+    <MainWrapper isOpen={isOpen}>
+      <StyledWrapper isOpen={isOpen}>
+        <StyledList>
+          {menuTrail.map((props, index) => (
+            <Link to={menuItems[index].url} key={menuItems[index].id}>
+              <StyledListItem style={props}>{menuItems[index].title}</StyledListItem>
+            </Link>
+          ))}
+          <ListBorder />
+        </StyledList>
+        <StyledStripe isOpen={isOpen} />
+      </StyledWrapper>
+      <SideWrapper isOpen={isOpen} />
+    </MainWrapper>
   );
 };
 

@@ -1,6 +1,5 @@
 export const FETCH_START = 'FETCH_START';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
-export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
 const initialState = {
@@ -21,13 +20,6 @@ export const firebaseReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
-        loading: false,
-        error: null
-      };
-    case FETCH_ORDERS_SUCCESS:
-      return {
-        ...state,
-        orders: action.payload,
         loading: false,
         error: null
       };
