@@ -14,6 +14,7 @@ import Account from './pages/Account/Account';
 import OrderComplete from './pages/OrderComplete/OrderComplete';
 import { fetchProducts } from './actions/firebaseAction';
 import Loader from './components/atoms/Loader/Loader';
+import Contact from './pages/Contact/Contact';
 
 function App({ isLoggedIn, authenticationCheck, getProducts, loading }) {
   useEffect(() => {
@@ -30,6 +31,7 @@ function App({ isLoggedIn, authenticationCheck, getProducts, loading }) {
       <Route path={'/product/:id'} exact component={SpecificProduct} />
       <Route path={'/account'} component={Account} />
       <Route path={'/order-data'} component={OrderComplete} />
+      <Route path={'/contact'} component={Contact} />
       <Redirect from={'/login'} to={'/account'} />
       <Redirect from={'/register'} to={'/account'} />
     </Switch>
@@ -43,6 +45,7 @@ function App({ isLoggedIn, authenticationCheck, getProducts, loading }) {
       <Route path={'/login'} component={AuthPage} />
       <Route path={'/register'} component={AuthPage} />
       <Route path={'/account'} component={Account} />
+      <Route path={'/contact'} component={Contact} />
       <Redirect from={'/order-data'} to={'/login'} />
     </Switch>
   );
