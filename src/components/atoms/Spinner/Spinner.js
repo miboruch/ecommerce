@@ -18,10 +18,10 @@ const StyledInnerSpinner = styled.div`
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border-top: 2px solid #725a5a;
-  border-bottom: 2px solid transparent;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
+  border-top: 2px double #725a5a;
+  border-bottom: 2px double transparent;
+  border-left: 2px double transparent;
+  border-right: 2px double transparent;
   position: relative;
   animation: ${rotate} 3s linear infinite forwards;
 
@@ -30,10 +30,10 @@ const StyledInnerSpinner = styled.div`
     content: '';
     position: absolute;
     border-radius: 50%;
-    border-top: 2px solid inherit;
-    border-bottom: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
+    border-top: 2px double inherit;
+    border-bottom: 2px double transparent;
+    border-left: 2px double transparent;
+    border-right: 2px double transparent;
   }
 
   ::before {
@@ -41,7 +41,7 @@ const StyledInnerSpinner = styled.div`
     left: 0;
     width: 70px;
     height: 70px;
-    border-top: 2px solid #171616;
+    border-top: 2px double #171616;
     animation: ${rotate} 2s linear infinite forwards;
   }
 
@@ -50,8 +50,8 @@ const StyledInnerSpinner = styled.div`
     left: 0;
     width: 70px;
     height: 70px;
-    border-top: 2px solid #8b8383;
-    animation: ${rotate} 1s linear infinite forwards;
+    border-top: 2px double #8b8383;
+    animation: ${rotate} 1.2s linear infinite forwards;
   }
 `;
 

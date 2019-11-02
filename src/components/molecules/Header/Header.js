@@ -97,7 +97,9 @@ const Header = ({ isLoggedIn, email, cart }) => {
       <Link to='/'>
         <StyledLogo>INDEED INC.</StyledLogo>
       </Link>
-      <StyledMailParagraph small>{email}</StyledMailParagraph>
+      <Link to='/account'>
+        <StyledMailParagraph small>{email}</StyledMailParagraph>
+      </Link>
       <Link to={isLoggedIn ? '/account' : '/login'}>
         <StyledIcon src={svgUserIcon} />
       </Link>
@@ -105,11 +107,7 @@ const Header = ({ isLoggedIn, email, cart }) => {
         <StyledCartIcon src={svgCartIcon} size={cart.length} />
       </Link>
       <StyledMailBox>
-        {isLoggedIn ? (
-          <StyledParagraph>{email}</StyledParagraph>
-        ) : (
-          <StyledParagraph>login</StyledParagraph>
-        )}
+        <StyledParagraph>{isLoggedIn ? email : 'login'}</StyledParagraph>
       </StyledMailBox>
     </StyledHeader>
   );

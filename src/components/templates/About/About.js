@@ -42,7 +42,7 @@ const About = () => {
     <Fade>
       <StyledWrapper>
         <StyledLine />
-        <StyledImage src={image} />
+        <StyledImage src={image} alt='background image' />
         <StyledParagraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation

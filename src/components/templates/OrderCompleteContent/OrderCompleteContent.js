@@ -71,6 +71,15 @@ const UserDataSchema = Yup.object().shape({
     .required('House number is required')
 });
 
+export const errorCheck = (errorType, fieldText) =>
+  errorType ? (
+    <StyledParagraph error small>
+      {errorType}
+    </StyledParagraph>
+  ) : (
+    <StyledParagraph small>{fieldText}</StyledParagraph>
+  );
+
 const OrderCompleteContent = ({
   cart,
   totalPrice,
@@ -82,15 +91,6 @@ const OrderCompleteContent = ({
 }) => {
   const fadeIn = createFadeIn(2000, 900)();
   const buttonFadeIn = createFadeIn(1500, 1900)();
-
-  const errorCheck = (errorType, fieldText) =>
-    errorType ? (
-      <StyledParagraph error small>
-        {errorType}
-      </StyledParagraph>
-    ) : (
-      <StyledParagraph small>{fieldText}</StyledParagraph>
-    );
 
   return (
     <StyledWrapper>

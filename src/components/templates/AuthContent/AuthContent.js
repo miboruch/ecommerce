@@ -12,6 +12,7 @@ import { authenticateUser } from '../../../actions/authAction';
 import Spinner from '../../atoms/Spinner/Spinner';
 import Button from '../../atoms/Button/Button';
 import { createFadeIn } from '../../animations/animations';
+import { errorCheck } from '../OrderCompleteContent/OrderCompleteContent';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -77,11 +78,7 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
           ({ handleChange, handleBlur, values, errors }) => (
             <StyledForm style={fadeIn}>
               <StyledParagraph medium>{isCurrentLogin ? 'Log in' : 'Sign up'}</StyledParagraph>
-              {errors.email ? (
-                <StyledErrorParagraph small>{errors.email}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>email</StyledParagraph>
-              )}
+              {errorCheck(errors.email, 'email')}
               <StyledInput
                 type='email'
                 name='email'
@@ -90,11 +87,7 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
                 onBlur={handleBlur}
                 value={values.username}
               />
-              {errors.password ? (
-                <StyledErrorParagraph small>{errors.password}</StyledErrorParagraph>
-              ) : (
-                <StyledParagraph small>password</StyledParagraph>
-              )}
+              {errorCheck(errors.password, 'password')}
               <StyledInput
                 type='password'
                 name='password'
@@ -102,21 +95,14 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {isCurrentLogin ? (
-                <>
-                  <Button type='submit'>log in</Button>
-                  <Link to='/register'>
-                    <StyledParagraph small>or create an account</StyledParagraph>
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Button type='submit'>create</Button>
-                  <Link to='/login'>
-                    <StyledParagraph small>or log in to your account</StyledParagraph>
-                  </Link>
-                </>
-              )}
+              <>
+                <Button type='submit'>{isCurrentLogin ? 'log in' : 'create'}</Button>
+                <Link to={isCurrentLogin ? '/register' : 'login'}>
+                  <StyledParagraph small>
+                    {isCurrentLogin ? 'or create an account' : 'or log in to your account'}
+                  </StyledParagraph>
+                </Link>
+              </>
               {error !== null ? (
                 <StyledErrorParagraph small>incorrect login or password</StyledErrorParagraph>
               ) : null}

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useTrail, animated } from 'react-spring';
-import background from '../../../assets/images/background.jpg';
+import background from '../../../assets/images/menuBackground.jpg';
 
 import { MenuContext } from '../../../contexts/MenuContext';
 

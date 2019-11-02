@@ -55,7 +55,7 @@ const ContentHeader = () => {
         If we plant the right seeds, tomorrow will be better. <br /> If you put out good things,
         then you'll get good things back.
       </StyledParagraph>
-      <StyledImage src={image} style={imageEffect} />
+      <StyledImage src={image} alt='Main page image' style={imageEffect} />
     </StyledWrapper>
   );
 };

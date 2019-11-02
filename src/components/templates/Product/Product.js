@@ -87,7 +87,7 @@ const Product = ({ name, addition, price, photoURL }) => {
     <StyledWrapper style={fadeIn}>
       <StyledHeading>{name}</StyledHeading>
       <StyledSubtitle>{addition}</StyledSubtitle>
-      <StyledImage src={photoURL} />
+      <StyledImage src={photoURL} alt='Product image' />
       <StyledPriceText>USD {price}</StyledPriceText>
       <StyledMore>see more</StyledMore>
       <StyledBorder />

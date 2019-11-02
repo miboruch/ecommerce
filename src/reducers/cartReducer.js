@@ -39,8 +39,7 @@ export const cartReducer = (state = initialState, action) => {
 
 /* --- */
 
-const addProduct = (state, product) => {
-  console.log(state.cart);
+export const addProduct = (state, product) => {
   const isProductInCart = state.cart.some(item => item.id === product.id);
 
   return !isProductInCart
@@ -55,7 +54,7 @@ const addProduct = (state, product) => {
       };
 };
 
-const increaseQuantity = (state, index) => {
+export const increaseQuantity = (state, index) => {
   const cartItem = state.cart[index];
 
   if (cartItem.quantity < 5) {
@@ -71,7 +70,7 @@ const increaseQuantity = (state, index) => {
   };
 };
 
-const decreaseQuantity = (state, index) => {
+export const decreaseQuantity = (state, index) => {
   const cartItem = state.cart[index];
 
   if (cartItem.quantity > 1) {
@@ -87,7 +86,7 @@ const decreaseQuantity = (state, index) => {
   };
 };
 
-const calculateTotalPrice = state => {
+export const calculateTotalPrice = state => {
   const result = state.cart.reduce((acc, item) => acc + item.totalPrice, 0);
 
   return {

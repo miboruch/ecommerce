@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring';
 import { withRouter } from 'react-router-dom';
 import { logoutUser } from '../../../actions/authAction';
-import { Link } from 'react-router-dom';
 import Spinner from '../../atoms/Spinner/Spinner';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Button from '../../atoms/Button/Button';
@@ -44,12 +43,11 @@ const StyledHeading = styled(animated.h1)`
 `;
 
 const StyledButton = styled(animated(Button))`
-  margin-top: 5rem;
+  margin-top: 2rem;
 `;
 
 const AccountContent = ({
   userID,
-  isLoggedIn,
   loading,
   email,
   createdDate,
@@ -63,52 +61,39 @@ const AccountContent = ({
   const contentSlide = createFadeIn(1000, 1200)();
   const buttonSlide = createFadeIn(1000, 1700)();
 
-  useEffect(() => {
-    console.log(`logout state changed to: ${logoutLoading}`);
-  }, [logoutLoading]);
-
   return (
     <StyledWrapper>
-      {isLoggedIn ? (
-        <>
-          {loading || logoutLoading ? (
-            <Spinner />
-          ) : (
-            <StyledInnerWrapper>
-              <StyledHeading style={headingSlide}>Your account: </StyledHeading>
-              <StyledBox style={contentSlide}>
-                <StyledHeadingParagraph>
-                  <strong>email:</strong>
-                </StyledHeadingParagraph>
-                <StyledParagraph>{email}</StyledParagraph>
-                <StyledHeadingParagraph>
-                  <strong>your ID:</strong>
-                </StyledHeadingParagraph>
-                <StyledParagraph>{userID}</StyledParagraph>
-                <StyledHeadingParagraph>
-                  <strong>created date:</strong>
-                </StyledHeadingParagraph>
-                <StyledParagraph>{accountCreatedDate}</StyledParagraph>
-              </StyledBox>
-              <StyledButton
-                style={buttonSlide}
-                onClick={() => {
-                  logout(history);
-                }}
-              >
-                log out
-              </StyledButton>
-            </StyledInnerWrapper>
-          )}
-        </>
-      ) : (
-        <StyledInnerWrapper>
-          <Paragraph>You have to log in first to see this page</Paragraph>
-          <Link to='/login'>
-            <Button>LOG IN</Button>
-          </Link>
-        </StyledInnerWrapper>
-      )}
+      <>
+        {loading || logoutLoading ? (
+          <Spinner />
+        ) : (
+          <StyledInnerWrapper>
+            <StyledHeading style={headingSlide}>Your account: </StyledHeading>
+            <StyledBox style={contentSlide}>
+              <StyledHeadingParagraph>
+                <strong>email:</strong>
+              </StyledHeadingParagraph>
+              <StyledParagraph>{email}</StyledParagraph>
+              <StyledHeadingParagraph>
+                <strong>your ID:</strong>
+              </StyledHeadingParagraph>
+              <StyledParagraph>{userID}</StyledParagraph>
+              <StyledHeadingParagraph>
+                <strong>created date:</strong>
+              </StyledHeadingParagraph>
+              <StyledParagraph>{accountCreatedDate}</StyledParagraph>
+            </StyledBox>
+            <StyledButton
+              style={buttonSlide}
+              onClick={() => {
+                logout(history);
+              }}
+            >
+              log out
+            </StyledButton>
+          </StyledInnerWrapper>
+        )}
+      </>
     </StyledWrapper>
   );
 };

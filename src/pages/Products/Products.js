@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createFadeIn } from '../../components/animations/animations';
 import Fade from 'react-reveal/Fade';
 import TitleSection from '../../components/molecules/TitleSection/TitleSection';
 import Product from '../../components/templates/Product/Product';
 import ContactFooter from '../../components/templates/ContactFooter/ContactFooter';
 
 const Products = ({ products }) => {
-  const fadeIn = createFadeIn(1000, 500)();
   return (
     <>
       <TitleSection>Products</TitleSection>
