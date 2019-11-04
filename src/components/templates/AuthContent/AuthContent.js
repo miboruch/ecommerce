@@ -104,7 +104,11 @@ const AuthContent = ({ pathname, authenticate, loading, history, error }) => {
                 </Link>
               </>
               {error !== null ? (
-                <StyledErrorParagraph small>incorrect login or password</StyledErrorParagraph>
+                <StyledErrorParagraph small>
+                  {isCurrentLogin
+                    ? 'incorrect login or password'
+                    : 'account with this email already exists'}
+                </StyledErrorParagraph>
               ) : null}
             </StyledForm>
           )
