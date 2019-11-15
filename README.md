@@ -10,7 +10,7 @@ Live demo: [indeed e-commerce](https://pages.github.com/).<br>
 <p align="center"><br>Standard:<br><p>
 <img src="screenshots/landingStandard.png">
 
-### Other technologies used in this project:
+### Other libraries used in this project:
 - Storybook
 - React reveal
 - React spring

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ORDER_START, ORDER_SUCCESS, ORDER_FAILURE } from '../reducers/orderReducer';
-import {resetCart} from './cartAction';
+import { resetCart } from './cartAction';
 
 const firebaseURL = 'https://ecommerce-page.firebaseio.com';
 

@@ -7,7 +7,7 @@ import {
   AUTH_LOGOUT_START
 } from '../reducers/authReducer';
 
-const API_KEY = 'AIzaSyDwmRW7kgffAwvOCUYz1yMK3qBahH2HURU';
+const API_KEY = process.env.REACT_APP_GOOGLE_KEY;
 
 const authStart = () => {
   return {

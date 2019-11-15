@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { useTrail, animated } from 'react-spring';
 import background from '../../../assets/images/menuBackground.jpg';
-
 import { MenuContext } from '../../../contexts/MenuContext';
+import { createFadeIn } from '../../animations/animations';
+import Button from '../../atoms/Button/Button';
+import { logoutUser } from '../../../actions/authAction';
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -97,8 +100,14 @@ const SideWrapper = styled.div`
   }
 `;
 
-const Menu = () => {
-  const { isOpen, menuItems } = useContext(MenuContext);
+const StyledButton = styled(animated(Button))`
+  position: absolute;
+  bottom: -78px;
+`;
+
+const Menu = ({ isLoggedIn, logout, history }) => {
+  const { isOpen, menuItems, toggleMenu } = useContext(MenuContext);
+  const buttonSlide = createFadeIn(1000, 1700)();
 
   const menuTrail = useTrail(menuItems.length, {
     opacity: isOpen ? 1 : 0,
@@ -117,6 +126,25 @@ const Menu = () => {
             </Link>
           ))}
           <ListBorder />
+          {isLoggedIn ? (
+            <StyledButton
+              style={buttonSlide}
+              onClick={
+                history.location.pathname === '/'
+                  ? () => {
+                      logout(history);
+                      toggleMenu();
+                    }
+                  : () => logout(history)
+              }
+            >
+              log out
+            </StyledButton>
+          ) : (
+            <Link to='/login'>
+              <StyledButton style={buttonSlide}>log in</StyledButton>
+            </Link>
+          )}
         </StyledList>
         <StyledStripe isOpen={isOpen} />
       </StyledWrapper>
@@ -125,4 +153,19 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+const mapStateToProps = ({ authReducer: { isLoggedIn } }) => {
+  return { isLoggedIn };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: history => dispatch(logoutUser(history))
+  };
+};
+
+const MenuWithRouter = withRouter(Menu);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MenuWithRouter);
