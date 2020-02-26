@@ -33,6 +33,14 @@ const StyledImage = styled(animated.img)`
   border-right: none;
   margin-top: 2rem;
   transition: all 0.3s ease;
+
+  ${({ theme }) => theme.mq.tablet} {
+    height: 60vh;
+  }
+
+  ${({ theme }) => theme.mq.standard} {
+    height: 70vh;
+  }
 `;
 
 const ContentHeader = () => {
