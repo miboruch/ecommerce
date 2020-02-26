@@ -18,6 +18,7 @@ const StyledParagraph = styled(Paragraph)`
 
 const StyledLink = styled.a`
   color: #000;
+  margin-left: 1rem;
 `;
 
 const ContactContent = () => {

@@ -28,27 +28,16 @@ const StyledParagraph = styled(animated(Paragraph))`
 const StyledImage = styled(animated.img)`
   width: 100%;
   height: 50vh;
-  position: absolute;
   object-fit: cover;
-  bottom: 80px;
-  right: 0;
   border: 1px solid #ccc;
   border-right: none;
-
-  ${({ theme }) => theme.mq.tablet} {
-    width: 90%;
-    height: 70vh;
-  }
-
-  ${({ theme }) => theme.mq.standard} {
-    width: 80%;
-    bottom: 40px;
-  }
+  margin-top: 2rem;
+  transition: all 0.3s ease;
 `;
 
 const ContentHeader = () => {
   const fadeIn = createFadeIn(1000, 1000)();
-  const imageEffect = createSlideFadeIn(2500, 1700, { right: '-30px' }, { right: '0' })();
+  const imageEffect = createSlideFadeIn(2500, 1700, { opacity: 0 }, { opacity: 1 })();
   return (
     <StyledWrapper>
       <StyledParagraph style={fadeIn} medium>
